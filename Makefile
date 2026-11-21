@@ -5,7 +5,7 @@ check:
 	uv run python manage.py check
 	uv run ruff check .
 	uv run ruff format --check .
-	uv run mypy formreview accounts documents
+	uv run mypy formreview accounts documents extraction reviews
 	uv run pytest -m "not integration and not e2e"
 container-check:
 	docker compose config --quiet

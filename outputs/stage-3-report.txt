@@ -1,0 +1,173 @@
+FormReview — stage 3 of exactly 10
+
+Outcome
+Implemented a keyless synthetic extraction-to-review preview. A reviewer can run
+replay on a supported synthetic canonical source, inspect all five fields with
+server-derived evidence and flags, and explicitly create an initial draft bound
+to that run/text version. Later extractions never replace the draft. No approval,
+draft editing, live provider, paid capability or regex baseline was implemented.
+The stage-3 keyless walkthrough is demonstrated; full MVP remains due after stage 4.
+
+Baseline and scope
+Read AGENTS.md, Git status/history, current code and verification commands first.
+Started from a clean tree at cfdb61f (stage 2), following stage-1 commit 5f90e78.
+Re-ran the previous 42 unit and 14 real PostgreSQL integration tests successfully.
+No approved design/roadmap files were supplied. The explicit stage-3 user scope
+supersedes AGENTS.md's old stage-2-only table restriction; AGENTS.md now records
+stage 3 and preserves exactly 10 stages. No older project was touched, no unrelated
+changes were overwritten, and no commit/push/deployment/paid request occurred.
+
+Actual behavior and important files
+- extraction/schemas.py: strict Pydantic 2 contract, all five required keys;
+  present/missing/ambiguous require 1/0/2 distinct candidates. Rejects extra fields,
+  confidence/offset fields, type coercions, duplicate candidates, empty values,
+  invalid Unicode/NUL and overlong quotes/values. JSON duplicate keys are rejected.
+- extraction/evidence.py: finds exact quotes across canonical pages, requires unique
+  occurrence on the claimed page, checks exact value membership, derives half-open
+  Unicode code-point offsets. Repeated/missing/wrong-page quotes have no fabricated
+  highlight. Value mismatch/repetition is explicitly flagged. Matching is not truth.
+- extraction/normalization.py: preserves source strings for name, registration,
+  email and country; only full explicit NetN/Ndays patterns normalize to 0–365.
+  Other terms remain unresolved. No inferred jurisdiction or identifier verification.
+- extraction/config.py and providers.py: persist full prompt_text, model, settings,
+  JSON schema, schema/normalizer/evidence versions and content hash. Provider input
+  is built from stored config plus canonical source/version metadata, with integrity
+  checks. No labels, reviewer/gold decisions, filenames or membership authority enter
+  the request. Config mutations change config/request hashes. The default prompt
+  is used to create config records, not substituted over stored request contents.
+- extraction/replay.py and fixtures/synthetic_v1.json: authored, visibly synthetic
+  responses keyed by real canonical hashes of the 12 development sources. Unknown
+  source hashes fail explicitly. Replay accepts the actual config payload; changing
+  a prompt changes hashes, not the authored response. No model or network is used.
+- extraction/models.py/migrations: immutable ExtractionConfig, ExtractionRun and
+  FieldCandidate; explicit replay mode, config/source/request/response hashes and
+  version references. PostgreSQL triggers prevent output/config changes and validate
+  reference hashes. Invalid outputs are recorded as failed validation with no candidates.
+- reviews/models.py/migrations: initial ReviewDraft, unique per document, explicit
+  run/text version and revision. DB checks enforce matching source/run/document.
+  Creation uses Document→Draft locks and expected_revision; conflicting revisions
+  or replacement runs receive 409. No silent overwrite or review decisions.
+- extraction/api.py/templates: owned JSON and source/fields preview with escaped
+  exact highlights and manual-review flags. Viewer role is read-only; writes require
+  reviewer membership and CSRF. Updated source screen links to replay/previews.
+- Updated settings/URLs, Docker packaging, CI/Makefile type-check scope, README,
+  AGENTS.md, pyproject.toml and uv.lock. Pydantic 2.14.4 is frozen; no provider SDK added.
+- New unit/evidence/contract and PostgreSQL replay tests; synthetic fixture generator
+  reads source bytes/hashes, never development truth labels.
+
+Run the feature
+Prerequisites: Python 3.12, uv 0.13.9, PostgreSQL 18 with UTF-8. Docker/Compose v2
+is needed for the normal DB/container commands; Docker remains absent on this host.
+From the repository root:
+  uv sync --frozen --all-groups
+  docker compose up -d db
+  uv run python manage.py migrate
+  uv run python manage.py bootstrap_workspace --username reviewer --workspace "Local demo"
+  uv run python manage.py runserver 127.0.0.1:8000
+In another terminal:
+  uv run python manage.py process_jobs
+Use an existing stage-2 reviewer instead of bootstrapping if one already exists.
+Bootstrap prompts for a password; never put real credentials in shell arguments.
+
+Sign in at http://127.0.0.1:8000/accounts/login, select your workspace, upload
+ datasets/dev/01_complete.txt, and wait for worker parsing. Open the source page,
+click Run synthetic replay, inspect the three demonstration cases, and click
+Create initial draft from this run. No key is needed:
+  supplier_name: correct anchored Supplier: Alder Parts quote;
+  registration_id: deliberately missing in synthetic output;
+  contact_email: unsupported quote, quote_missing flag, no offset/highlight.
+04_ambiguous_email.txt has two real source candidates; 08_two_pages.pdf deliberately
+claims the wrong page for country. These authored mistakes are not accuracy results.
+
+Interfaces
+POST /documents/{id}/extractions: form mode=replay, reviewer session and CSRF.
+GET /api/v1/extractions/{id}: owned output, candidates, offsets, flags and references.
+GET /extractions/{id}: source/field preview.
+POST /documents/{id}/drafts: run_id and expected_revision=0 for initial creation.
+GET /drafts/{id}: owned draft preview. Existing draft idempotency requires matching
+run and current revision; no replacement/edit/approval endpoint exists.
+
+Local verification tool setup
+Tools already installed in ignored work/ can be selected with:
+  export PATH="$PWD/work/bootstrap/bin:$PATH"
+  export UV_CACHE_DIR="$PWD/work/uv-cache"
+  export UV_PYTHON_INSTALL_DIR="$PWD/work/python"
+For this host's existing scratch PostgreSQL 18.7 instance (stopped after checks):
+  export POSTGRES_HOST="$(cat work/pg-socket-path)"
+  export POSTGRES_PORT=55432 POSTGRES_DB=formreview_utf8
+  export FORMREVIEW_PRIVATE_ROOT="$PWD/work/stage3-http-private"
+  work/pg/bin/pg_ctl -D work/pg-data -l "$PWD/work/pg-server.log" -o "-h '' -k '$POSTGRES_HOST' -p 55432" start
+It uses a private Unix socket and local trust only for this disposable scratch setup.
+Tests create/drop test_formreview_utf8; never use a production server for test runs.
+
+Checks actually run and results
+PASS uv sync --frozen --all-groups: 28 packages checked.
+PASS uv run python manage.py check: no issues.
+PASS uv run python manage.py help and process_jobs --help.
+PASS uv run ruff check . and uv run ruff format --check .: 65 Python files.
+PASS uv run mypy formreview accounts documents extraction reviews: 43 source files.
+PASS uv run pytest -m "not integration and not e2e": 96 unit tests.
+PASS uv run pytest --collect-only -q: final collection has 134 categorized tests.
+PASS uv run python manage.py migrate: all stage-3 migrations applied on PostgreSQL 18.7.
+PASS uv run python manage.py makemigrations --check --dry-run: no changes detected.
+PASS uv run pytest -m integration: 38 tests using real disposable PostgreSQL.
+PASS requested targeted command:
+  uv run pytest tests/unit/test_evidence.py tests/unit/test_extraction_contract.py tests/integration/test_replay.py
+  76 tests passed at that point; two additional integration hardening tests were
+  subsequently added and passed in the final 38-test integration suite.
+PASS git diff --check.
+PASS real in-app browser walkthrough: signed in, selected workspace, viewed canonical
+source, ran replay, inspected actual evidence/missing/unsupported flags, explicitly
+created a revision-1 draft and inspected its bound source/run. Saved screenshot:
+  outputs/stage-3-replay-preview.jpg
+Chrome was unavailable; the supported in-app browser completed the walkthrough.
+This is observed browser evidence, not a committed automated browser regression suite.
+
+Initial lint/type errors were corrected before final checks. Initial migration-file
+generation warned that default port 5432 was unavailable; actual migrations and
+migration consistency checks then passed against the configured scratch PostgreSQL
+socket. No tests were skipped to obtain a pass.
+
+Unavailable/pending checks
+- docker compose config --quiet, docker compose up -d db and docker build -t
+  formreview:local . each returned command not found (127).
+- Built-container non-root UID/real HTTP checks and Compose shared-volume behavior
+  therefore remain pending, inherited from stages 1–2.
+- Linux 512 MiB parser/worker deployment resource ceiling remains unverified on macOS.
+- Remote GitHub Actions has not run. Workflow includes all unit/integration checks.
+
+Acceptance evaluation
+1. Keyless user can inspect real canonical evidence/flags: PASS. All 12 development
+   sources replayed with real parser/PostgreSQL-backed source versions; real browser
+   inspection demonstrated correct, missing and unsupported evidence cases.
+2. No fabricated offsets/confidence: PASS. Strict contract rejects these output
+   fields; server derives exact offsets only when source quotes resolve uniquely.
+   Duplicate/wrong-page/missing evidence tests assert null offsets. No confidence UI.
+3. Full executable config/version storage: PASS. Full prompt/model/settings/schema/
+   versions and hash persisted immutably; request propagation and tamper tests pass.
+   Canonical text/parser normalization versions remain immutable source references.
+4. Explicit synthetic replay, no approval/live claim: PASS. Banner/fixtures/API/docs
+   label replay; only replay mode is accepted. No live SDK/network/model requests,
+   regex baseline, human review decisions, accuracy claim or approval capability.
+5. Explicit initial draft, no silent overwrite: PASS. New runs leave drafts intact;
+   expected_revision tests, cross-tenant/run checks and independent PostgreSQL
+   connection concurrency tests establish one initial draft and explicit conflicts.
+
+Mock/live distinction
+Replay is authored synthetic output, not live model inference. Malformed-output and
+payload-propagation tests use test doubles around ReplayProvider. Evidence matching,
+canonical parsing, database constraints/concurrency and browser inspection are real.
+There is no live-model validation, model accuracy measurement or independently
+reviewed gold claim. Development labels remain separate and provisional.
+
+Known limits
+Schema status validated means structural validation, not correctness or semantic
+truth. Conservative duplicate-quote checks span all source pages. Draft preview is
+read-only after initial binding; editing, overrides, reasons and human approval
+belong to stage 4. Only bundled source hashes support replay. If canonical parser
+output changes, fixtures require explicit regeneration; there is no fallback guess.
+Inherited Docker/resource/remote-CI gates remain open. No stage 4 work was done.
+Temporary browser server and scratch database were stopped after verification.
+
+Suggested commit (user reviews and commits):
+  validate extraction evidence and add replay review

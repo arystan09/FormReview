@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     "formreview",
     "accounts",
     "documents",
+    "extraction",
+    "reviews",
 ]
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

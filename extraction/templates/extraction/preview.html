@@ -1,0 +1,18 @@
+{% extends "documents/base.html" %}{% block content %}
+<h1>{% if draft %}Review draft preview{% else %}Extraction preview{% endif %}</h1>
+<section><h2>Synthetic replay — no model call</h2><p>This authored output can contain deliberate omissions and invalid evidence. Quote membership is not semantic truth. Every field needs human confirmation; approval is not available in this stage.</p>
+<p><a href="/documents/{{ document.id }}">{{ document.filename }} — canonical source</a></p>
+<p>Run: <code>{{ run.id }}</code> · mode: {{ run.mode }} · status: {{ run.status }}</p>
+<p>Text version: {{ run.text_version_id }} · source hash: <code>{{ run.canonical_sha256 }}</code></p>
+<p>Config: <code>{{ run.config_hash }}</code><br>Schema: {{ run.config.schema_version }} · normalizer: {{ run.config.normalizer_version }} · evidence: {{ run.config.evidence_version }}</p>
+{% if draft %}<p>Draft: <code>{{ draft.id }}</code> · revision {{ draft.revision }}. Bound to the run and text version above. No review decisions have been saved.</p>
+{% elif existing_draft %}<p>An existing draft remains bound to its selected run. <a href="/drafts/{{ existing_draft.id }}">Open existing draft</a>.</p>
+{% elif run.status == 'validated' and can_write %}<form method="post" action="/documents/{{ document.id }}/drafts">{% csrf_token %}<input type="hidden" name="run_id" value="{{ run.id }}"><input type="hidden" name="expected_revision" value="0"><input type="hidden" name="preview" value="yes"><button>Create initial draft from this run</button></form>{% endif %}
+</section>
+{% if run.error_code %}<p role="alert">Output rejected: {{ run.error_code }}. No candidates or draft can be created from this output.</p>{% endif %}
+{% for field in fields %}<section><h2>{{ field.name }}</h2><p>Status: <strong>{{ field.status }}</strong></p>{% if field.flags %}<p>Manual review flags: {{ field.flags|join:", " }}</p>{% endif %}
+{% for item in field.candidates %}<article><p>Source value: <strong>{{ item.candidate.value_text }}</strong></p><p>Normalized value: {% if item.candidate.normalized_value is None %}unresolved{% else %}{{ item.candidate.normalized_value }}{% endif %}</p><p>Claimed page: {{ item.candidate.page }}</p><blockquote>{{ item.candidate.quote }}</blockquote>
+{% if item.candidate.flags %}<p>Flags: {{ item.candidate.flags|join:", " }}</p>{% endif %}
+{% if item.highlight %}<p>Server-anchored quote: [{{ item.candidate.quote_start }}, {{ item.candidate.quote_end }}) Unicode code points.</p><pre>{{ item.highlight.before }}<mark>{{ item.highlight.quote }}</mark>{{ item.highlight.after }}</pre>{% else %}<p>No unique source highlight. Review the canonical source manually.</p>{% endif %}</article>{% empty %}<p>No candidate. A reviewer must resolve this field.</p>{% endfor %}</section>{% endfor %}
+<a href="/api/v1/extractions/{{ run.id }}">Extraction JSON</a>
+{% endblock %}

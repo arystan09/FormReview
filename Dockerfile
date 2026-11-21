@@ -11,6 +11,8 @@ COPY config ./config
 COPY formreview ./formreview
 COPY accounts ./accounts
 COPY documents ./documents
+COPY extraction ./extraction
+COPY reviews ./reviews
 RUN mkdir /app/private && chown 10001:10001 /app/private && chmod 700 /app/private
 COPY manage.py ./
 USER 10001:10001

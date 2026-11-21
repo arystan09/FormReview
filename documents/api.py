@@ -78,7 +78,12 @@ def source(request: HttpRequest, document_id: object) -> HttpResponse:
     return render(
         request,
         "documents/source.html",
-        {"document": document, "text": text, "job": document.parse_job},
+        {
+            "document": document,
+            "text": text,
+            "job": document.parse_job,
+            "can_extract": active_membership(request).role == "reviewer",
+        },
     )
 
 

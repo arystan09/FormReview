@@ -1,0 +1,621 @@
+{
+  "notice": "SYNTHETIC REPLAY — authored examples, including intentional errors; not model results or truth labels.",
+  "by_canonical_hash": {
+    "8edc73c0f18e3fbae7dba16925faa7a910f22f294e8dbd3497ce83910efcc869": {
+      "id": "synthetic-v1/01_complete.txt",
+      "output": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Alder Parts",
+              "quote": "Supplier: Alder Parts",
+              "page": 1
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "alder@example.test",
+              "quote": "Verified email: alder@example.test",
+              "page": 1
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Italy",
+              "quote": "Country: Italy",
+              "page": 1
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Net30",
+              "quote": "Payment terms: Net30",
+              "page": 1
+            }
+          ]
+        }
+      }
+    },
+    "120775fc4bb5c8d0378d7cb576fbc7f4f64401471d4dccbeaf33ba63e51bb071": {
+      "id": "synthetic-v1/02_bom_unicode.txt",
+      "output": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Café Parts",
+              "quote": "Supplier: Café Parts",
+              "page": 1
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "0007/X",
+              "quote": "Registration ID: 0007/X",
+              "page": 1
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "cafe@example.test",
+              "quote": "Email: cafe@example.test",
+              "page": 1
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "France",
+              "quote": "Country: France",
+              "page": 1
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "14 days",
+              "quote": "Payment terms: 14 days",
+              "page": 1
+            }
+          ]
+        }
+      }
+    },
+    "ced676b8bcbdec48f073650ce21d50ac3762fc1f876c572d9c9a63e37a639661": {
+      "id": "synthetic-v1/03_missing_optional.txt",
+      "output": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Beacon Tools",
+              "quote": "Supplier: Beacon Tools",
+              "page": 1
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "beacon@example.test",
+              "quote": "Email: beacon@example.test",
+              "page": 1
+            }
+          ]
+        },
+        "country": {
+          "status": "missing",
+          "candidates": []
+        },
+        "payment_terms_days": {
+          "status": "missing",
+          "candidates": []
+        }
+      }
+    },
+    "0577904cb3c4aa564b2b21136078702a98928861d895f26b281676c919ec64e5": {
+      "id": "synthetic-v1/04_ambiguous_email.txt",
+      "output": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Cedar Supply",
+              "quote": "Supplier: Cedar Supply",
+              "page": 1
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "value_text": "sales@cedar.example.test",
+              "quote": "Email: sales@cedar.example.test",
+              "page": 1
+            },
+            {
+              "value_text": "billing@cedar.example.test",
+              "quote": "Email: billing@cedar.example.test",
+              "page": 1
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Canada",
+              "quote": "Country: Canada",
+              "page": 1
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Net45",
+              "quote": "Payment terms: Net45",
+              "page": 1
+            }
+          ]
+        }
+      }
+    },
+    "d2966d373a976f0f1400e52104e0866e4b7856535dfb6e7ac6993e2b7aeb9b8c": {
+      "id": "synthetic-v1/05_unresolved_terms.txt",
+      "output": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Drift Materials",
+              "quote": "Supplier: Drift Materials",
+              "page": 1
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "00.04-A",
+              "quote": "Registration ID: 00.04-A",
+              "page": 1
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "drift@example.test",
+              "quote": "Email: drift@example.test",
+              "page": 1
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "United Kingdom",
+              "quote": "Country: United Kingdom",
+              "page": 1
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "on receipt",
+              "quote": "Payment terms: on receipt",
+              "page": 1
+            }
+          ]
+        }
+      }
+    },
+    "9e0a1894e7f546708dd9ebdf72cf5ef496113f2d0f315d722f4b72c3447725c4": {
+      "id": "synthetic-v1/06_source_instructions.txt",
+      "output": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Elm Goods",
+              "quote": "Supplier: Elm Goods",
+              "page": 1
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "elm@example.test",
+              "quote": "Email: elm@example.test",
+              "page": 1
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "England",
+              "quote": "Country: England",
+              "page": 1
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Net0",
+              "quote": "Payment terms: Net0",
+              "page": 1
+            }
+          ]
+        }
+      }
+    },
+    "d051e66cb89f94a349bc49b2bfef7d01a398fc9ff1caa6cd9fc9e0bb2aced548": {
+      "id": "synthetic-v1/07_complete.pdf",
+      "output": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Flint Goods",
+              "quote": "Supplier: Flint Goods",
+              "page": 1
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "009-Z",
+              "quote": "Registration ID: 009-Z",
+              "page": 1
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "flint@example.test",
+              "quote": "Email: flint@example.test",
+              "page": 1
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Germany",
+              "quote": "Country: Germany",
+              "page": 1
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Net60",
+              "quote": "Payment terms: Net60",
+              "page": 1
+            }
+          ]
+        }
+      }
+    },
+    "b86caf5d9154ab90ec12690cc1fc8ad931ebbfc08072f9853277676d7cd255e7": {
+      "id": "synthetic-v1/08_two_pages.pdf",
+      "output": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Grove Components",
+              "quote": "Supplier: Grove Components",
+              "page": 1
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "000/19",
+              "quote": "Registration ID: 000/19",
+              "page": 2
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "grove@example.test",
+              "quote": "Email: grove@example.test",
+              "page": 1
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Spain",
+              "quote": "Country: Spain",
+              "page": 1
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "90 days",
+              "quote": "Payment terms: 90 days",
+              "page": 2
+            }
+          ]
+        }
+      }
+    },
+    "28afc87c15b2d56a3478667f357844cb120f9140460f5472c34db7289d70f66e": {
+      "id": "synthetic-v1/09_missing_name.pdf",
+      "output": {
+        "supplier_name": {
+          "status": "missing",
+          "candidates": []
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "000-Q",
+              "quote": "Registration ID: 000-Q",
+              "page": 1
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "unknown@example.test",
+              "quote": "Email: unknown@example.test",
+              "page": 1
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Ireland",
+              "quote": "Country: Ireland",
+              "page": 1
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Net15",
+              "quote": "Payment terms: Net15",
+              "page": 1
+            }
+          ]
+        }
+      }
+    },
+    "379e5f07b9b821f670c06745571073113a3f5e16650c35f5faa4114dbbd57c65": {
+      "id": "synthetic-v1/10_out_of_range.pdf",
+      "output": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Harbor Tools",
+              "quote": "Supplier: Harbor Tools",
+              "page": 1
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "harbor@example.test",
+              "quote": "Email: harbor@example.test",
+              "page": 1
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "USA",
+              "quote": "Country: USA",
+              "page": 1
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Net366",
+              "quote": "Payment terms: Net366",
+              "page": 1
+            }
+          ]
+        }
+      }
+    },
+    "7f35046c74b8b6f60f99868b1c3412ebb665870b4a6445fb2d0bb7c33cc8af6b": {
+      "id": "synthetic-v1/11_ambiguous_country.pdf",
+      "output": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Iris Supply",
+              "quote": "Supplier: Iris Supply",
+              "page": 1
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "iris@example.test",
+              "quote": "Email: iris@example.test",
+              "page": 1
+            }
+          ]
+        },
+        "country": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "value_text": "France",
+              "quote": "Country: France",
+              "page": 1
+            },
+            {
+              "value_text": "Belgium",
+              "quote": "Country: Belgium",
+              "page": 1
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Net30",
+              "quote": "Payment terms: Net30",
+              "page": 1
+            }
+          ]
+        }
+      }
+    },
+    "e05b0b26828246a84532cf7537df3573b12066b2225139e6de1d0f4968db8576": {
+      "id": "synthetic-v1/12_upper_boundary.pdf",
+      "output": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Juniper Parts",
+              "quote": "Supplier: Juniper Parts",
+              "page": 1
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "000-12",
+              "quote": "Registration ID: 000-12",
+              "page": 1
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "juniper@example.test",
+              "quote": "Email: juniper@example.test",
+              "page": 1
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "Australia",
+              "quote": "Country: Australia",
+              "page": 1
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "value_text": "365 days",
+              "quote": "Payment terms: 365 days",
+              "page": 1
+            }
+          ]
+        }
+      }
+    }
+  }
+}

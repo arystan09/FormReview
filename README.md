@@ -1,10 +1,63 @@
 # FormReview
 
-Stage 2 of exactly **10 mandatory stages**: authenticated workspace members can
-upload UTF-8 TXT or digital PDF and inspect immutable canonical pages. Reviewers
-can upload; viewers can read. Background jobs parse documents outside HTTP.
-The keyless replay walkthrough remains due after stage 3 and full MVP after stage 4.
-No AI extraction, model calls, approval workflow or public upload exists yet.
+Stage 3 of exactly **10 mandatory stages**: owned documents now support a keyless
+synthetic extraction-to-review preview. Source evidence is anchored by the server,
+with explicit manual-review flags and an immutable executable config. The keyless
+walkthrough milestone is implemented; the full MVP remains due after stage 4.
+There is no approval, live provider, paid mode or regex baseline in this stage.
+
+## Keyless replay walkthrough
+
+Use the local setup below, sign in as a reviewer and select your workspace. Upload
+`datasets/dev/01_complete.txt`, let `process_jobs` parse it, then open its source
+page and click **Run synthetic replay**. The preview shows:
+
+- supplier_name: an exact server-highlighted source quote;
+- registration_id: deliberately missing in the synthetic output;
+- contact_email: deliberately unsupported quote, flagged `quote_missing`, no offset.
+
+Click **Create initial draft from this run** to bind a revision-1 preview to that
+explicit run and immutable text version. A later extraction does not replace this
+draft. `04_ambiguous_email.txt` demonstrates two source candidates, while
+`08_two_pages.pdf` deliberately claims the wrong page. No key is needed. Only the
+12 bundled development sources have replay outputs; arbitrary source hashes return
+`no_synthetic_replay_fixture` without inventing results.
+
+Replay responses are authored examples with intentional errors, not model results,
+a regex baseline or gold labels. The provider receives the stored full prompt,
+model, settings, schema, versions and canonical pages; an allowlist excludes labels,
+review decisions, user/workspace authority and filenames. A prompt change changes
+config/request hashes but does not change an authored replay response. The initial
+prompt constant is used only when creating a config; requests use the persisted
+config contents and verify its hash/schema/version compatibility.
+
+POST `/documents/{id}/extractions` requires a reviewer session, CSRF and form field
+`mode=replay`. GET `/api/v1/extractions/{id}` exposes owned candidates/flags;
+GET `/extractions/{id}` shows the source/field preview. POST
+`/documents/{id}/drafts` requires `run_id` and `expected_revision=0` for initial
+creation. Existing drafts require their exact revision and same run for an
+idempotent response; stale revisions and replacement runs receive 409. GET
+`/drafts/{id}` shows the owned draft. No editing or approval endpoint exists yet.
+
+The strict contract requires all five fields, 1/0/2 distinct candidates for
+present/missing/ambiguous, and no extras or confidence/offset fields. Quotes are
+1–500 characters, values 1–256, claimed pages 1–5. Offsets are half-open Python
+Unicode code-point indices into immutable canonical pages, never model output.
+Repeated quotes anywhere in the source, missing/wrong-page quotes, absent or
+repeated value substrings, missing/ambiguous fields and unresolved terms are
+flagged. Exact quote membership does not prove semantic truth. Candidate values
+are preserved; only full lexical NetN/Ndays patterns normalize to integers 0–365.
+Config, run and candidate records are immutable under PostgreSQL triggers, and
+DB constraints validate run hashes and draft source/run references.
+
+Run the requested stage-specific checks against a disposable PostgreSQL server:
+
+```sh
+uv run pytest tests/unit/test_evidence.py tests/unit/test_extraction_contract.py tests/integration/test_replay.py
+```
+
+These tests replay all 12 real canonical development sources and inspect their
+pages. See extraction/fixtures/README.md for the synthetic-output provenance.
 
 ## Run locally
 
@@ -114,12 +167,12 @@ make container-check
 and unit tests. `make integration` runs migrations, migration-drift check, real
 PostgreSQL tests (including independent workers) and worker help. Test collection
 requires exactly one unit/integration/e2e category. CI runs these with PostgreSQL 18
-and container smoke checks. Real HTTP behavior can be verified locally; no JS or
-browser automation is included and no browser verification is claimed.
+and container smoke checks. Real HTTP behavior can be verified locally; no JS is required. Stage 3 was also manually exercised in a real in-app browser;
+that walkthrough is not a committed browser-regression suite.
 
 The 12 synthetic development sources and separately authored provisional labels
 are described in datasets/dev/README.md. Labels are not independently human-reviewed
 gold, parser output or model input. Parser-negative fixtures are separate. There
-are no mock/live model results or accuracy claims; replay, regex and live AI modes
-are future distinct capabilities. Approved design/roadmap files were not supplied;
+are no live model results or accuracy claims. Synthetic replay is implemented;
+regex baseline and live AI remain distinct future capabilities. Approved design/roadmap files were not supplied;
 no replacement roadmap or history was invented. See AGENTS.md for permanent contracts.

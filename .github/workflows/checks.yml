@@ -27,7 +27,7 @@ jobs:
       - run: uv run python manage.py help
       - run: uv run ruff check .
       - run: uv run ruff format --check .
-      - run: uv run mypy formreview accounts documents
+      - run: uv run mypy formreview accounts documents extraction reviews
       - run: uv run pytest --collect-only
       - run: uv run pytest -m "not integration and not e2e"
       - run: uv run python manage.py migrate

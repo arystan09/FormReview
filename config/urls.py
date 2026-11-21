@@ -4,9 +4,15 @@ from django.views.generic import RedirectView
 
 from accounts.views import select_workspace
 from documents import api
+from extraction import api as extraction_api
 from formreview.views import liveness
 
 urlpatterns = [
+    path("documents/<uuid:document_id>/extractions", extraction_api.extract),
+    path("documents/<uuid:document_id>/drafts", extraction_api.draft_create),
+    path("api/v1/extractions/<uuid:run_id>", extraction_api.extraction_json),
+    path("extractions/<uuid:run_id>", extraction_api.preview),
+    path("drafts/<uuid:draft_id>", extraction_api.draft_preview),
     path("", RedirectView.as_view(url="/accounts/workspaces")),
     path("health/live", liveness, name="health-live"),
     path("health/ready", api.readiness, name="health-ready"),
