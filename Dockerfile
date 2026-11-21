@@ -9,6 +9,9 @@ RUN uv sync --frozen --no-dev --no-install-project \
     && useradd --uid 10001 --gid app --no-create-home app
 COPY config ./config
 COPY formreview ./formreview
+COPY accounts ./accounts
+COPY documents ./documents
+RUN mkdir /app/private && chown 10001:10001 /app/private && chmod 700 /app/private
 COPY manage.py ./
 USER 10001:10001
 EXPOSE 8000

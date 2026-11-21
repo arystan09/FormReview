@@ -5,6 +5,17 @@ permissions:
 jobs:
   checks:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_DB: formreview
+          POSTGRES_USER: formreview
+          POSTGRES_PASSWORD: local-development-only
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U formreview -d formreview"
+          --health-interval 5s --health-timeout 3s --health-retries 10
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
@@ -16,9 +27,13 @@ jobs:
       - run: uv run python manage.py help
       - run: uv run ruff check .
       - run: uv run ruff format --check .
-      - run: uv run mypy formreview
+      - run: uv run mypy formreview accounts documents
       - run: uv run pytest --collect-only
       - run: uv run pytest -m "not integration and not e2e"
+      - run: uv run python manage.py migrate
+      - run: uv run python manage.py makemigrations --check --dry-run
+      - run: uv run pytest -m integration
+      - run: uv run python manage.py process_jobs --help
       - run: docker compose config --quiet
       - run: docker build -t formreview:local .
       - run: uv run python scripts/check_container.py

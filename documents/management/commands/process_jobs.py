@@ -1,0 +1,27 @@
+import time
+
+from django.core.management.base import BaseCommand, CommandError, CommandParser
+from django.db import DatabaseError, close_old_connections
+
+from documents.services import process_one_job
+
+
+class Command(BaseCommand):
+    help = "Parse queued sources outside HTTP. --once drains available jobs and exits."
+
+    def add_arguments(self, parser: CommandParser) -> None:
+        parser.add_argument("--once", action="store_true")
+
+    def handle(self, *args: object, **options: object) -> None:
+        while True:
+            close_old_connections()
+            try:
+                processed = process_one_job()
+            except DatabaseError:
+                raise CommandError(
+                    "Database operation failed; job lease allows recovery."
+                ) from None
+            if not processed:
+                if options["once"]:
+                    return
+                time.sleep(1)

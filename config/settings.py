@@ -35,13 +35,16 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "formreview",
+    "accounts",
+    "documents",
 ]
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "documents.uploads.UploadAdmissionMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -70,6 +73,7 @@ DATABASES = {
         "HOST": os.environ.get("POSTGRES_HOST", "127.0.0.1"),
         "PORT": os.environ.get("POSTGRES_PORT", "5432"),
         "CONN_MAX_AGE": 0,
+        "TEST": {"CHARSET": "UTF8", "TEMPLATE": "template0"},
     },
 }
 LANGUAGE_CODE = "en-us"
@@ -91,4 +95,22 @@ X_FRAME_OPTIONS = "DENY"
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ["rest_framework.authentication.SessionAuthentication"],
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
+}
+
+PRIVATE_ROOT = Path(os.environ.get("FORMREVIEW_PRIVATE_ROOT", str(BASE_DIR / "private")))
+LOGIN_URL = "/accounts/login"
+LOGIN_REDIRECT_URL = "/accounts/workspaces"
+LOGOUT_REDIRECT_URL = "/accounts/login"
+DATA_UPLOAD_MAX_MEMORY_SIZE = 65536
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 8
+DATA_UPLOAD_MAX_NUMBER_FILES = 1
+FILE_UPLOAD_MAX_MEMORY_SIZE = 0
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"null": {"class": "logging.NullHandler"}},
+    "loggers": {
+        "django.request": {"handlers": ["null"], "propagate": False},
+        "django.security": {"handlers": ["null"], "propagate": False},
+    },
 }

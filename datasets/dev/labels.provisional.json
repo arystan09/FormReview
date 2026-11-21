@@ -1,0 +1,315 @@
+{
+  "provenance": "Separately authored synthetic expectations, not generated from parser or model output. Not independently human reviewed.",
+  "review_status": "provisional_unreviewed",
+  "purpose": "Development cases only; not gold evaluation truth or review decisions. Status unresolved here describes a provisional normalization expectation, not the future extraction response schema.",
+  "examples": [
+    {
+      "document": "01_complete.txt",
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "expected": "Alder Parts"
+        },
+        "registration_id": {
+          "status": "present",
+          "expected": "001-AB"
+        },
+        "contact_email": {
+          "status": "present",
+          "expected": "alder@example.test"
+        },
+        "country": {
+          "status": "present",
+          "expected": "Italy"
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "expected": 30
+        }
+      }
+    },
+    {
+      "document": "02_bom_unicode.txt",
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "expected": "Café Parts"
+        },
+        "registration_id": {
+          "status": "present",
+          "expected": "0007/X"
+        },
+        "contact_email": {
+          "status": "present",
+          "expected": "cafe@example.test"
+        },
+        "country": {
+          "status": "present",
+          "expected": "France"
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "expected": 14
+        }
+      }
+    },
+    {
+      "document": "03_missing_optional.txt",
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "expected": "Beacon Tools"
+        },
+        "registration_id": {
+          "status": "missing",
+          "expected": null
+        },
+        "contact_email": {
+          "status": "present",
+          "expected": "beacon@example.test"
+        },
+        "country": {
+          "status": "missing",
+          "expected": null
+        },
+        "payment_terms_days": {
+          "status": "missing",
+          "expected": null
+        }
+      }
+    },
+    {
+      "document": "04_ambiguous_email.txt",
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "expected": "Cedar Supply"
+        },
+        "registration_id": {
+          "status": "missing",
+          "expected": null
+        },
+        "contact_email": {
+          "status": "ambiguous",
+          "expected": [
+            "sales@cedar.example.test",
+            "billing@cedar.example.test"
+          ]
+        },
+        "country": {
+          "status": "present",
+          "expected": "Canada"
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "expected": 45
+        }
+      }
+    },
+    {
+      "document": "05_unresolved_terms.txt",
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "expected": "Drift Materials"
+        },
+        "registration_id": {
+          "status": "present",
+          "expected": "00.04-A"
+        },
+        "contact_email": {
+          "status": "present",
+          "expected": "drift@example.test"
+        },
+        "country": {
+          "status": "present",
+          "expected": "United Kingdom"
+        },
+        "payment_terms_days": {
+          "status": "unresolved",
+          "expected": null,
+          "reason": "on receipt is not an explicit NetN/Ndays pattern"
+        }
+      }
+    },
+    {
+      "document": "06_source_instructions.txt",
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "expected": "Elm Goods"
+        },
+        "registration_id": {
+          "status": "missing",
+          "expected": null
+        },
+        "contact_email": {
+          "status": "present",
+          "expected": "elm@example.test"
+        },
+        "country": {
+          "status": "present",
+          "expected": "England"
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "expected": 0
+        }
+      }
+    },
+    {
+      "document": "07_complete.pdf",
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "expected": "Flint Goods"
+        },
+        "registration_id": {
+          "status": "present",
+          "expected": "009-Z"
+        },
+        "contact_email": {
+          "status": "present",
+          "expected": "flint@example.test"
+        },
+        "country": {
+          "status": "present",
+          "expected": "Germany"
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "expected": 60
+        }
+      }
+    },
+    {
+      "document": "08_two_pages.pdf",
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "expected": "Grove Components"
+        },
+        "registration_id": {
+          "status": "present",
+          "expected": "000/19"
+        },
+        "contact_email": {
+          "status": "present",
+          "expected": "grove@example.test"
+        },
+        "country": {
+          "status": "present",
+          "expected": "Spain"
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "expected": 90
+        }
+      }
+    },
+    {
+      "document": "09_missing_name.pdf",
+      "fields": {
+        "supplier_name": {
+          "status": "missing",
+          "expected": null
+        },
+        "registration_id": {
+          "status": "present",
+          "expected": "000-Q"
+        },
+        "contact_email": {
+          "status": "present",
+          "expected": "unknown@example.test"
+        },
+        "country": {
+          "status": "present",
+          "expected": "Ireland"
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "expected": 15
+        }
+      }
+    },
+    {
+      "document": "10_out_of_range.pdf",
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "expected": "Harbor Tools"
+        },
+        "registration_id": {
+          "status": "missing",
+          "expected": null
+        },
+        "contact_email": {
+          "status": "present",
+          "expected": "harbor@example.test"
+        },
+        "country": {
+          "status": "present",
+          "expected": "USA"
+        },
+        "payment_terms_days": {
+          "status": "unresolved",
+          "expected": null,
+          "reason": "Net366 is outside 0–365"
+        }
+      }
+    },
+    {
+      "document": "11_ambiguous_country.pdf",
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "expected": "Iris Supply"
+        },
+        "registration_id": {
+          "status": "missing",
+          "expected": null
+        },
+        "contact_email": {
+          "status": "present",
+          "expected": "iris@example.test"
+        },
+        "country": {
+          "status": "ambiguous",
+          "expected": [
+            "France",
+            "Belgium"
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "expected": 30
+        }
+      }
+    },
+    {
+      "document": "12_upper_boundary.pdf",
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "expected": "Juniper Parts"
+        },
+        "registration_id": {
+          "status": "present",
+          "expected": "000-12"
+        },
+        "contact_email": {
+          "status": "present",
+          "expected": "juniper@example.test"
+        },
+        "country": {
+          "status": "present",
+          "expected": "Australia"
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "expected": 365
+        }
+      }
+    }
+  ]
+}

@@ -17,7 +17,7 @@ services:
   web:
     build: .
     image: formreview:local
-    environment:
+    environment: &app_environment
       FORMREVIEW_ENV: ${FORMREVIEW_ENV:-development}
       DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1}
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-development-only-not-for-production}
@@ -26,10 +26,31 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-development-only}
       POSTGRES_HOST: db
       POSTGRES_PORT: "5432"
+      FORMREVIEW_PRIVATE_ROOT: /app/private
+    volumes:
+      - private_sources:/app/private
     ports:
       - "127.0.0.1:8000:8000"
     depends_on:
       db:
         condition: service_healthy
+  worker:
+    image: formreview:local
+    command: ["python", "manage.py", "process_jobs"]
+    environment: *app_environment
+    volumes:
+      - private_sources:/app/private
+    mem_limit: 512m
+    memswap_limit: 512m
+    pids_limit: 64
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    healthcheck:
+      disable: true
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
 volumes:
+  private_sources:
   postgres_data:

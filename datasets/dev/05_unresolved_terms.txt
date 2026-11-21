@@ -1,0 +1,5 @@
+Supplier: Drift Materials
+Email: drift@example.test
+Registration ID: 00.04-A
+Country: United Kingdom
+Payment terms: on receipt

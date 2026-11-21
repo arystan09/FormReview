@@ -1,0 +1,5 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>FormReview</title>
+<style>body{font:17px system-ui;max-width:960px;margin:2rem auto;padding:0 1rem;color:#192b33;background:#f8faf9}a{color:#075d61}nav{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}button{padding:.5rem 1rem;cursor:pointer}input,select{padding:.5rem}article,section{background:white;padding:1.5rem;margin:1rem 0;border:1px solid #ccd9d5}pre{white-space:pre-wrap;overflow-wrap:anywhere}code{overflow-wrap:anywhere}label{display:block;margin:1rem 0}table{width:100%;text-align:left}td,th{padding:.5rem} .muted{color:#465a61}</style></head>
+<body><nav><strong>FormReview</strong>{% if user.is_authenticated %}<a href="/documents">Inbox</a><a href="/accounts/workspaces">Workspace</a><form action="/accounts/logout" method="post">{% csrf_token %}<button>Sign out</button></form>{% endif %}</nav>
+{% block content %}{% endblock %}</body></html>

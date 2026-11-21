@@ -1,0 +1,144 @@
+FormReview — stage 2 of exactly 10
+
+Implementation scope and previous-stage verification
+Started from a clean working tree at 5f90e78 (stage 1). Read AGENTS.md, current
+code/configuration and verification commands, then passed the prior checks.
+No supplied design/roadmap files were present. No older project was accessed or
+modified. No commits, pushes, deployment, model requests or paid resources occurred.
+The keyless replay milestone remains after stage 3; full MVP remains after stage 4.
+
+Actual behavior and changed files
+- accounts/: Workspace/Membership models, viewer/reviewer roles, session workspace
+  selection, login/logout templates and bootstrap_workspace command with hidden
+  password prompts. Upload requires reviewer membership; all reads validate active
+  membership and workspace ownership. Workspace/role request fields grant nothing.
+- documents/: immutable Document/TextVersion, durable parse Job, private UUID paths,
+  raw hashes, safe display names, bounded upload admission, canonical parsing and
+  source API/templates. Jobs parse outside HTTP with leases and stale-job recovery.
+- PostgreSQL migrations reject UPDATE/DELETE of immutable document/source records.
+  References derive ownership through Document rather than accepting tenant IDs.
+- Parser subprocess: pypdf 7.1.1, 10-second wall limit, Linux 512 MiB address-space
+  ceiling and 9-second CPU limit; no inherited credential environment, no PDF action
+  execution and Python network/process operations denied. Compose adds a 512 MiB
+  worker memory/swap ceiling. macOS does not enforce the Linux address-space limit.
+- Original bytes preserved with exclusive creation and mode 0400. Canonical pages
+  normalize NFC and CRLF/CR to LF; TXT strips leading UTF-8 BOM. SHA-256 uses compact
+  UTF-8 JSON page arrays, preserving page boundaries. Versions are stored immutably.
+- Bounds: 5 MiB file, 5 PDF pages, 20,000 canonical characters. Multipart envelope
+  adds at most 64 KiB; file bytes separately capped while streaming. Other write
+  routes also have a 64 KiB admission bound. Unsupported/empty/encrypted/malformed/
+  textless/invalid-UTF8 files fail explicitly. No OCR. TXT is one canonical page.
+- Added 12 synthetic sources (6 TXT, 6 digital PDFs), separately authored provisional
+  labels and separate parser-negative fixtures. No PDF-generator dependency/font
+  files added: fixture generator uses existing pypdf with Base-14 font references.
+- Updated settings/URLs, Docker image, Compose web/worker/private volume, Makefile,
+  CI with PostgreSQL 18, README, AGENTS.md, .env.example and uv.lock.
+
+Interfaces
+GET /health/live; GET /health/ready (UTF-8 DB/schema connectivity, not worker health).
+/accounts/login, POST /accounts/logout, /accounts/workspaces.
+POST/GET /api/v1/documents; GET /documents; GET /documents/{id};
+GET /documents/{id}/text. No public upload or raw artifact route.
+
+Exact normal quickstart
+Prerequisites: Python 3.12, uv 0.13.9, PostgreSQL 18 UTF-8; Docker/Compose v2 for the
+commands below and deployment checks. Run from the repository root:
+  uv sync --frozen --all-groups
+  cp .env.example .env
+  docker compose up -d db
+  uv run python manage.py migrate
+  uv run python manage.py bootstrap_workspace --username reviewer --workspace "Local demo"
+  uv run python manage.py runserver 127.0.0.1:8000
+In another terminal:
+  uv run python manage.py process_jobs
+Sign in at http://127.0.0.1:8000/accounts/login, select workspace and upload
+ datasets/dev/01_complete.txt or datasets/dev/08_two_pages.pdf.
+Refresh the source page after parsing. Upload fixtures/parser_negative/scan_like.pdf
+to see no_text_page. Password is prompted; do not put it in shell arguments.
+
+Workspace-local tools (already installed in ignored work/)
+  export PATH="$PWD/work/bootstrap/bin:$PATH"
+  export UV_CACHE_DIR="$PWD/work/uv-cache"
+  export UV_PYTHON_INSTALL_DIR="$PWD/work/python"
+Docker was absent, so PostgreSQL 18.7 was built locally for verification. That
+scratch server was stopped after testing. To restart the existing scratch setup:
+  export POSTGRES_HOST="$(cat work/pg-socket-path)"
+  export POSTGRES_PORT=55432 POSTGRES_DB=formreview_utf8
+  export FORMREVIEW_PRIVATE_ROOT="$PWD/work/http-private"
+  work/pg/bin/pg_ctl -D work/pg-data -l "$PWD/work/pg-server.log" -o "-h '' -k '$POSTGRES_HOST' -p 55432" start
+It listens only on a private Unix socket; local trust authentication is for this
+scratch instance only. The normal Docker quickstart remains unverified locally.
+Tests use a dedicated disposable test_<POSTGRES_DB> database; never production.
+
+Checks actually run
+PASS uv sync --frozen --all-groups: 24 packages, including locked pypdf.
+PASS uv run python manage.py check: zero issues.
+PASS uv run python manage.py help and bootstrap_workspace --help.
+PASS uv run ruff check . and uv run ruff format --check .: 42 Python files.
+PASS uv run mypy formreview accounts documents: 25 source files.
+PASS uv run pytest -m "not integration and not e2e": 42 unit tests.
+PASS uv run pytest --collect-only -q: 56 categorized tests.
+PASS uv run python manage.py migrate: real PostgreSQL 18.7, all migrations applied.
+PASS uv run python manage.py makemigrations --check --dry-run: no changes.
+PASS uv run pytest -m integration: 14 tests on disposable real PostgreSQL database.
+PASS uv run python manage.py process_jobs --help.
+PASS git diff --check.
+PASS real HTTP synthetic walkthrough: login/CSRF, workspace selection, TXT/PDF
+     uploads, separate worker process, canonical JSON/source pages, scan-like
+     rejection and readiness. Temporary Gunicorn server stopped afterward.
+
+Integration evidence includes independent worker DB connections, a separate worker
+process, tenant/role isolation and revocation, CSRF on login/logout/upload/workspace
+selection, byte boundaries, source escaping, DB immutability triggers, stale leases
+and retry exhaustion. Unit evidence includes all 12 development sources, malformed/
+encrypted/textless PDFs, BOM/Unicode, 5/6-page and 20,000/20,001-character boundaries,
+original byte/hash preservation, safe names, and actual timed subprocess termination.
+The timeout suite includes one mock for the configured budget and one real sleeping
+subprocess to prove termination. Parser success fixtures use real pypdf, not mocks.
+
+Failures encountered and resolved
+- Initial source build/init required sandbox authorization for shared memory.
+- Initial PostgreSQL scratch database defaulted to SQL_ASCII; the Unicode worker
+  test failed. Created a UTF-8 app DB and explicitly configured UTF-8/template0
+  test databases; all integration tests then passed. Readiness rejects non-UTF8 DBs.
+- Initial lint/type errors were fixed, with full checks passing afterward.
+No tests were bypassed or failure results presented as passes.
+
+Unavailable/not run
+- docker compose config --quiet, docker compose up -d db and
+  docker build -t formreview:local .: command not found, exit 127.
+- Built image HTTP/default UID check and Compose volume/resource behavior: not run.
+- Linux 512 MiB runtime ceiling: configured, not exercised on this macOS host.
+- Remote GitHub Actions: configured but not run.
+- Browser automation/visual browser QA: not run. HTTP/template behavior was tested;
+  no JS/UI browser behavior is claimed.
+
+Acceptance evaluation
+1. Supported documents produce canonical pages and source hashes: PASS, all 12
+   parser cases plus real PostgreSQL worker and real HTTP TXT/PDF walkthrough.
+2. Unsupported files fail safely: PASS for tested malformed/encrypted/empty/
+   image-only/page/byte/character/UTF8/extension cases; deployment resource proof
+   remains an open gate.
+3. Jobs run outside HTTP: PASS, upload leaves queued jobs; separate worker process
+   produces TextVersion. Real independent DB connections establish concurrent claims.
+4. Source belongs to workspace: PASS, list/source/text tenant filters, role checks,
+   revocation, forged workspace fields, selection and CSRF tests.
+5. Twelve development examples exist: PASS. Labels are separate, provisional and
+   not derived from parser/model output. Independent HUMAN review is outstanding;
+   these are not reviewed gold, approval decisions or accuracy evidence.
+6. No AI result/accuracy claim: PASS. No model implementation or calls, including
+   no live, replay or mock provider results. Those modes remain later-stage work.
+
+Known limitations and open gates
+Stage 2 implementation is ready for review, but inherited Docker/container/remote
+CI gates remain open, together with Linux resource-limit verification. A PDF with
+any textless page (including a mixed document) is rejected. No OCR or semantic
+validation is provided. Inbox/API currently show the latest 100 sources. Bootstrap
+creates new users/workspaces only; existing membership administration is local ORM
+work. Crash-before-DB-commit may leave unreferenced private artifacts; no automatic
+cleanup/delete feature is added. Immutable sources resist application mutation,
+not privileged host/database administrators. Liveness/readiness do not certify
+worker progress. Independent human review of provisional labels is still required.
+
+No stage 3 work was implemented. User reviews and commits.
+Suggested commit: upload owned documents and extract canonical text

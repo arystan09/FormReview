@@ -1,0 +1,1 @@
+{% extends "documents/base.html" %}{% block content %}<h1>Select workspace</h1><form method="post">{% csrf_token %}<label>Workspace <select name="membership">{% for membership in memberships %}<option value="{{ membership.pk }}">{{ membership.workspace.name }} — {{ membership.role }}</option>{% endfor %}</select></label><button>Open workspace</button></form>{% endblock %}

@@ -1,0 +1,5 @@
+Supplier: Alder Parts
+Registration ID: 001-AB
+Email: alder@example.test
+Country: Italy
+Payment terms: Net30
