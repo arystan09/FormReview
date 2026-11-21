@@ -1,0 +1,13 @@
+.git
+.env
+.env.*
+.venv
+work
+outputs
+uploads
+private
+secrets
+**/__pycache__
+.*_cache
+*.pem
+*.key

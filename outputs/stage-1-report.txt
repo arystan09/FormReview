@@ -1,0 +1,96 @@
+FormReview — Stage 1 implementation report
+
+Implemented in the current, initially empty workspace. ScopeCheck and ImportLedger
+were not accessed or modified. There was no Git repository, existing code, AGENTS.md,
+or supplied design/roadmap. No Git initialization, commit, push, deployment, paid
+request or billable resource provisioning was performed.
+
+Behavior and files
+- GET /health/live returns HTTP 200 with {"status":"ok"}, without database access.
+- config/settings.py provides PostgreSQL settings, Django session/CSRF middleware,
+  DRF session authentication, production validation and secure cookie defaults.
+- config/urls.py, config/wsgi.py, formreview/views.py and manage.py form the app.
+- pyproject.toml and uv.lock freeze compatible Python 3.12/Django 5.2/DRF/psycopg,
+  Gunicorn and verification dependencies. Resolved Python 3.12.16, Django 5.2.19,
+  DRF 3.16.1, psycopg 3.3.9 and Gunicorn 23.0.0.
+- Dockerfile declares UID/GID 10001 and a real HTTP health check. compose.yaml uses
+  PostgreSQL 18 with its /var/lib/postgresql volume and loopback ports.
+- tests/unit covers settings, credential-safe failures, liveness, CSRF and strict
+  category collection. scripts/check_container.py tests the built image default
+  UID, Docker health and host HTTP; CI includes this check.
+- README, AGENTS.md, Makefile, .env.example, .gitignore, .dockerignore and CI added.
+  AGENTS.md preserves exactly 10 stages, replay after 3 and MVP after 4.
+- No domain models/migrations or future-feature scaffold. No AI implementation:
+  replay, regex baseline, mocked provider and live provider modes were not run.
+
+Prerequisites and exact commands
+This machine initially had Python 3.9 but no uv, Python 3.12 or Docker. uv 0.13.9
+was downloaded into ignored work/bootstrap; uv downloaded Python 3.12 into work/python.
+For this workspace's local bootstrap, first run:
+  export PATH="$PWD/work/bootstrap/bin:$PATH"
+  export UV_CACHE_DIR="$PWD/work/uv-cache"
+  export UV_PYTHON_INSTALL_DIR="$PWD/work/python"
+On another machine install uv 0.13.9 and Python 3.12 (or allow uv to fetch Python).
+Install Docker Engine with Compose v2 to close container/database gates.
+
+  uv sync --frozen --all-groups
+  uv run python manage.py check
+  uv run python manage.py help
+  uv run ruff check .
+  uv run ruff format --check .
+  uv run mypy formreview
+  uv run pytest -m "not integration and not e2e"
+  uv run pytest --collect-only
+
+For the database-backed development quickstart:
+  cp .env.example .env
+  docker compose up -d db
+  uv run python manage.py migrate
+  uv run python manage.py runserver 127.0.0.1:8000
+In a second terminal:
+  curl --fail http://127.0.0.1:8000/health/live
+
+For container verification:
+  docker compose config --quiet
+  docker build -t formreview:local .
+  uv run python scripts/check_container.py
+
+Actual verification results
+PASS: uv sync --frozen --all-groups (23 installed packages checked).
+PASS: python manage.py check (no issues); python manage.py help.
+PASS: ruff check .; ruff format --check . (14 Python files formatted).
+PASS: mypy formreview (2 source files).
+PASS: pytest -m "not integration and not e2e" (13 passed).
+PASS: pytest --collect-only (13 tests, all categorized).
+PASS: real local Gunicorn HTTP liveness via work/check_local_http.py; temporary
+      server terminated. This is not proof of container behavior.
+Initial Ruff attempts failed by scanning downloaded dependencies under work and
+finding one long project line. Explicit scratch exclusions and formatting fixed
+both; final full checks passed. Initial local HTTP bind was sandbox-blocked;
+the authorized retry passed. Initial sandbox dependency download failed; authorized
+download succeeded. No failing checks were suppressed.
+UNAVAILABLE: docker compose config --quiet and docker build -t formreview:local .
+             both returned command not found (127).
+NOT RUN: container smoke/default UID/health proof, PostgreSQL startup/migrations,
+         remote GitHub Actions. Docker is missing; no repository/remote CI exists.
+
+Acceptance evaluation
+- Separate new project, old projects untouched: satisfied; writes confined here.
+- Installation and frozen dependency checks: satisfied locally on Python 3.12.
+- Django checks, lint, formatting, typing and categorized tests: satisfied.
+- Liveness: satisfied by client tests and real local HTTP.
+- Non-root image and real container health: implemented, pending runtime proof.
+- Compose/PostgreSQL quickstart: documented, pending Docker verification.
+- CI: configured, pending actual remote execution.
+- Exactly ten stages and no future scaffold: satisfied in implementation/docs.
+- Supplied design/roadmap preservation: not applicable; none supplied. No invented
+  docs/design.md or docs/roadmap.md. Obtain approved later-stage scope before work.
+- Secrets/private artifacts: only synthetic placeholders in tracked-intent source;
+  ignore rules cover work, environments, uploads and keys. Nothing committed.
+
+Stage 1 acceptance remains gated on Docker/container and remote CI evidence.
+Liveness does not establish database readiness, extraction correctness or any
+later-stage capability. No later stage was started.
+
+Suggested commit (user reviews and commits):
+  set up FormReview app and verification workflow

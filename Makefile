@@ -1,0 +1,13 @@
+.PHONY: install check container-check
+install:
+	uv sync --frozen --all-groups
+check:
+	uv run python manage.py check
+	uv run ruff check .
+	uv run ruff format --check .
+	uv run mypy formreview
+	uv run pytest -m "not integration and not e2e"
+container-check:
+	docker compose config --quiet
+	docker build -t formreview:local .
+	uv run python scripts/check_container.py

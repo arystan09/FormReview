@@ -1,0 +1,47 @@
+[project]
+name = "formreview"
+version = "0.1.0"
+description = "Supplier onboarding extraction with evidence and human confirmation"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "Django>=5.2,<5.3",
+  "djangorestframework>=3.16,<3.17",
+  "psycopg[binary]>=3.2,<4",
+  "gunicorn>=23,<24",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8,<10",
+  "pytest-django>=4.11,<5",
+  "ruff>=0.14,<1",
+  "mypy>=1.18,<2",
+  "django-stubs>=5.2,<5.3",
+  "djangorestframework-stubs>=3.16,<3.17",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+testpaths = ["tests"]
+addopts = "--strict-markers --strict-config"
+markers = [
+  "unit: isolated tests without database or external services",
+  "integration: tests against real service boundaries",
+  "e2e: complete user workflows",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+extend-exclude = ["work", "outputs", "uploads", "private", "secrets"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "config.settings"
