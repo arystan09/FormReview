@@ -26,6 +26,23 @@ def owned_run(request: HttpRequest, run_id: uuid.UUID) -> ExtractionRun:
 def extract(request: HttpRequest, document_id: uuid.UUID) -> HttpResponse:
     membership = active_membership(request, reviewer=True)
     get_object_or_404(Document, pk=document_id, workspace_id=membership.workspace_id)
+    if request.POST.get("mode") == "live":
+        from extraction.live import admit
+
+        try:
+            attempt = admit(
+                membership,
+                document_id,
+                request.POST.get("confirmation_token", ""),
+                request.POST.get("paid_confirmed") == "yes",
+            )
+        except ReplayConflict as error:
+            return JsonResponse({"error": str(error)}, status=409)
+        if request.POST.get("preview") == "yes":
+            response = HttpResponse(status=303)
+            response["Location"] = f"/live-attempts/{attempt.id}"
+            return response
+        return JsonResponse({"attempt_id": str(attempt.id), "status": attempt.status}, status=202)
     if request.POST.get("mode") != "replay":
         return JsonResponse({"error": "explicit_replay_mode_required"}, status=400)
     try:
@@ -70,9 +87,7 @@ def extraction_json(request: HttpRequest, run_id: uuid.UUID) -> HttpResponse:
         {
             "id": str(run.id),
             "mode": run.mode,
-            "notice": (
-                "Synthetic replay, not a live model result. Quote membership is not semantic truth."
-            ),
+            "notice": ("Source mode is explicit. Quote membership is not semantic truth."),
             "status": run.status,
             "error_code": run.error_code,
             "text_version_id": run.text_version_id,
@@ -133,6 +148,18 @@ def preview(request: HttpRequest, run_id: uuid.UUID) -> HttpResponse:
 def draft_create(request: HttpRequest, document_id: uuid.UUID) -> HttpResponse:
     membership = active_membership(request, reviewer=True)
     get_object_or_404(Document, pk=document_id, workspace_id=membership.workspace_id)
+    if request.POST.get("mode") == "manual":
+        from reviews.services import ReviewConflict, manual_draft
+
+        try:
+            draft = manual_draft(
+                membership, document_id, int(request.POST.get("expected_revision", ""))
+            )
+        except (ValueError, ReviewConflict) as error:
+            return JsonResponse({"error": str(error)}, status=409)
+        response = HttpResponse(status=303)
+        response["Location"] = f"/drafts/{draft.id}"
+        return response
     try:
         run_id = uuid.UUID(request.POST.get("run_id", ""))
         expected_revision = int(request.POST.get("expected_revision", ""))
@@ -156,17 +183,3 @@ def draft_create(request: HttpRequest, document_id: uuid.UUID) -> HttpResponse:
         },
         status=201,
     )
-
-
-@require_GET
-def draft_preview(request: HttpRequest, draft_id: uuid.UUID) -> HttpResponse:
-    membership = active_membership(request)
-    draft = get_object_or_404(
-        ReviewDraft.objects.select_related("run__text_version__document", "run__config"),
-        pk=draft_id,
-        document__workspace_id=membership.workspace_id,
-    )
-    context = preview_context(draft.run)
-    context["draft"] = draft
-    context["can_write"] = membership.role == "reviewer"
-    return render(request, "extraction/preview.html", context)

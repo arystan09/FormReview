@@ -1,11 +1,11 @@
 {% extends "documents/base.html" %}{% block content %}
 <h1>{% if draft %}Review draft preview{% else %}Extraction preview{% endif %}</h1>
-<section><h2>Synthetic replay — no model call</h2><p>This authored output can contain deliberate omissions and invalid evidence. Quote membership is not semantic truth. Every field needs human confirmation; approval is not available in this stage.</p>
+<section><h2>{% if run.mode == "replay" %}Synthetic replay — no model call{% else %}Live model suggestions — human confirmation required{% endif %}</h2><p>{% if run.mode == "replay" %}This authored output can contain deliberate omissions and invalid evidence.{% else %}Model output can be wrong or unsupported.{% endif %} Quote membership is not semantic truth. Every field needs human confirmation; approval is available only after explicit human review.</p>
 <p><a href="/documents/{{ document.id }}">{{ document.filename }} — canonical source</a></p>
 <p>Run: <code>{{ run.id }}</code> · mode: {{ run.mode }} · status: {{ run.status }}</p>
 <p>Text version: {{ run.text_version_id }} · source hash: <code>{{ run.canonical_sha256 }}</code></p>
 <p>Config: <code>{{ run.config_hash }}</code><br>Schema: {{ run.config.schema_version }} · normalizer: {{ run.config.normalizer_version }} · evidence: {{ run.config.evidence_version }}</p>
-{% if draft %}<p>Draft: <code>{{ draft.id }}</code> · revision {{ draft.revision }}. Bound to the run and text version above. No review decisions have been saved.</p>
+{% if draft %}<p>Draft: <code>{{ draft.id }}</code> · revision {{ draft.revision }}. Bound to the run and text version above. Review decisions are managed in the draft editor.</p>
 {% elif existing_draft %}<p>An existing draft remains bound to its selected run. <a href="/drafts/{{ existing_draft.id }}">Open existing draft</a>.</p>
 {% elif run.status == 'validated' and can_write %}<form method="post" action="/documents/{{ document.id }}/drafts">{% csrf_token %}<input type="hidden" name="run_id" value="{{ run.id }}"><input type="hidden" name="expected_revision" value="0"><input type="hidden" name="preview" value="yes"><button>Create initial draft from this run</button></form>{% endif %}
 </section>

@@ -30,6 +30,7 @@ def reviewer_for_document(membership: Membership, document: Document) -> None:
             workspace_id=document.workspace_id,
             user_id=membership.user_id,
             role="reviewer",
+            user__is_active=True,
         )
         .first()
     )
@@ -69,11 +70,26 @@ def run_replay(
         fixture_id, response = ReplayProvider().extract(request)
     except ValueError as error:
         raise ReplayConflict(str(error)) from None
+    return persist_result(text, config, "replay", request_hash(request), response, fixture_id)
+
+
+@transaction.atomic
+def persist_result(
+    text: TextVersion,
+    config: ExtractionConfig,
+    mode: str,
+    payload_hash: str,
+    response: str,
+    fixture_id: str = "",
+    provider_error: str = "",
+) -> ExtractionRun:
     output: dict[str, Any] = {}
     field_flags: dict[str, list[str]] = {}
     candidates = []
-    error_code = ""
+    error_code = provider_error
     try:
+        if provider_error:
+            raise ValueError("provider_failure")
         validated = parse_response(response)
         output = validated.model_dump()
         for name, field in validated.field_results():
@@ -99,8 +115,8 @@ def run_replay(
                     )
                 )
             field_flags[name] = sorted(set(flags))
-    except (ValidationError, ValueError, TypeError):
-        error_code = "invalid_provider_output"
+    except (ValidationError, ValueError, TypeError, RecursionError):
+        error_code = provider_error or "invalid_provider_output"
     response_bytes = response.encode("utf-8", errors="surrogatepass")
     safe_response = (
         response
@@ -112,16 +128,16 @@ def run_replay(
     run = ExtractionRun.objects.create(
         text_version=text,
         config=config,
-        mode="replay",
+        mode=mode,
         config_hash=config.config_hash,
         canonical_sha256=text.canonical_sha256,
-        request_hash=request_hash(request),
+        request_hash=payload_hash,
         replay_fixture=fixture_id,
         response_text=safe_response,
         response_sha256=hashlib.sha256(response_bytes).hexdigest(),
         output=output,
         field_flags=field_flags,
-        status="invalid_output" if error_code else "validated",
+        status="failed" if provider_error else "invalid_output" if error_code else "validated",
         error_code=error_code,
     )
     if not error_code:
@@ -156,4 +172,6 @@ def create_draft(
     ).first()
     if run is None:
         raise ReplayConflict("valid_owned_run_required")
-    return ReviewDraft.objects.create(document=document, run=run, text_version=run.text_version)
+    return ReviewDraft.objects.create(
+        document=document, run=run, text_version=run.text_version, mode=run.mode
+    )

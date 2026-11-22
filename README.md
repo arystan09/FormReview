@@ -1,10 +1,10 @@
 # FormReview
 
-Stage 3 of exactly **10 mandatory stages**: owned documents now support a keyless
-synthetic extraction-to-review preview. Source evidence is anchored by the server,
-with explicit manual-review flags and an immutable executable config. The keyless
-walkthrough milestone is implemented; the full MVP remains due after stage 4.
-There is no approval, live provider, paid mode or regex baseline in this stage.
+Stage 4 of exactly **10 mandatory stages** adds human decisions, atomic approval,
+immutable records/exports and an explicitly enabled live adapter. The keyless
+replay workflow is available locally. Full stage-4 acceptance still requires an
+actual authorized live extraction; replay and mocked transport are not live evidence.
+Paid mode defaults disabled. Stages 5–10 and the regex baseline are not implemented.
 
 ## Keyless replay walkthrough
 
@@ -16,8 +16,15 @@ page and click **Run synthetic replay**. The preview shows:
 - registration_id: deliberately missing in the synthetic output;
 - contact_email: deliberately unsupported quote, flagged `quote_missing`, no offset.
 
-Click **Create initial draft from this run** to bind a revision-1 preview to that
-explicit run and immutable text version. A later extraction does not replace this
+Click **Create initial draft from this run** to bind revision 1 to that explicit
+run and immutable text version. For each of the five fields, accept an eligible
+source candidate, enter a manual correction with reason/provenance, or explicitly
+mark an optional field missing with a reason. Name and email cannot be missing.
+For this example, accept supplier_name/country/payment_terms_days, mark the optional
+registration_id missing, and correct contact_email to `alder@example.test` using
+the source Email line with a correction reason and provenance. Save decisions,
+inspect the confirmation, explicitly confirm human approval, then export the record.
+The record preserves replay provenance and manual corrections; it is not model success. A later extraction does not replace this
 draft. `04_ambiguous_email.txt` demonstrates two source candidates, while
 `08_two_pages.pdf` deliberately claims the wrong page. No key is needed. Only the
 12 bundled development sources have replay outputs; arbitrary source hashes return
@@ -37,7 +44,22 @@ GET `/extractions/{id}` shows the source/field preview. POST
 `/documents/{id}/drafts` requires `run_id` and `expected_revision=0` for initial
 creation. Existing drafts require their exact revision and same run for an
 idempotent response; stale revisions and replacement runs receive 409. GET
-`/drafts/{id}` shows the owned draft. No editing or approval endpoint exists yet.
+`/drafts/{id}` shows the owned editor. PATCH `/api/v1/drafts/{id}` requires JSON
+`expected_revision` and all five `decisions`. A decision contains `action`
+(accept/edit/missing), `candidate_id`, `value`, `reason` and `provenance`, with
+explicit nulls where unused. Saves increment revision; stale or closed drafts get
+409. GET `/drafts/{id}/confirm` binds the revision and decision hash to an approval
+form. POST `/drafts/{id}/approve` requires its idempotency key and explicit human
+confirmation. Same request returns the same receipt; mismatches get 409. Document
+then Draft locks, role rechecking and final validation protect concurrent saves and
+approval. GET `/records/{id}` and `/records/{id}/export` remain workspace-owned.
+
+The source page also offers **Create manual-only draft** for sources without a
+usable extraction. It records no model run and requires manual provenance/reasons.
+Neither extraction nor manual creation replaces an existing draft. Approved records,
+receipts and review events are protected by PostgreSQL immutability triggers.
+The guard migrations are deliberately irreversible: back up the database before
+migrating; do not expect a reverse migration to remove audit protections.
 
 The strict contract requires all five fields, 1/0/2 distinct candidates for
 present/missing/ambiguous, and no extras or confidence/offset fields. Quotes are
@@ -160,6 +182,10 @@ make check
 uv run pytest --collect-only
 docker compose up -d db
 make integration
+uv run playwright install chromium
+uv run pytest -m e2e
+uv run python scripts/demo_smoke.py
+uv run python manage.py configure_live --help
 make container-check
 ```
 
@@ -167,12 +193,80 @@ make container-check
 and unit tests. `make integration` runs migrations, migration-drift check, real
 PostgreSQL tests (including independent workers) and worker help. Test collection
 requires exactly one unit/integration/e2e category. CI runs these with PostgreSQL 18
-and container smoke checks. Real HTTP behavior can be verified locally; no JS is required. Stage 3 was also manually exercised in a real in-app browser;
-that walkthrough is not a committed browser-regression suite.
+and container smoke checks. Stage-4 browser tests use real Chromium, a real worker
+subprocess and PostgreSQL, including a stale browser tab and JSON export. They cover
+replay and manual-only approval. SDK tests use mocked HTTP transport; CI never pays
+for a model call. `demo_smoke.py` runs those two complete browser workflows.
 
 The 12 synthetic development sources and separately authored provisional labels
 are described in datasets/dev/README.md. Labels are not independently human-reviewed
 gold, parser output or model input. Parser-negative fixtures are separate. There
 are no live model results or accuracy claims. Synthetic replay is implemented;
-regex baseline and live AI remain distinct future capabilities. Approved design/roadmap files were not supplied;
+regex baseline is a distinct future capability. The live adapter requires explicit enablement and has no verified live result yet. Approved design/roadmap files were not supplied;
 no replacement roadmap or history was invented. See AGENTS.md for permanent contracts.
+
+
+## Optional owner-enabled live extraction
+
+Do not enable this path without owner credentials and spending authorization.
+The only allowlisted model is `gpt-5.4-mini-2026-03-17`. The stored full prompt,
+model, settings, JSON schema and normalizer versions are hashed and immutable.
+The wire schema is the stored OpenAI-compatible schema; the strict five-field
+cardinality and evidence rules are additionally enforced by the server. Schema
+validity and quote membership do not establish semantic truth.
+
+The OpenAI SDK sends canonical pages and the stored executable prompt/schema only,
+with `store=false`, reasoning effort `none`, output limit 3,000, 30-second transport
+and outer wall timeout, retries zero, no tools, fixed official endpoint and no proxy
+environment. Labels and human decisions are not provider inputs. The key is read
+only from `FORMREVIEW_OPENAI_API_KEY` in the local owner command/worker environment;
+Compose does not pass it to web. Do not paste it into a command argument, source,
+logs or screenshots. Load it through your private environment/secret mechanism.
+
+After authorization, put the desired executable prompt in ignored private storage,
+check current official prices, and configure a finite lifetime allowance locally:
+
+```sh
+# Worker environment already contains FORMREVIEW_OPENAI_API_KEY privately.
+# Review current prices first; supply those values, not unverified historical prices.
+uv run python manage.py configure_live --enable \
+  --prompt-file private/live-prompt.txt --limit 1 \
+  --input-price "$INPUT_USD_PER_MILLION" --output-price "$OUTPUT_USD_PER_MILLION" \
+  --price-checked-on "$(date -u +%F)" \
+  --price-source https://developers.openai.com/api/docs/models/gpt-5.4-mini
+uv run python manage.py process_jobs
+```
+
+Price references expire after seven UTC days. The displayed estimate uses a
+conservative input-byte approximation plus maximum output tokens; it is not an
+invoice or guaranteed dollar ceiling. See the [official model pricing](https://developers.openai.com/api/docs/models/gpt-5.4-mini)
+and [SDK retry documentation](https://github.com/openai/openai-python#retries).
+The owner must supply a prompt appropriate to the five-field schema and source
+limits; no hidden live prompt is substituted for it.
+
+On the source page, open **Check paid extraction availability and estimate** and explicitly confirm that
+single request and estimate. The signed confirmation binds source/config/policy
+and an idempotency nonce. A transaction consumes one lifetime attempt before
+queuing. Global admission allows one active request, at least 60 seconds between
+admissions, and never replenishes/refunds consumed attempts. Changing `--limit`
+sets an absolute lifetime ceiling, not additional credits. `--disable` stops new
+admission and cancels queued work; it cannot undo a submitted provider request.
+
+The worker durably marks `submitted` before its one network call. Refusals,
+truncation, schema errors and rate limits produce explicit terminal outcomes.
+Timeouts, connection errors, server errors and worker crashes after submission
+remain uncertain and block the global slot. There is no automatic retry. Only an
+owner who has stopped the worker and independently established that the provider
+request has finished may release an uncertain slot:
+
+```sh
+uv run python manage.py configure_live --reconcile-unknown ATTEMPT_UUID \
+  --confirm-provider-finished
+```
+
+This does not retry or restore allowance. Inspect the owned attempt page for the
+provider request ID when returned. Successful output uses the same evidence/review
+path as replay, and only the human endpoint can approve. A required live smoke
+must record an attributable synthetic attempt/config/run before claiming stage-4
+acceptance. `FORMREVIEW_PUBLIC_DEMO=1` blocks domain writes and live admission;
+public-demo deployments must contain no key and are not deployed by this project.

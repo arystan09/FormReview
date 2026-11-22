@@ -57,6 +57,16 @@ def replay_config(prompt_text: str = DEFAULT_PROMPT) -> ExtractionConfig:
 def validate_config(config: ExtractionConfig) -> None:
     if digest(executable_config(config)) != config.config_hash:
         raise ValueError("config_hash_mismatch")
+    if config.schema_version == LIVE_SCHEMA_VERSION:
+        if (
+            config.model != LIVE_MODEL
+            or config.settings != LIVE_SETTINGS
+            or config.response_schema != live_schema()
+            or config.normalizer_version != NORMALIZER_VERSION
+            or config.evidence_version != EVIDENCE_VERSION
+        ):
+            raise ValueError("unsupported_live_config")
+        return
     if (
         config.model != "synthetic-replay-v1"
         or config.schema_version != SCHEMA_VERSION
@@ -67,3 +77,37 @@ def validate_config(config: ExtractionConfig) -> None:
         raise ValueError("unsupported_config")
     if config.settings != {"max_output_tokens": 3000, "timeout_seconds": 30, "temperature": 0}:
         raise ValueError("unsupported_settings")
+
+
+LIVE_MODEL = "gpt-5.4-mini-2026-03-17"
+LIVE_SCHEMA_VERSION = "five-fields-openai-v1"
+LIVE_SETTINGS = {
+    "max_output_tokens": 3000,
+    "timeout_seconds": 30,
+    "max_retries": 0,
+    "reasoning_effort": "none",
+    "store": False,
+}
+
+
+def live_schema() -> dict[str, Any]:
+    schema = ExtractionOutput.model_json_schema()
+    # OpenAI does not support conditional allOf. Cardinality remains enforced server-side.
+    schema["$defs"]["FieldResult"].pop("allOf")
+    return schema
+
+
+def live_config(prompt_text: str) -> ExtractionConfig:
+    if not prompt_text.strip() or len(prompt_text) > 20000:
+        raise ValueError("invalid_prompt_length")
+    values = {
+        "prompt_text": prompt_text,
+        "model": LIVE_MODEL,
+        "settings": LIVE_SETTINGS,
+        "response_schema": live_schema(),
+        "schema_version": LIVE_SCHEMA_VERSION,
+        "normalizer_version": NORMALIZER_VERSION,
+        "evidence_version": EVIDENCE_VERSION,
+    }
+    config, _ = ExtractionConfig.objects.get_or_create(config_hash=digest(values), defaults=values)
+    return config

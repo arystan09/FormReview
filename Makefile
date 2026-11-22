@@ -18,3 +18,8 @@ integration:
 	uv run python manage.py makemigrations --check --dry-run
 	uv run pytest -m integration
 	uv run python manage.py process_jobs --help
+
+.PHONY: e2e
+e2e:
+	uv run pytest -m e2e
+	uv run python scripts/demo_smoke.py

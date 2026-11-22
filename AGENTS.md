@@ -4,7 +4,9 @@ This is the new FormReview project. Never edit ScopeCheck or ImportLedger.
 There are exactly **10 mandatory stages**. Work on one authorized stage only.
 Stage 1 establishes the foundation. A keyless replay walkthrough is due after
 stage 3; the full MVP is due after stage 4. Stage 2 adds owned uploads and immutable canonical parsing. Stage 3 adds synthetic replay, immutable extraction config/evidence and an initial
-review preview. Stages 4–10 are not implemented here.
+review preview. Stage 4 adds guarded live admission and human review/approval.
+Stages 5–10 are not implemented here. Actual paid verification remains a required
+gate until owner credentials and explicit spending authorization are supplied.
 No approved design/roadmap files were supplied at initialization. Do not invent
 implementation history or fill in a replacement roadmap. Obtain the approved
 stage scope before implementing a later stage.
@@ -48,19 +50,21 @@ make paid calls or provision billable resources.
   data and mock provider calls in CI. Real PostgreSQL independent connections or
   processes prove concurrency; real browsers prove JS behavior. No invented passes.
 
-Do not scaffold later capabilities. Stage 3 additionally permits ExtractionConfig,
-ExtractionRun, FieldCandidate and initial ReviewDraft. No approval or live capability.
+Do not scaffold later capabilities. Stage 4 permits finite LiveAllowance and durable
+LiveAttempt, draft decisions, ReviewEvent, ApprovedRecord and ApprovalReceipt.
+LiveAttempt records the pre-network submitted state separately from immutable runs.
+No automatic approval, uncertain-request retries, or paid CI calls.
 Use focused typed modules. Verification: `make install`, `make check`,
 `uv run pytest --collect-only`, `uv run python manage.py help`,
 `make container-check`. Missing Docker or remote CI is a pending gate, never a pass.
 Stop after reporting acceptance evidence and suggesting the intended commit:
-`validate extraction evidence and add replay review`.
+`extract live fields and save human-approved records`.
 
 Stage 2 checks additionally require PostgreSQL 18 with UTF-8 encoding:
 `make integration`. Tests create/drop a dedicated test database; never point them
 at a production server. PDF parsing has a 10-second subprocess wall timeout, Linux
 512 MiB address-space limit and a 512 MiB Compose worker ceiling. macOS development
-does not prove the Linux memory ceiling. No OCR or live model calls. Keep provisional labels
+does not prove the Linux memory ceiling. No OCR. Live calls require explicit owner authorization. Keep provisional labels
 separate from parser output; never call them independently human-reviewed truth.
 
 Stage 3 checks: `uv run pytest tests/unit/test_evidence.py
@@ -68,4 +72,12 @@ tests/unit/test_extraction_contract.py tests/integration/test_replay.py` (one co
 Replay is visibly synthetic, restricted to bundled source hashes, and must consume
 the actual stored config payload. Never derive model offsets or claim quote
 membership is truth. Initial draft creation binds an explicit run/text version;
-new extraction must not replace it. Editing/approval remain stage 4.
+new extraction must not replace it. Stage 4 editing uses expected_revision; approval locks Document then Draft,
+revalidates five decisions, and atomically creates an immutable record/receipt/event.
+
+Stage 4 verification additionally requires `uv run playwright install chromium`,
+`uv run pytest -m e2e`, `uv run python scripts/demo_smoke.py` and
+`uv run python manage.py configure_live --help`. Browser tests use real Chromium,
+a real worker subprocess and disposable PostgreSQL. Provider tests mock transport.
+Actual live smoke, Docker/Linux resource proof and remote CI cannot be inferred
+from offline passes. Never declare full milestone acceptance without live evidence.

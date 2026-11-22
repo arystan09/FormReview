@@ -34,6 +34,10 @@ jobs:
       - run: uv run python manage.py makemigrations --check --dry-run
       - run: uv run pytest -m integration
       - run: uv run python manage.py process_jobs --help
+      - run: uv run playwright install --with-deps chromium
+      - run: uv run pytest -m e2e
+      - run: uv run python scripts/demo_smoke.py
+      - run: uv run python manage.py configure_live --help
       - run: docker compose config --quiet
       - run: docker build -t formreview:local .
       - run: uv run python scripts/check_container.py

@@ -1,5 +1,6 @@
 from collections.abc import Callable
 
+from django.conf import settings
 from django.core.exceptions import PermissionDenied
 from django.core.files.uploadhandler import FileUploadHandler, StopUpload
 from django.http import HttpRequest, HttpResponse, JsonResponse
@@ -34,6 +35,12 @@ class UploadAdmissionMiddleware:
         self.get_response = get_response
 
     def __call__(self, request: HttpRequest) -> HttpResponse:
+        if (
+            settings.PUBLIC_DEMO
+            and request.method not in {"GET", "HEAD", "OPTIONS"}
+            and request.path not in {"/accounts/login", "/accounts/logout", "/accounts/workspaces"}
+        ):
+            return JsonResponse({"error": "public_demo_read_only"}, status=403)
         if request.path == "/api/v1/documents" and request.method == "POST":
             try:
                 active_membership(request, reviewer=True)

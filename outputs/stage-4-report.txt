@@ -1,0 +1,171 @@
+FormReview — stage 4 of exactly 10
+Verification date: 2026-11-22 (Europe/Rome)
+
+Outcome
+Implemented the local extraction → five explicit decisions → human confirmation →
+immutable approved record/export workflow. Real Chromium exercises synthetic replay
+and manual-only fallback with a real parser worker and PostgreSQL. The OpenAI SDK
+adapter and finite admission controls are implemented and tested with mocks only.
+Full stage-4 acceptance is NOT complete: an actual authorized live extraction is a
+required pending gate. No key or spending authorization was supplied and no real
+provider request was made. Docker/Linux container checks and remote CI also remain
+pending. No stages 5–10 were implemented. No commit, push, deployment or paid resource.
+
+Initial evidence and boundaries
+Read AGENTS.md, current code, Makefile/verification commands and Git status before
+implementation. Initial Git state was clean at stage-3 commit d8e3393, following
+stage-2 cfdb61f. Previous-stage regression tests passed before stage-4 changes.
+No approved design/roadmap files were supplied; none were invented. ScopeCheck and
+ImportLedger were not edited. Exactly 10 mandatory stages, the stage-3 keyless
+walkthrough and stage-4 MVP target remain documented. Earlier container gates
+could not be closed because Docker is unavailable on this machine.
+
+Actual changes
+- extraction/providers/openai.py: OpenAI Responses structured JSON adapter using
+  the actual immutable prompt/model/settings/schema. No tools or agent loop.
+  Fixed official endpoint; no proxy environment or redirects; store=false;
+  max 3,000 output tokens, 30-second transport and outer deadline, retries=0.
+  Refusal, truncation, invalid output, rate limit and uncertain outcomes are explicit.
+  SDK/transport parent and child debug loggers are silenced to avoid content leaks.
+- extraction/config.py, models.py, live.py, live_api.py and management/commands/
+  configure_live.py: allowlisted pinned model/config/key fingerprint, dated price
+  estimate, explicit signed reviewer confirmation, a finite durable lifetime count,
+  a global active slot and minimum 60 seconds between admissions. Paid mode is
+  disabled unless the local owner enables it. No request is made by configuration.
+- LiveAttempt is an additional durable pre-request record, separate from immutable
+  completed ExtractionRun. Its submitted marker commits before network activity.
+  Two workers cannot dispatch it twice. Unknown outcomes retain the slot. Owner
+  reconciliation requires an explicit worker-stopped/provider-finished attestation;
+  it neither retries nor refunds an attempt. No automatic replenishment.
+- reviews/services.py, approval.py, api.py and models.py: strict five decisions,
+  expected_revision, source candidate validation, reasons/provenance for manual
+  values, optional-missing reasons, required name/email and final value validation.
+  Document→Draft locks plus role recheck protect save/approve. A single transaction
+  creates ApprovedRecord, ApprovalReceipt and ReviewEvent and closes the draft.
+  Same approval request reuses its receipt; stale/mismatched requests conflict.
+  Immutable snapshot includes source/run/config hashes and manual provenance.
+- PostgreSQL migrations enforce immutable records/events/receipts, source bindings,
+  monotonic allowance consumption and non-retryable live attempt transitions.
+  Guard migrations are deliberately irreversible; back up before migrating.
+- Review/edit/confirmation/record/export templates and local JavaScript complete
+  the workflow. Replay, live and manual-only modes remain visibly distinct.
+  Sources link to existing drafts/records and owned live attempts. Public-demo
+  domain writes and live admission are blocked. No publication occurred.
+- process_jobs handles parsing and confirmed live attempts using the same app.
+  Compose supplies the optional provider key only to worker, never web.
+- Dependencies frozen in uv.lock include OpenAI 2.54.0, Playwright 1.65.2 and
+  pytest-playwright 0.10.0. CI adds Chromium and offline browser checks without keys.
+  README, AGENTS.md, safe environment example and ignore rules were updated.
+- New tests cover SDK transport/errors/debug logging, real PostgreSQL races and
+  approval rollback, permissions/CSRF, and browser review/approval/export.
+  scripts/demo_smoke.py runs the real replay/manual browser workflows.
+
+Run locally
+Prerequisites: Python 3.12, uv 0.13.9, PostgreSQL 18 with UTF-8 and a dedicated
+local database. Docker/Compose v2 is the documented database/container route.
+For tests the database user needs CREATEDB; use a disposable server, never production.
+Chromium requires the Playwright installation below (Linux may need --with-deps).
+Run these commands in the FormReview project directory:
+
+  uv sync --frozen --all-groups
+  cp .env.example .env
+  docker compose up -d db
+  uv run python manage.py migrate
+  uv run python manage.py bootstrap_workspace --username reviewer --workspace "Local demo"
+  uv run python manage.py runserver 127.0.0.1:8000
+
+In another terminal:
+  uv run python manage.py process_jobs
+
+Compose reads .env. Local Python does not implicitly load it: export POSTGRES_HOST,
+POSTGRES_PORT, POSTGRES_DB, POSTGRES_USER and POSTGRES_PASSWORD if using non-default
+local settings. Bootstrap prompts privately for a new password.
+
+Open http://127.0.0.1:8000/accounts/login, select the workspace and upload
+ datasets/dev/01_complete.txt. Refresh after parsing; run synthetic replay and
+create its draft. Accept supplier_name, country and payment_terms_days candidates;
+mark registration_id missing with a reason. Manually correct contact_email to
+alder@example.test with reason and source provenance. Save all five decisions,
+inspect confirmation, check the human-approval checkbox, approve and export JSON.
+Alternatively upload a source and create a manual-only draft before any other draft.
+All five manual values require reasons and provenance. No key is needed for either.
+The screenshot stage-4-approved-record.png shows an automated synthetic reviewer
+workflow; it is not evidence of an independent human review or live model quality.
+
+Verification commands:
+  make check
+  uv run pytest --collect-only
+  make integration
+  uv run playwright install chromium
+  uv run pytest -m e2e
+  uv run python scripts/demo_smoke.py
+  uv run python manage.py configure_live --help
+  make container-check
+
+Actual verification results
+- uv sync --frozen --all-groups: PASS; frozen 44-package environment.
+- python manage.py check: PASS, zero issues.
+- ruff check . and ruff format --check .: PASS, 85 files formatted.
+- mypy formreview accounts documents extraction reviews: PASS, 56 source files.
+- pytest -m "not integration and not e2e": PASS, 105 unit tests.
+- pytest --collect-only: PASS, 171 tests, exactly one mandatory category per test.
+- python manage.py migrate: PASS; stage-4 migrations applied to local development
+  database and freshly applied to disposable test databases. Final run: no pending.
+- python manage.py makemigrations --check --dry-run: PASS, no changes detected.
+- pytest -m integration: PASS, 64 tests on real PostgreSQL 18.7 UTF-8, using separate
+  connections for concurrent saves, approval, admission and worker dispatch.
+- playwright install chromium: PASS, local Chromium installed under ignored work/.
+- pytest -m e2e: PASS, 2 real Chromium tests. Real subprocess performs parsing;
+  authenticated reviewer interactions save/confirm/approve and download JSON;
+  stale browser tab receives a conflict. Manual-only approval also passes.
+- python scripts/demo_smoke.py: PASS, both real-browser workflows repeated.
+- manage.py help, process_jobs --help, configure_live --help: PASS.
+- git diff --check: PASS.
+- Initial browser failures were repaired: scoped Playwright's event loop outside
+  Django fixture lifecycle and used explicit dropdown label associations. Final
+  runs pass without disabling Django async safety or bypassing checks.
+- make container-check: UNAVAILABLE/FAILED at first command because docker is not
+  installed. Compose validation, image build, default UID and container HTTP health
+  were not executed. macOS tests do not prove Linux parser/worker memory ceilings.
+- Remote CI: configured but NOT RUN; no push was authorized.
+- Actual live smoke: NOT RUN; no owner key or spending authorization. SDK transport
+  tests use synthetic mocked responses, not a live provider and not accuracy data.
+
+Acceptance evaluation
+1. Full local replay workflow: PASS, real browser + worker + PostgreSQL, source
+   evidence/manual correction/explicit confirmation/approved record/export.
+2. Actual attributable live extraction: REQUIRED PENDING GATE. Nothing paid ran.
+   Before claiming completion, owner must authorize and configure a finite allowance,
+   then explicitly confirm one synthetic request and retain its attempt/config/run
+   and provider request ID. README documents configure_live and current-price input.
+3. Human-only immutable/idempotent approval: PASS within tested application boundary.
+   Browser endpoint proof, database immutability, concurrent duplicate receipt,
+   save/approve race and rollback tests. Workers never invoke approval. Automated
+   tests simulate a reviewer; they do not claim actual independent human review.
+4. No credential exposure: PASS for tested paths; no key stored in the database or
+   passed to web, prompt/body are allowlisted, debug/error leak tests pass. This is
+   targeted test evidence, not a claim of a comprehensive security audit.
+5. Finite attempts/rates: PASS with PostgreSQL concurrency tests, explicit consent,
+   nonce idempotency, one worker submission, monotonic consumed count, cooldown,
+   unknown-outcome blocking and explicit owner reconciliation without replenishment.
+6. Inherited deployment verification: PENDING Docker/Linux container checks and CI.
+
+Known limits and review notes
+No live schema/model compatibility proof until authorized smoke. Stored wire schema
+omits unsupported conditional allOf; the server still enforces strict five-field
+cardinality. Provider schema success is not truth. Price estimates use a conservative
+byte/token approximation plus maximum output tokens, not an invoice or hard dollar
+cap; owner pricing must be checked against official sources within seven UTC days.
+Only one initial draft per document; new extraction never replaces it. All five
+valid decisions must be saved together. Manual fallback requires a parsed source.
+Unknown submitted attempts deliberately block further admission until reconciliation.
+No OCR, regex baseline, deployment or later-stage features were added.
+
+Official interfaces consulted during implementation:
+https://github.com/openai/openai-python#retries
+https://developers.openai.com/api/docs/guides/structured-outputs
+https://developers.openai.com/api/reference/resources/responses/methods/create
+https://developers.openai.com/api/docs/models/gpt-5.4-mini
+
+Suggested commit (user reviews and commits):
+extract live fields and save human-approved records

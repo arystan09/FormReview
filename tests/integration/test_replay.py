@@ -72,7 +72,7 @@ def test_replay_preview_and_explicit_draft(context) -> None:
     assert response.status_code == 200
     assert b"<mark>Supplier: Alder Parts</mark>" in response.content
     assert b"Synthetic replay" in response.content and b"quote_missing" in response.content
-    assert b"approval is not available" in response.content
+    assert b"approval is available only after explicit human review" in response.content
     assert client.get(f"/api/v1/extractions/{run.id}").json()["mode"] == "replay"
     created = post(client, f"/documents/{document.id}/drafts", run_id=run.id, expected_revision=0)
     assert created.status_code == 201
@@ -189,7 +189,7 @@ def test_csrf_roles_ownership_and_no_live(context) -> None:
     document = source(membership)
     url = f"/documents/{document.id}/extractions"
     assert client.post(url, {"mode": "replay"}).status_code == 403
-    assert post(client, url, mode="live").status_code == 400
+    assert post(client, url, mode="live").status_code == 409
     run = run_replay(membership, document.id)
     draft = create_draft(membership, document.id, run.id, 0)
     assert (

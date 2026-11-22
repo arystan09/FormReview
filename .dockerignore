@@ -11,3 +11,5 @@ secrets
 .*_cache
 *.pem
 *.key
+test-results/
+playwright-report/

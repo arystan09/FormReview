@@ -116,3 +116,5 @@ LOGGING = {
         "django.security": {"handlers": ["null"], "propagate": False},
     },
 }
+
+PUBLIC_DEMO = os.environ.get("FORMREVIEW_PUBLIC_DEMO", "0") == "1"

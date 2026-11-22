@@ -40,9 +40,11 @@ class ExtractionRun(models.Model):
 
     class Meta:
         constraints = [
-            models.CheckConstraint(condition=models.Q(mode="replay"), name="stage3_replay_only"),
             models.CheckConstraint(
-                condition=models.Q(status__in=["validated", "invalid_output"]),
+                condition=models.Q(mode__in=["replay", "live"]), name="extraction_mode"
+            ),
+            models.CheckConstraint(
+                condition=models.Q(status__in=["validated", "invalid_output", "failed"]),
                 name="valid_extraction_status",
             ),
         ]
@@ -76,4 +78,61 @@ class FieldCandidate(models.Model):
             models.CheckConstraint(
                 condition=models.Q(page__gte=1, page__lte=5), name="candidate_page_limit"
             ),
+        ]
+
+
+class LiveAllowance(models.Model):
+    """One installation-wide budget and admission lock, managed by the local owner."""
+
+    id = models.PositiveSmallIntegerField(primary_key=True, default=1, editable=False)
+    enabled = models.BooleanField(default=False)
+    config = models.ForeignKey(ExtractionConfig, null=True, on_delete=models.PROTECT)
+    key_fingerprint = models.CharField(max_length=64, blank=True)
+    request_limit = models.PositiveIntegerField(default=0)
+    consumed = models.PositiveIntegerField(default=0)
+    version = models.PositiveIntegerField(default=1)
+    active_attempt = models.UUIDField(null=True)
+    next_admission_at = models.DateTimeField(null=True)
+    input_price = models.DecimalField(max_digits=12, decimal_places=6, default=0)
+    output_price = models.DecimalField(max_digits=12, decimal_places=6, default=0)
+    price_checked_on = models.DateField(null=True)
+    price_source = models.URLField(blank=True)
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(condition=models.Q(id=1), name="singleton_live_allowance"),
+            models.CheckConstraint(
+                condition=models.Q(consumed__lte=models.F("request_limit")),
+                name="finite_live_allowance",
+            ),
+        ]
+
+
+class LiveAttempt(models.Model):
+    """Durable one-shot dispatch; submitted attempts are never reclaimed or retried."""
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    text_version = models.ForeignKey(TextVersion, on_delete=models.PROTECT)
+    config = models.ForeignKey(ExtractionConfig, on_delete=models.PROTECT)
+    requested_by = models.ForeignKey("auth.User", on_delete=models.PROTECT)
+    request_hash = models.CharField(max_length=64)
+    allowance_version = models.PositiveIntegerField()
+    estimate_usd = models.DecimalField(max_digits=12, decimal_places=6)
+    price_snapshot = models.JSONField()
+    status = models.CharField(max_length=16, default="queued")
+    error_code = models.CharField(max_length=40, blank=True)
+    run = models.OneToOneField(ExtractionRun, null=True, on_delete=models.PROTECT)
+    provider_request_id = models.CharField(max_length=200, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    submitted_at = models.DateTimeField(null=True)
+    finished_at = models.DateTimeField(null=True)
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                condition=models.Q(
+                    status__in=["queued", "submitted", "done", "unknown", "cancelled"]
+                ),
+                name="valid_live_attempt_status",
+            )
         ]

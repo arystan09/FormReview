@@ -19,6 +19,7 @@ services:
     image: formreview:local
     environment: &app_environment
       FORMREVIEW_ENV: ${FORMREVIEW_ENV:-development}
+      FORMREVIEW_PUBLIC_DEMO: ${FORMREVIEW_PUBLIC_DEMO:-0}
       DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1}
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-development-only-not-for-production}
       POSTGRES_DB: ${POSTGRES_DB:-formreview}
@@ -37,7 +38,9 @@ services:
   worker:
     image: formreview:local
     command: ["python", "manage.py", "process_jobs"]
-    environment: *app_environment
+    environment:
+      <<: *app_environment
+      FORMREVIEW_OPENAI_API_KEY: ${FORMREVIEW_OPENAI_API_KEY:-}
     volumes:
       - private_sources:/app/private
     mem_limit: 512m
