@@ -13,6 +13,8 @@ COPY accounts ./accounts
 COPY documents ./documents
 COPY extraction ./extraction
 COPY reviews ./reviews
+COPY evaluation ./evaluation
+COPY datasets ./datasets
 RUN mkdir /app/private && chown 10001:10001 /app/private && chmod 700 /app/private
 COPY manage.py ./
 USER 10001:10001

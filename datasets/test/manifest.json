@@ -1,0 +1,188 @@
+{
+  "schema_version": "formreview-dataset-v1",
+  "split": "test",
+  "gold_path": "gold.json",
+  "gold_sha256": "3044f4bae1e3276759396d10225574b52e133015d2d80e6339d7058127a55055",
+  "documents": [
+    {
+      "id": "f11_v1",
+      "family": "f11",
+      "variant": 1,
+      "template_id": "f11",
+      "identity_group": "f11",
+      "path": "f11_v1.txt",
+      "raw_sha256": "890e45c19af454351162d070d3576ff4a76d44040f385efe1f52a73e2655ac2c",
+      "canonical_sha256": "352d2732fe28909c25f39ccdcbe5824399518872ed9072429583d2645e9c2341"
+    },
+    {
+      "id": "f11_v2",
+      "family": "f11",
+      "variant": 2,
+      "template_id": "f11",
+      "identity_group": "f11",
+      "path": "f11_v2.txt",
+      "raw_sha256": "72b8b10382f7da6aefd6d83cf9910206dba1dd3dff2e5d9514cf9e08b50c764c",
+      "canonical_sha256": "acbb7d4c8befaf201c6eaa192441ed49dc084966845a4223407de4498b47c92f"
+    },
+    {
+      "id": "f11_v3",
+      "family": "f11",
+      "variant": 3,
+      "template_id": "f11",
+      "identity_group": "f11",
+      "path": "f11_v3.pdf",
+      "raw_sha256": "cee060bfd783cd67146719f71009a79ca8eb4473e654fe2b46f44045a8d1513c",
+      "canonical_sha256": "2f95e38325fa050ce4d04f6837cfe8dc478405d5765f4867bfc0b39f7a54ccde"
+    },
+    {
+      "id": "f12_v1",
+      "family": "f12",
+      "variant": 1,
+      "template_id": "f12",
+      "identity_group": "f12",
+      "path": "f12_v1.txt",
+      "raw_sha256": "dce34609704dc5c820fadb6c27b8a10325a7a94e46c952370755c53129c5f574",
+      "canonical_sha256": "4842227f7e7ad963df44cde4d41fa3e1c1923a8559758ecbe3afdf7b4fc70285"
+    },
+    {
+      "id": "f12_v2",
+      "family": "f12",
+      "variant": 2,
+      "template_id": "f12",
+      "identity_group": "f12",
+      "path": "f12_v2.txt",
+      "raw_sha256": "4ff772f7c164fcaf64e52abd1b5e832235c5c6b87b93c703bab92dab8181445d",
+      "canonical_sha256": "cf4d044d659c5fc2c4bebb654d3416a53b8fbc577881ace228920bff8b220f07"
+    },
+    {
+      "id": "f12_v3",
+      "family": "f12",
+      "variant": 3,
+      "template_id": "f12",
+      "identity_group": "f12",
+      "path": "f12_v3.pdf",
+      "raw_sha256": "c157b9775600152f84a5645456782c101ba50711d658c601e10b2afed0802262",
+      "canonical_sha256": "07694b6888e38e3d178f63853a9834bee1a5d7af5fc62c8cb39f5d30baf84de5"
+    },
+    {
+      "id": "f13_v1",
+      "family": "f13",
+      "variant": 1,
+      "template_id": "f13",
+      "identity_group": "f13",
+      "path": "f13_v1.txt",
+      "raw_sha256": "ed8a48ff7d14f07965c76a7d7ded92f145e5b7580910b70729070fb4478d6ec6",
+      "canonical_sha256": "3b6320d1a5992e16d0c63b82dd026d46596c44057a6a3eb4e60e82676d31ca22"
+    },
+    {
+      "id": "f13_v2",
+      "family": "f13",
+      "variant": 2,
+      "template_id": "f13",
+      "identity_group": "f13",
+      "path": "f13_v2.txt",
+      "raw_sha256": "fbaed91c9fa815b2da9daed18fbb6f902bc71279bfd56d8715c0f15bd7cf2716",
+      "canonical_sha256": "6a3a443755af1b298b209cc76e880b8cd565a78a176c360e3a7b38f368095a9c"
+    },
+    {
+      "id": "f13_v3",
+      "family": "f13",
+      "variant": 3,
+      "template_id": "f13",
+      "identity_group": "f13",
+      "path": "f13_v3.pdf",
+      "raw_sha256": "75f63df57c082ad75d718a46b30441e0ad6b26e841b07ddf8cd3a9cd7b3aa446",
+      "canonical_sha256": "a7044c8a0bf4726040f364df823b835b1709c54ef37e76ea3e82ccbd3e33ae8f"
+    },
+    {
+      "id": "f14_v1",
+      "family": "f14",
+      "variant": 1,
+      "template_id": "f14",
+      "identity_group": "f14",
+      "path": "f14_v1.txt",
+      "raw_sha256": "e23e132b57b84aaaad50dd5b155bfc853276ecb5914e96854760da6ce5bfc40e",
+      "canonical_sha256": "a0882da6362c23f40d5573bc34676feadca6a0f24d0366f0199d1497824cbbe3"
+    },
+    {
+      "id": "f14_v2",
+      "family": "f14",
+      "variant": 2,
+      "template_id": "f14",
+      "identity_group": "f14",
+      "path": "f14_v2.txt",
+      "raw_sha256": "f1cccea08914e82ded1af32be5aca6e1d512496970023e70d1201ee1a29444e9",
+      "canonical_sha256": "e94d2df74a94918d948ec3fbcf7b05116672b9df9487b7cba059fadac8b77556"
+    },
+    {
+      "id": "f14_v3",
+      "family": "f14",
+      "variant": 3,
+      "template_id": "f14",
+      "identity_group": "f14",
+      "path": "f14_v3.pdf",
+      "raw_sha256": "deee2cdfb0fd386673ea5eda241739856cdcb4a8d55fba360544728b0705dfde",
+      "canonical_sha256": "4d17c5f4a1caf5f6328e1f9a7fcd4acf419bd6dff3759b1cfe0505375155afec"
+    },
+    {
+      "id": "f15_v1",
+      "family": "f15",
+      "variant": 1,
+      "template_id": "f15",
+      "identity_group": "f15",
+      "path": "f15_v1.txt",
+      "raw_sha256": "b9fad0722763b215c8316c023eb0668c2c1304f39cdbb5e2f7acf358aeba465f",
+      "canonical_sha256": "000e7b220b40d630fa3361687c06710942298327edcac701429cf9c83c0a6e97"
+    },
+    {
+      "id": "f15_v2",
+      "family": "f15",
+      "variant": 2,
+      "template_id": "f15",
+      "identity_group": "f15",
+      "path": "f15_v2.txt",
+      "raw_sha256": "76069be52569a9e818f21ec8413a177f6bd7dbde99e431927913009644c9bdf1",
+      "canonical_sha256": "5f01596c5e2f2ac5b5ce62d879679b1e361ed3d62570885aa84f13d8a3dbad4c"
+    },
+    {
+      "id": "f15_v3",
+      "family": "f15",
+      "variant": 3,
+      "template_id": "f15",
+      "identity_group": "f15",
+      "path": "f15_v3.pdf",
+      "raw_sha256": "50a945a28df8bb3e22b4604c3330fa9afaf91e4a7d30fcfecd9b81f3b9186f09",
+      "canonical_sha256": "bf8156e2e4ddfc8bdf77bcdc67949d241c036bc7c39a54b1d1373a4fe1bca42a"
+    },
+    {
+      "id": "f16_v1",
+      "family": "f16",
+      "variant": 1,
+      "template_id": "f16",
+      "identity_group": "f16",
+      "path": "f16_v1.txt",
+      "raw_sha256": "407380a89bcbba487616e99c1a5e0071fe5c8e654eead30dc2f7fb1c701e51b1",
+      "canonical_sha256": "9535ae7b873122f9b71828c0313f10bca0f26eed698609fce6b61051d928ac3d"
+    },
+    {
+      "id": "f16_v2",
+      "family": "f16",
+      "variant": 2,
+      "template_id": "f16",
+      "identity_group": "f16",
+      "path": "f16_v2.txt",
+      "raw_sha256": "aacc243785f0b6c9a4641c80cbcd2ccecdc9d183a53dfaea061c3b707b88cefa",
+      "canonical_sha256": "3b2488b704f6ffeccb6f007d9482bb94f1117cbb2d2edede222c6d1f9738a473"
+    },
+    {
+      "id": "f16_v3",
+      "family": "f16",
+      "variant": 3,
+      "template_id": "f16",
+      "identity_group": "f16",
+      "path": "f16_v3.pdf",
+      "raw_sha256": "e62378e904ae7a4324bdc5d1158f5a264e87669830f7daebf47e2b8e19e68b0e",
+      "canonical_sha256": "7778936c83f52fa009a6d4c456493b7dcfad343017f0d6eb40263b78594bb23f"
+    }
+  ]
+}

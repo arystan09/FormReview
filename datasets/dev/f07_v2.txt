@@ -1,0 +1,9 @@
+Synthetic development family 7, variant 2
+Buyer office
+Country: Germany
+Supplier details
+Supplier: Grove Components
+Registration ID: 000/19
+Email: grove@example.test
+Supplier country = Spain
+Payment terms: 90 days

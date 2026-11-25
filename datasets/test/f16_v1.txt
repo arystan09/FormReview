@@ -1,0 +1,10 @@
+Synthetic holdout scenario 16; variant 1
+Buyer only (not the supplier)
+Country: Germany
+Email: buyer-only@example.test
+Supplier section follows
+Authoritative Supplier = "Holdout 16 Manufacturing"
+Authoritative Registration ID = "0016/Z"
+Authoritative Email = "contact16@holdout.example.test"
+Authoritative Country = "New Zealand"
+Authoritative Payment terms = "Net21"

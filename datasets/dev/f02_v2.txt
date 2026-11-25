@@ -1,0 +1,6 @@
+Synthetic development family 2, variant 2
+Supplier: Café Parts
+Registration ID: 0007/X
+Email: cafe@example.test
+Country: France
+Payment terms: 14 days

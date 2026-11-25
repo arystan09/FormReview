@@ -1,0 +1,2263 @@
+{
+  "schema_version": "formreview-gold-v1",
+  "human_review": "pending",
+  "provenance": "Public synthetic author-specified source records and expectations. Legacy expectations adapted from separately authored provisional labels. No extractor output used; not author-blind; human review pending.",
+  "cases": {
+    "f11_v1": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 11 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 11 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Vendor Supplier = Holdout 11 Manufacturing",
+                  "start": 41,
+                  "end": 83,
+                  "value_start": 59,
+                  "value_end": 83
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0011/Z"
+              ],
+              "accepted_normalized_values": [
+                "0011/Z"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Vendor Registration ID = 0011/Z",
+                  "start": 84,
+                  "end": 115,
+                  "value_start": 109,
+                  "value_end": 115
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "contact11@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "contact11@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Vendor Email = contact11@holdout.example.test",
+                  "start": 116,
+                  "end": 161,
+                  "value_start": 131,
+                  "value_end": 161
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "New Zealand"
+              ],
+              "accepted_normalized_values": [
+                "New Zealand"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Vendor Country = New Zealand",
+                  "start": 162,
+                  "end": 190,
+                  "value_start": 179,
+                  "value_end": 190
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net21"
+              ],
+              "accepted_normalized_values": [
+                21
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Vendor Payment terms = Net21",
+                  "start": 191,
+                  "end": 219,
+                  "value_start": 214,
+                  "value_end": 219
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f11_v2": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 11 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 11 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Vendor Supplier = Holdout 11 Manufacturing",
+                  "start": 41,
+                  "end": 83,
+                  "value_start": 59,
+                  "value_end": 83
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0011/Z"
+              ],
+              "accepted_normalized_values": [
+                "0011/Z"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Vendor Registration ID = 0011/Z",
+                  "start": 84,
+                  "end": 115,
+                  "value_start": 109,
+                  "value_end": 115
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "contact11@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "contact11@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Vendor Email = contact11@holdout.example.test",
+                  "start": 116,
+                  "end": 161,
+                  "value_start": 131,
+                  "value_end": 161
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "New Zealand"
+              ],
+              "accepted_normalized_values": [
+                "New Zealand"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Vendor Country = New Zealand",
+                  "start": 162,
+                  "end": 190,
+                  "value_start": 179,
+                  "value_end": 190
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net21"
+              ],
+              "accepted_normalized_values": [
+                21
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Vendor Payment terms = Net21",
+                  "start": 191,
+                  "end": 219,
+                  "value_start": 214,
+                  "value_end": 219
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f11_v3": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 11 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 11 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Vendor Supplier = Holdout 11 Manufacturing",
+                  "start": 41,
+                  "end": 83,
+                  "value_start": 59,
+                  "value_end": 83
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0011/Z"
+              ],
+              "accepted_normalized_values": [
+                "0011/Z"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Vendor Registration ID = 0011/Z",
+                  "start": 84,
+                  "end": 115,
+                  "value_start": 109,
+                  "value_end": 115
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "contact11@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "contact11@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Vendor Email = contact11@holdout.example.test",
+                  "start": 116,
+                  "end": 161,
+                  "value_start": 131,
+                  "value_end": 161
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "New Zealand"
+              ],
+              "accepted_normalized_values": [
+                "New Zealand"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Vendor Country = New Zealand",
+                  "start": 162,
+                  "end": 190,
+                  "value_start": 179,
+                  "value_end": 190
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net21"
+              ],
+              "accepted_normalized_values": [
+                21
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Vendor Payment terms = Net21",
+                  "start": 191,
+                  "end": 219,
+                  "value_start": 214,
+                  "value_end": 219
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f12_v1": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 12 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 12 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier -> Holdout 12 Manufacturing",
+                  "start": 41,
+                  "end": 77,
+                  "value_start": 53,
+                  "value_end": 77
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "contact12@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "contact12@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email -> contact12@holdout.example.test",
+                  "start": 78,
+                  "end": 117,
+                  "value_start": 87,
+                  "value_end": 117
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "missing",
+          "candidates": []
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net21"
+              ],
+              "accepted_normalized_values": [
+                21
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms -> Net21",
+                  "start": 118,
+                  "end": 140,
+                  "value_start": 135,
+                  "value_end": 140
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f12_v2": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 12 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 12 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier -> Holdout 12 Manufacturing",
+                  "start": 41,
+                  "end": 77,
+                  "value_start": 53,
+                  "value_end": 77
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "contact12@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "contact12@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email -> contact12@holdout.example.test",
+                  "start": 78,
+                  "end": 117,
+                  "value_start": 87,
+                  "value_end": 117
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "missing",
+          "candidates": []
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net21"
+              ],
+              "accepted_normalized_values": [
+                21
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms -> Net21",
+                  "start": 118,
+                  "end": 140,
+                  "value_start": 135,
+                  "value_end": 140
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f12_v3": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 12 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 12 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier -> Holdout 12 Manufacturing",
+                  "start": 41,
+                  "end": 77,
+                  "value_start": 53,
+                  "value_end": 77
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "contact12@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "contact12@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email -> contact12@holdout.example.test",
+                  "start": 78,
+                  "end": 117,
+                  "value_start": 87,
+                  "value_end": 117
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "missing",
+          "candidates": []
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net21"
+              ],
+              "accepted_normalized_values": [
+                21
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms -> Net21",
+                  "start": 118,
+                  "end": 140,
+                  "value_start": 135,
+                  "value_end": 140
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f13_v1": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 13 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 13 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Supplier | Holdout 13 Manufacturing",
+                  "start": 41,
+                  "end": 85,
+                  "value_start": 61,
+                  "value_end": 85
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0013/Z"
+              ],
+              "accepted_normalized_values": [
+                "0013/Z"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Registration ID | 0013/Z",
+                  "start": 86,
+                  "end": 119,
+                  "value_start": 113,
+                  "value_end": 119
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "contact13@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "contact13@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Email | contact13@holdout.example.test",
+                  "start": 120,
+                  "end": 167,
+                  "value_start": 137,
+                  "value_end": 167
+                }
+              ]
+            },
+            {
+              "accepted_raw_values": [
+                "accounts13@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "accounts13@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Email | accounts13@holdout.example.test",
+                  "start": 168,
+                  "end": 216,
+                  "value_start": 185,
+                  "value_end": 216
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "New Zealand"
+              ],
+              "accepted_normalized_values": [
+                "New Zealand"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Country | New Zealand",
+                  "start": 217,
+                  "end": 247,
+                  "value_start": 236,
+                  "value_end": 247
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net21"
+              ],
+              "accepted_normalized_values": [
+                21
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Payment terms | Net21",
+                  "start": 248,
+                  "end": 278,
+                  "value_start": 273,
+                  "value_end": 278
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f13_v2": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 13 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 13 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Supplier | Holdout 13 Manufacturing",
+                  "start": 41,
+                  "end": 85,
+                  "value_start": 61,
+                  "value_end": 85
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0013/Z"
+              ],
+              "accepted_normalized_values": [
+                "0013/Z"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Registration ID | 0013/Z",
+                  "start": 86,
+                  "end": 119,
+                  "value_start": 113,
+                  "value_end": 119
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "contact13@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "contact13@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Email | contact13@holdout.example.test",
+                  "start": 120,
+                  "end": 167,
+                  "value_start": 137,
+                  "value_end": 167
+                }
+              ]
+            },
+            {
+              "accepted_raw_values": [
+                "accounts13@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "accounts13@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Email | accounts13@holdout.example.test",
+                  "start": 168,
+                  "end": 216,
+                  "value_start": 185,
+                  "value_end": 216
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "New Zealand"
+              ],
+              "accepted_normalized_values": [
+                "New Zealand"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Country | New Zealand",
+                  "start": 217,
+                  "end": 247,
+                  "value_start": 236,
+                  "value_end": 247
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net21"
+              ],
+              "accepted_normalized_values": [
+                21
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Payment terms | Net21",
+                  "start": 248,
+                  "end": 278,
+                  "value_start": 273,
+                  "value_end": 278
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f13_v3": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 13 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 13 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Supplier | Holdout 13 Manufacturing",
+                  "start": 41,
+                  "end": 85,
+                  "value_start": 61,
+                  "value_end": 85
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0013/Z"
+              ],
+              "accepted_normalized_values": [
+                "0013/Z"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Registration ID | 0013/Z",
+                  "start": 86,
+                  "end": 119,
+                  "value_start": 113,
+                  "value_end": 119
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "contact13@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "contact13@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Email | contact13@holdout.example.test",
+                  "start": 120,
+                  "end": 167,
+                  "value_start": 137,
+                  "value_end": 167
+                }
+              ]
+            },
+            {
+              "accepted_raw_values": [
+                "accounts13@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "accounts13@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Email | accounts13@holdout.example.test",
+                  "start": 168,
+                  "end": 216,
+                  "value_start": 185,
+                  "value_end": 216
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "New Zealand"
+              ],
+              "accepted_normalized_values": [
+                "New Zealand"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Country | New Zealand",
+                  "start": 217,
+                  "end": 247,
+                  "value_start": 236,
+                  "value_end": 247
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net21"
+              ],
+              "accepted_normalized_values": [
+                21
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Declared Payment terms | Net21",
+                  "start": 248,
+                  "end": 278,
+                  "value_start": 273,
+                  "value_end": 278
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f14_v1": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 14 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 14 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Onboarding Supplier: [Holdout 14 Manufacturing]",
+                  "start": 41,
+                  "end": 88,
+                  "value_start": 63,
+                  "value_end": 87
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0014/Z"
+              ],
+              "accepted_normalized_values": [
+                "0014/Z"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Onboarding Registration ID: [0014/Z]",
+                  "start": 89,
+                  "end": 125,
+                  "value_start": 118,
+                  "value_end": 124
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "contact14@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "contact14@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Onboarding Email: [contact14@holdout.example.test]",
+                  "start": 126,
+                  "end": 176,
+                  "value_start": 145,
+                  "value_end": 175
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "New Zealand"
+              ],
+              "accepted_normalized_values": [
+                "New Zealand"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Onboarding Country: [New Zealand]",
+                  "start": 177,
+                  "end": 210,
+                  "value_start": 198,
+                  "value_end": 209
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "2% ten days, otherwise thirty"
+              ],
+              "accepted_normalized_values": [],
+              "normalizable": false,
+              "expected_validation_flags": [
+                "unresolved_terms"
+              ],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Onboarding Payment terms: [2% ten days, otherwise thirty]",
+                  "start": 211,
+                  "end": 268,
+                  "value_start": 238,
+                  "value_end": 267
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f14_v2": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 14 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 14 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Onboarding Supplier: [Holdout 14 Manufacturing]",
+                  "start": 41,
+                  "end": 88,
+                  "value_start": 63,
+                  "value_end": 87
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0014/Z"
+              ],
+              "accepted_normalized_values": [
+                "0014/Z"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Onboarding Registration ID: [0014/Z]",
+                  "start": 89,
+                  "end": 125,
+                  "value_start": 118,
+                  "value_end": 124
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "contact14@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "contact14@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Onboarding Email: [contact14@holdout.example.test]",
+                  "start": 126,
+                  "end": 176,
+                  "value_start": 145,
+                  "value_end": 175
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "New Zealand"
+              ],
+              "accepted_normalized_values": [
+                "New Zealand"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Onboarding Country: [New Zealand]",
+                  "start": 177,
+                  "end": 210,
+                  "value_start": 198,
+                  "value_end": 209
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "2% ten days, otherwise thirty"
+              ],
+              "accepted_normalized_values": [],
+              "normalizable": false,
+              "expected_validation_flags": [
+                "unresolved_terms"
+              ],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Onboarding Payment terms: [2% ten days, otherwise thirty]",
+                  "start": 211,
+                  "end": 268,
+                  "value_start": 238,
+                  "value_end": 267
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f14_v3": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 14 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 14 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Onboarding Supplier: [Holdout 14 Manufacturing]",
+                  "start": 41,
+                  "end": 88,
+                  "value_start": 63,
+                  "value_end": 87
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0014/Z"
+              ],
+              "accepted_normalized_values": [
+                "0014/Z"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Onboarding Registration ID: [0014/Z]",
+                  "start": 89,
+                  "end": 125,
+                  "value_start": 118,
+                  "value_end": 124
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "contact14@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "contact14@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Onboarding Email: [contact14@holdout.example.test]",
+                  "start": 126,
+                  "end": 176,
+                  "value_start": 145,
+                  "value_end": 175
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "New Zealand"
+              ],
+              "accepted_normalized_values": [
+                "New Zealand"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Onboarding Country: [New Zealand]",
+                  "start": 177,
+                  "end": 210,
+                  "value_start": 198,
+                  "value_end": 209
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "2% ten days, otherwise thirty"
+              ],
+              "accepted_normalized_values": [],
+              "normalizable": false,
+              "expected_validation_flags": [
+                "unresolved_terms"
+              ],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Onboarding Payment terms: [2% ten days, otherwise thirty]",
+                  "start": 211,
+                  "end": 268,
+                  "value_start": 238,
+                  "value_end": 267
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f15_v1": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 15 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 15 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier form / Supplier / Holdout 15 Manufacturing",
+                  "start": 41,
+                  "end": 92,
+                  "value_start": 68,
+                  "value_end": 92
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0015/Z"
+              ],
+              "accepted_normalized_values": [
+                "0015/Z"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier form / Registration ID / 0015/Z",
+                  "start": 93,
+                  "end": 133,
+                  "value_start": 127,
+                  "value_end": 133
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "not-an-email-address"
+              ],
+              "accepted_normalized_values": [],
+              "normalizable": false,
+              "expected_validation_flags": [
+                "invalid_email"
+              ],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier form / Email / not-an-email-address",
+                  "start": 134,
+                  "end": 178,
+                  "value_start": 158,
+                  "value_end": 178
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "New Zealand"
+              ],
+              "accepted_normalized_values": [
+                "New Zealand"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier form / Country / New Zealand",
+                  "start": 179,
+                  "end": 216,
+                  "value_start": 205,
+                  "value_end": 216
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net21"
+              ],
+              "accepted_normalized_values": [
+                21
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier form / Payment terms / Net21",
+                  "start": 217,
+                  "end": 254,
+                  "value_start": 249,
+                  "value_end": 254
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f15_v2": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 15 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 15 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier form / Supplier / Holdout 15 Manufacturing",
+                  "start": 41,
+                  "end": 92,
+                  "value_start": 68,
+                  "value_end": 92
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0015/Z"
+              ],
+              "accepted_normalized_values": [
+                "0015/Z"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier form / Registration ID / 0015/Z",
+                  "start": 93,
+                  "end": 133,
+                  "value_start": 127,
+                  "value_end": 133
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "not-an-email-address"
+              ],
+              "accepted_normalized_values": [],
+              "normalizable": false,
+              "expected_validation_flags": [
+                "invalid_email"
+              ],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier form / Email / not-an-email-address",
+                  "start": 134,
+                  "end": 178,
+                  "value_start": 158,
+                  "value_end": 178
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "New Zealand"
+              ],
+              "accepted_normalized_values": [
+                "New Zealand"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier form / Country / New Zealand",
+                  "start": 179,
+                  "end": 216,
+                  "value_start": 205,
+                  "value_end": 216
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net21"
+              ],
+              "accepted_normalized_values": [
+                21
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier form / Payment terms / Net21",
+                  "start": 217,
+                  "end": 254,
+                  "value_start": 249,
+                  "value_end": 254
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f15_v3": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 15 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 15 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier form / Supplier / Holdout 15 Manufacturing",
+                  "start": 41,
+                  "end": 92,
+                  "value_start": 68,
+                  "value_end": 92
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0015/Z"
+              ],
+              "accepted_normalized_values": [
+                "0015/Z"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier form / Registration ID / 0015/Z",
+                  "start": 93,
+                  "end": 133,
+                  "value_start": 127,
+                  "value_end": 133
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "not-an-email-address"
+              ],
+              "accepted_normalized_values": [],
+              "normalizable": false,
+              "expected_validation_flags": [
+                "invalid_email"
+              ],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier form / Email / not-an-email-address",
+                  "start": 134,
+                  "end": 178,
+                  "value_start": 158,
+                  "value_end": 178
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "New Zealand"
+              ],
+              "accepted_normalized_values": [
+                "New Zealand"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier form / Country / New Zealand",
+                  "start": 179,
+                  "end": 216,
+                  "value_start": 205,
+                  "value_end": 216
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net21"
+              ],
+              "accepted_normalized_values": [
+                21
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier form / Payment terms / Net21",
+                  "start": 217,
+                  "end": 254,
+                  "value_start": 249,
+                  "value_end": 254
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f16_v1": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 16 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 16 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Authoritative Supplier = \"Holdout 16 Manufacturing\"",
+                  "start": 144,
+                  "end": 195,
+                  "value_start": 170,
+                  "value_end": 194
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0016/Z"
+              ],
+              "accepted_normalized_values": [
+                "0016/Z"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Authoritative Registration ID = \"0016/Z\"",
+                  "start": 196,
+                  "end": 236,
+                  "value_start": 229,
+                  "value_end": 235
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "contact16@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "contact16@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Authoritative Email = \"contact16@holdout.example.test\"",
+                  "start": 237,
+                  "end": 291,
+                  "value_start": 260,
+                  "value_end": 290
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "New Zealand"
+              ],
+              "accepted_normalized_values": [
+                "New Zealand"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Authoritative Country = \"New Zealand\"",
+                  "start": 292,
+                  "end": 329,
+                  "value_start": 317,
+                  "value_end": 328
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net21"
+              ],
+              "accepted_normalized_values": [
+                21
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Authoritative Payment terms = \"Net21\"",
+                  "start": 330,
+                  "end": 367,
+                  "value_start": 361,
+                  "value_end": 366
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f16_v2": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 16 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 16 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Authoritative Supplier = \"Holdout 16 Manufacturing\"",
+                  "start": 144,
+                  "end": 195,
+                  "value_start": 170,
+                  "value_end": 194
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0016/Z"
+              ],
+              "accepted_normalized_values": [
+                "0016/Z"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Authoritative Registration ID = \"0016/Z\"",
+                  "start": 196,
+                  "end": 236,
+                  "value_start": 229,
+                  "value_end": 235
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "contact16@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "contact16@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Authoritative Email = \"contact16@holdout.example.test\"",
+                  "start": 237,
+                  "end": 291,
+                  "value_start": 260,
+                  "value_end": 290
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "New Zealand"
+              ],
+              "accepted_normalized_values": [
+                "New Zealand"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Authoritative Country = \"New Zealand\"",
+                  "start": 292,
+                  "end": 329,
+                  "value_start": 317,
+                  "value_end": 328
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net21"
+              ],
+              "accepted_normalized_values": [
+                21
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Authoritative Payment terms = \"Net21\"",
+                  "start": 330,
+                  "end": 367,
+                  "value_start": 361,
+                  "value_end": 366
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f16_v3": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Holdout 16 Manufacturing"
+              ],
+              "accepted_normalized_values": [
+                "Holdout 16 Manufacturing"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Authoritative Supplier = \"Holdout 16 Manufacturing\"",
+                  "start": 144,
+                  "end": 195,
+                  "value_start": 170,
+                  "value_end": 194
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0016/Z"
+              ],
+              "accepted_normalized_values": [
+                "0016/Z"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Authoritative Registration ID = \"0016/Z\"",
+                  "start": 196,
+                  "end": 236,
+                  "value_start": 229,
+                  "value_end": 235
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "contact16@holdout.example.test"
+              ],
+              "accepted_normalized_values": [
+                "contact16@holdout.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Authoritative Email = \"contact16@holdout.example.test\"",
+                  "start": 237,
+                  "end": 291,
+                  "value_start": 260,
+                  "value_end": 290
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "New Zealand"
+              ],
+              "accepted_normalized_values": [
+                "New Zealand"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Authoritative Country = \"New Zealand\"",
+                  "start": 292,
+                  "end": 329,
+                  "value_start": 317,
+                  "value_end": 328
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net21"
+              ],
+              "accepted_normalized_values": [
+                21
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Authoritative Payment terms = \"Net21\"",
+                  "start": 330,
+                  "end": 367,
+                  "value_start": 361,
+                  "value_end": 366
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

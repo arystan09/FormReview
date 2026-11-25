@@ -1,0 +1,187 @@
+{
+  "$defs": {
+    "GoldAnchor": {
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "quote": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Quote",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 1,
+          "title": "End",
+          "type": "integer"
+        },
+        "value_start": {
+          "minimum": 0,
+          "title": "Value Start",
+          "type": "integer"
+        },
+        "value_end": {
+          "minimum": 1,
+          "title": "Value End",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "page",
+        "quote",
+        "start",
+        "end",
+        "value_start",
+        "value_end"
+      ],
+      "title": "GoldAnchor",
+      "type": "object"
+    },
+    "GoldCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted_raw_values": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Accepted Raw Values",
+          "type": "array"
+        },
+        "accepted_normalized_values": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          },
+          "title": "Accepted Normalized Values",
+          "type": "array"
+        },
+        "normalizable": {
+          "title": "Normalizable",
+          "type": "boolean"
+        },
+        "expected_validation_flags": {
+          "items": {
+            "enum": [
+              "invalid_email",
+              "unresolved_terms"
+            ],
+            "type": "string"
+          },
+          "title": "Expected Validation Flags",
+          "type": "array"
+        },
+        "anchors": {
+          "items": {
+            "$ref": "#/$defs/GoldAnchor"
+          },
+          "minItems": 1,
+          "title": "Anchors",
+          "type": "array"
+        }
+      },
+      "required": [
+        "accepted_raw_values",
+        "accepted_normalized_values",
+        "normalizable",
+        "expected_validation_flags",
+        "anchors"
+      ],
+      "title": "GoldCandidate",
+      "type": "object"
+    },
+    "GoldCase": {
+      "additionalProperties": false,
+      "properties": {
+        "fields": {
+          "additionalProperties": {
+            "$ref": "#/$defs/GoldField"
+          },
+          "title": "Fields",
+          "type": "object"
+        }
+      },
+      "required": [
+        "fields"
+      ],
+      "title": "GoldCase",
+      "type": "object"
+    },
+    "GoldField": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "present",
+            "missing",
+            "ambiguous"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "candidates": {
+          "items": {
+            "$ref": "#/$defs/GoldCandidate"
+          },
+          "maxItems": 2,
+          "title": "Candidates",
+          "type": "array"
+        }
+      },
+      "required": [
+        "status",
+        "candidates"
+      ],
+      "title": "GoldField",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "formreview-gold-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "human_review": {
+      "const": "pending",
+      "title": "Human Review",
+      "type": "string"
+    },
+    "provenance": {
+      "title": "Provenance",
+      "type": "string"
+    },
+    "cases": {
+      "additionalProperties": {
+        "$ref": "#/$defs/GoldCase"
+      },
+      "title": "Cases",
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "human_review",
+    "provenance",
+    "cases"
+  ],
+  "title": "GoldFile",
+  "type": "object"
+}

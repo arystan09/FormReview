@@ -1,0 +1,6 @@
+Synthetic development family 5, variant 2
+Supplier: Drift Materials
+Registration ID: 00.04-A
+Email: drift-at-example.test
+Country: United Kingdom
+Payment terms: on receipt

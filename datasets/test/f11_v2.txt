@@ -1,0 +1,6 @@
+Synthetic holdout scenario 11; variant 2
+Vendor Supplier = Holdout 11 Manufacturing
+Vendor Registration ID = 0011/Z
+Vendor Email = contact11@holdout.example.test
+Vendor Country = New Zealand
+Vendor Payment terms = Net21

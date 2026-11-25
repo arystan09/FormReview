@@ -1,0 +1,4 @@
+Synthetic holdout scenario 12; variant 2
+Supplier -> Holdout 12 Manufacturing
+Email -> contact12@holdout.example.test
+Payment terms -> Net21

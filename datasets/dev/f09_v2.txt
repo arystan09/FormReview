@@ -1,0 +1,5 @@
+Synthetic development family 9, variant 2
+Supplier: Harbor Tools
+Email: harbor@example.test
+Country: USA
+Payment terms: Net366

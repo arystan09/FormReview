@@ -1,0 +1,172 @@
+FormReview — stage 5 of exactly 10
+2026-11-25, Europe/Rome
+
+Outcome
+Implemented grouped synthetic data and offline baseline/replay evaluation. There
+are exactly 48 supported documents in 16 whole families, 30 dev / 18 test. Existing
+12 walkthrough documents remain byte-identical. Test sources/labels/hashes were
+validated only; no held-out extraction outputs were produced or tuned against.
+Human label review remains PENDING. No actual live inference or paid benchmark ran.
+This is a public synthetic benchmark, not an author-blind study or generalization
+claim. Stage-4 live verification, Docker/Linux proof and remote CI remain open gates.
+No stage 6 work, commit, push, deployment or changes to ScopeCheck/ImportLedger.
+
+Prerequisite inspection
+Read AGENTS.md, Git status, code, schemas, parser, replay fixtures and verification
+commands first. Initial Git status was clean at 57a8dd1 (stage 4). Existing unit
+checks passed before changes; full PostgreSQL/browser regressions also pass after
+changes. No approved design/roadmap files were supplied; none were invented.
+Exactly 10 mandatory stages and the original stage-3/stage-4 milestones are retained.
+
+Important files and actual behavior
+- datasets/scenarios.json: explicitly authored source records and expectations,
+  adapted from provisional legacy labels where appropriate, without extracting
+  labels from baseline/replay/model output. Sources and expectations share synthetic
+  authoring records; this is disclosed, not claimed independent human annotation.
+- datasets/{dev,test}/{manifest,gold}.json and datasets/schemas/: strict versioned
+  shapes, raw/canonical/gold hashes, statuses, accepted raw/normalized values,
+  normalizable flags, expected validation flags and exact canonical evidence spans.
+  Ten development scenario/identity families and six held-out layout families.
+- scripts/build_dataset.py: deterministic source/gold-anchor compiler using existing
+  pypdf and Base-14 Helvetica references, no added dependency/font distribution.
+  Original sources are preserved. Parser use locates authored evidence only.
+- fixtures/parser_negative/: added mixed digital/textless PDF and a synthetic
+  unsupported-extension sentinel. Unsupported fixtures are not benchmark cases.
+- extraction/providers/baseline.py: deliberately simple text-only labelled-line
+  patterns. No fixture ID, label lookup, filesystem access or provider network.
+- datasets/configs.v1.json: frozen full executable replay config and baseline
+  settings with implementation hashes, before any test extraction outputs.
+- evaluation/{schemas,dataset,scoring,report}.py: strict dataset validation and split
+  checks, separate literal/normalizable/unresolved/missing/ambiguous/evidence/all-five
+  metrics, scheduled failures kept in denominators, manual-mode results excluded
+  from extraction success. Reports pin dataset/config/freeze/scorer/build hashes.
+- extraction/management/commands/evaluate.py: offline CLI; no DB product writes,
+  new endpoints or migrations. Validates both splits, evaluates dev only, exports
+  versioned JSON without overwriting existing reports. Errors expose fixed codes.
+- docs/evaluation.md: matching/denominator rules, group definitions, authoring and
+  holdout limitations, and an explicit user label-review checklist.
+- Makefile/CI/README/AGENTS/Dockerfile: include evaluation checks/package/data while
+  preserving earlier workflows. CI has no paid benchmark. The replay regression
+  now explicitly enumerates its unchanged 12 fixture scripts rather than assuming
+  every newly added dev document has a scripted response.
+
+Exact commands and prerequisites
+Offline evaluation: Python 3.12 and uv 0.13.9 with frozen dependencies. No database,
+API key, worker, paid allowance or network service is required for evaluate itself.
+From /Users/arystan/Documents/Codex/2026-11-21/you-are-implementing-formreview-an-applied:
+
+  uv sync --frozen --all-groups
+  uv run python -m scripts.build_dataset
+  uv run python manage.py evaluate --help
+  uv run python manage.py evaluate --dataset datasets/test/manifest.json --validate-only
+  uv run python manage.py evaluate --dataset datasets/dev/manifest.json --provider baseline
+  uv run python manage.py evaluate --dataset datasets/dev/manifest.json --provider replay
+
+The default reports already exist in this handoff. For a fresh run use, for example:
+  uv run python manage.py evaluate --dataset datasets/dev/manifest.json --provider baseline --output work/baseline-review-001.json
+  uv run python manage.py evaluate --dataset datasets/dev/manifest.json --provider replay --output work/replay-review-001.json
+
+Do not overwrite an earlier report or refresh the frozen config silently. The
+compiler is deterministic; changing authored expectations requires a disclosed new
+version/review. Human review can only be recorded after actual confirmation.
+
+Full regression prerequisites: disposable PostgreSQL 18 with UTF-8 and CREATEDB,
+plus installed Playwright Chromium. Export POSTGRES_HOST/PORT/DB/USER/PASSWORD for
+that local test server; never use production. Docker/Compose is the documented
+container route but is unavailable on this host. Commands:
+
+  make check
+  uv run pytest --collect-only
+  make integration
+  uv run playwright install chromium
+  uv run pytest -m e2e
+  uv run python scripts/demo_smoke.py
+  make container-check
+
+Exact report artifacts
+/Users/arystan/Documents/Codex/2026-11-21/you-are-implementing-formreview-an-applied/outputs/evaluation-v1-dev-baseline.json
+/Users/arystan/Documents/Codex/2026-11-21/you-are-implementing-formreview-an-applied/outputs/evaluation-v1-dev-replay.json
+
+Synthetic dev outcomes (not live-model accuracy)
+Metric                                    Baseline        Scripted replay
+Scheduled / complete                      30 / 30         30 / 12
+Errors / refused / unattempted             0 / 0 / 0       0 / 0 / 18
+Normalizable-present correct              112 / 113       45 / 113
+Present literal and evidence correct      119 / 120       47 / 120
+Unnormalizable handling                    7 / 7           2 / 7
+Missing handling                           24 / 24         8 / 24
+Ambiguity detection                        6 / 6           2 / 6
+Both ambiguous candidates correct          6 / 6           2 / 6
+Valid quote/value evidence slots           132 / 132       51 / 132
+All-five documents correct                 29 / 30         10 / 30
+
+Examples
+- f07_v2: the buyer's Country: Germany is a valid quote; the supplier country is
+  Spain under a different label. Baseline quote validity passes while country
+  correctness fails. Quote membership is not entity truth.
+- f03_v1: optional registration/country/terms are absent. Correct missing statuses
+  count only under missing handling, not present-field accuracy.
+- f04_v1: sales and billing contact emails are both candidates. An unordered match
+  of both is required for full correctness; selecting one loses ambiguity credit.
+- f05_v2: malformed email and complex terms are present literals, with invalid_email
+  and unresolved_terms expectations. They are excluded from normalizable-present
+  accuracy, not disguised as missing. These handling scores include server validation.
+
+Checks actually run
+PASS: uv sync --frozen --all-groups; frozen environment checked, no new dependencies.
+PASS: pre-change make check, including 105 prior unit tests.
+PASS: final make check: Django check, Ruff, format, mypy (63 source files), and
+      148 unit tests. Includes 25 evaluation tests plus 18 additional existing
+      parser-test cases automatically collected for expanded dev sources.
+PASS: pytest --collect-only: 214 tests, strict category markers.
+PASS: make integration: migrate (no pending migrations), makemigrations --check
+      --dry-run (no changes), 64 real PostgreSQL tests, process_jobs --help.
+PASS: pytest -m e2e: 2 real Chromium workflows with real parser subprocess and
+      PostgreSQL, retaining stage-4 review/approval behavior.
+PASS: python scripts/demo_smoke.py: both browser workflows passed again.
+PASS: evaluate --help and manage.py help.
+PASS: requested baseline and replay evaluate commands; versioned reports emitted.
+PASS: test-manifest validation, including cross-split metadata/hash/identity/template
+      checks. No test extraction outputs were run.
+PASS: 48 supported source-file count and 16-family/30-dev/18-test invariants.
+PASS: deterministic compiler rerun: 68 dataset/fixture artifacts byte-identical.
+PASS: all original 12 source files compared to HEAD and remained byte-identical.
+PASS: repeated baseline report byte-identical, with PostgreSQL stopped. Both final
+      reports and test validation also ran successfully with PostgreSQL stopped.
+PASS: scorer known-error fixtures, zero denominators, errors/refusals/unattempted
+      scheduled cases, manual-result exclusion, frozen-code drift rejection,
+      baseline no file/label access, replay config propagation and truth exclusion.
+PASS: git diff --check. Chromium was already installed from stage 4 and executed;
+      no additional browser download was necessary this turn.
+UNAVAILABLE: make container-check failed at docker compose config --quiet because
+      docker is not installed. Compose validation/build/default UID/container HTTP
+      health and Linux memory ceilings were not verified.
+NOT RUN: remote CI, because no push was authorized. Workflow updated only.
+NOT RUN: paid benchmark/live smoke. Not needed for stage-5 offline implementation;
+      prior stage-4 live acceptance still requires owner key/spending authorization.
+
+Acceptance evaluation and limitations
+1. Reproducible dataset/split: PASS on the invariants, byte reproduction and declared
+   group/hash/identity/masked-template checks. Dev families intentionally share some
+   field-label syntax; this is not 16 independent real-world document designs.
+   Automatic checks are not proof against every semantic near-duplicate; human
+   template/split audit remains part of the pending checklist.
+2. Explicit matching rules: PASS, documented exact typed values and source spans,
+   one-to-one ambiguous matches, separate normalizable/unresolved/missing metrics,
+   fixed scheduled denominators and null rates for zero denominators.
+3. Correct known baseline/replay outcomes: PASS, regression-pinned counts, valid-
+   quote/wrong-entity case and preserved 18 unattempted replay cases. Neither report
+   is a live-model experiment; replay is not a fair coverage-matched model comparator.
+4. Honest human review status: PASS for disclosure; actual label review is PENDING.
+   Expectations are independently specified from extractor output, but authored
+   alongside synthetic scenarios, not independently human reviewed or author-blind.
+5. No live/generalization claim: PASS. No paid call, accuracy claim about a live
+   model, or inference from public scripted outputs to production was made.
+
+The task-local PostgreSQL service was stopped after verification. No source/raw
+text/quotes/prompts/keys were logged by the new evaluate command. Reports contain
+hashes, IDs, metrics and sanitized codes, not field text. No migration or new
+product endpoint was introduced. No later-stage capabilities were scaffolded.
+
+Suggested commit (user reviews and commits):
+add grouped extraction dataset and baseline evaluation

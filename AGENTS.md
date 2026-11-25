@@ -5,7 +5,8 @@ There are exactly **10 mandatory stages**. Work on one authorized stage only.
 Stage 1 establishes the foundation. A keyless replay walkthrough is due after
 stage 3; the full MVP is due after stage 4. Stage 2 adds owned uploads and immutable canonical parsing. Stage 3 adds synthetic replay, immutable extraction config/evidence and an initial
 review preview. Stage 4 adds guarded live admission and human review/approval.
-Stages 5–10 are not implemented here. Actual paid verification remains a required
+Stage 5 adds the grouped public synthetic dataset and offline baseline/replay scoring.
+Stages 6–10 are not implemented here. Actual paid verification remains a required
 gate until owner credentials and explicit spending authorization are supplied.
 No approved design/roadmap files were supplied at initialization. Do not invent
 implementation history or fill in a replacement roadmap. Obtain the approved
@@ -58,7 +59,7 @@ Use focused typed modules. Verification: `make install`, `make check`,
 `uv run pytest --collect-only`, `uv run python manage.py help`,
 `make container-check`. Missing Docker or remote CI is a pending gate, never a pass.
 Stop after reporting acceptance evidence and suggesting the intended commit:
-`extract live fields and save human-approved records`.
+`add grouped extraction dataset and baseline evaluation`.
 
 Stage 2 checks additionally require PostgreSQL 18 with UTF-8 encoding:
 `make integration`. Tests create/drop a dedicated test database; never point them
@@ -81,3 +82,23 @@ Stage 4 verification additionally requires `uv run playwright install chromium`,
 a real worker subprocess and disposable PostgreSQL. Provider tests mock transport.
 Actual live smoke, Docker/Linux resource proof and remote CI cannot be inferred
 from offline passes. Never declare full milestone acceptance without live evidence.
+
+
+Stage 5 scope: 48 supported documents, 16 complete families × 3 variants, 10/30 dev
+and 6/18 test. No product migration or new product endpoint. Explicit separately
+specified gold expectations are not baseline/parser/model outputs; human review
+remains pending. The dataset is public synthetic, not author-blind. Preserve legacy
+walkthrough bytes. Unsupported parser fixtures stay outside manifests.
+
+Offline baseline receives canonical pages and frozen settings only. Replay remains
+visibly scripted; its 18 uncovered dev cases must remain scheduled/unattempted.
+Reports separate normalizable present accuracy, malformed-present handling, missing,
+ambiguity, evidence validity and all-five correctness. Never count manual correction
+as model success or drop failed/refused/unattempted scheduled cases. Test split is
+validation-only in stage 5; freeze configs before any future authorized test outputs.
+No paid benchmark. Read docs/evaluation.md for exact rules and review checklist.
+
+Stage 5 checks: `uv run python manage.py evaluate --help`, dev evaluate for baseline
+and replay, test `--validate-only`, deterministic dataset rebuild, all existing checks.
+Default report paths are outputs/evaluation-v1-dev-baseline.json and
+outputs/evaluation-v1-dev-replay.json; use a fresh --output path for reruns.

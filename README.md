@@ -1,10 +1,29 @@
 # FormReview
 
-Stage 4 of exactly **10 mandatory stages** adds human decisions, atomic approval,
+Stage 5 of exactly **10 mandatory stages** adds a grouped offline synthetic benchmark.
+The existing stage-4 product provides human decisions, atomic approval,
 immutable records/exports and an explicitly enabled live adapter. The keyless
 replay workflow is available locally. Full stage-4 acceptance still requires an
 actual authorized live extraction; replay and mocked transport are not live evidence.
-Paid mode defaults disabled. Stages 5–10 and the regex baseline are not implemented.
+Paid mode defaults disabled. Stages 6–10 are not implemented. The offline labelled-line baseline is separate
+from replay and live inference.
+
+## Offline evaluation
+
+See [evaluation rules and human-review checklist](docs/evaluation.md). The benchmark
+contains 48 supported documents in 16 whole families (30 dev / 18 test). Gold review
+is pending; no actual live benchmark or generalization claim. Configs are frozen;
+test data is validated without extracting test outputs.
+
+```sh
+uv run python manage.py evaluate --dataset datasets/test/manifest.json --validate-only
+uv run python manage.py evaluate --dataset datasets/dev/manifest.json --provider baseline --output work/baseline-001.json
+uv run python manage.py evaluate --dataset datasets/dev/manifest.json --provider replay --output work/replay-001.json
+```
+
+Evaluation needs no database or key. Reports never overwrite existing paths.
+The original 12 documents retain scripted replay coverage; the 18 added dev cases
+remain scheduled/unattempted in replay. These counts are not live model accuracy.
 
 ## Keyless replay walkthrough
 
@@ -198,11 +217,11 @@ subprocess and PostgreSQL, including a stale browser tab and JSON export. They c
 replay and manual-only approval. SDK tests use mocked HTTP transport; CI never pays
 for a model call. `demo_smoke.py` runs those two complete browser workflows.
 
-The 12 synthetic development sources and separately authored provisional labels
+The original 12 synthetic walkthrough sources and separately authored provisional labels
 are described in datasets/dev/README.md. Labels are not independently human-reviewed
 gold, parser output or model input. Parser-negative fixtures are separate. There
 are no live model results or accuracy claims. Synthetic replay is implemented;
-regex baseline is a distinct future capability. The live adapter requires explicit enablement and has no verified live result yet. Approved design/roadmap files were not supplied;
+the offline regex baseline is now available through evaluate. The live adapter requires explicit enablement and has no verified live result yet. Approved design/roadmap files were not supplied;
 no replacement roadmap or history was invented. See AGENTS.md for permanent contracts.
 
 

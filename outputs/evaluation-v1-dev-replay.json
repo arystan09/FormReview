@@ -1,0 +1,505 @@
+{
+  "schema_version": "formreview-evaluation-report-v1",
+  "provider": "replay",
+  "notice": "Public synthetic benchmark; human label review pending. No live accuracy or generalization claim.",
+  "human_review": "pending",
+  "split": "dev",
+  "dataset_hash": "d2f76f723dd48a22f7ffea6493e54b2a368003c01e4d1765616c2f25e6590bb2",
+  "config_hash": "151948549849fa2fb4fe1e16f7c4f9cb04cfeedb42e31e523d73ac7af812a4f1",
+  "freeze_hash": "e5cf37363d3987af43944d61faeef76c17900d05b92d5f7c839300d5f2af0a4e",
+  "scorer_version": "exact-source-aligned-v1",
+  "validator_version": "email-and-explicit-terms-v1",
+  "scorer_hash": "7197efd86b9d2e13587b77e8c6d044833fdd580d99ab300cc7cf44aa93448ed1",
+  "build_hash": "051d68bb0fa2378b48f367c79f084b031e35bd109e461ab47a641aea2ea2fcf0",
+  "source_hashes": {
+    "evaluation/__init__.py": "bf6d7b8f00b35efeab3f981e1258bede7a93dfe93428b280e4dfd0f06865de84",
+    "evaluation/dataset.py": "0a3456185beb7dcf005206ffde975df84a68990441b726324e1a94e207d5a368",
+    "evaluation/report.py": "9ca5bcbbcd4004019884df58a3cd07d6d49ae19060ac297274891292083e9a93",
+    "evaluation/schemas.py": "3f0a07565adab875159461f2c5f1217e08957eb7901c62c888240cd758cb2cff",
+    "evaluation/scoring.py": "7197efd86b9d2e13587b77e8c6d044833fdd580d99ab300cc7cf44aa93448ed1",
+    "extraction/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "extraction/api.py": "932aa2cce5e31b1173b3dd634295d477fe4cf61689ee9a3ca3663099d78baf3d",
+    "extraction/config.py": "685dd1783c3fb115d9befee55793a0e0dada7a6e719afca81d6a0e7a70c89399",
+    "extraction/evidence.py": "20351de259f1f6888182562d7358c20050377a52e72d83f9543bf7dd31f5c0b4",
+    "extraction/live.py": "e7fbec6063092bb033245b70a19667c3a7740952e4340ce6118d18c042bf4d0b",
+    "extraction/live_api.py": "973b847c023efdde06d0657db87e369bdeb03e1f538f1ed15af8e0e0fe21b767",
+    "extraction/management/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "extraction/management/commands/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "extraction/management/commands/configure_live.py": "092cc9e1f3c7a72e5da1bb86af163a471f4665636fd2ec437ce4babde2d47fb0",
+    "extraction/management/commands/evaluate.py": "53842f56fba7c4529b9814457be56079855388542de2790ddf051e88ba8d69e3",
+    "extraction/migrations/0001_initial.py": "60442a1c59817d37b564e440d233916221782459402f4209fff6c36ccafb6455",
+    "extraction/migrations/0002_immutable_extractions.py": "39fb10023eb11b504a26e4faa66c0a728f0d2d54804e214e78725c887c4e1af5",
+    "extraction/migrations/0003_liveallowance_liveattempt_and_more.py": "8e8230aad9579c96106c8088220e18b5f8e9d22d8f823677329c6ab9db00581d",
+    "extraction/migrations/0004_live_guards.py": "854e93a1e3d5b6c73c371ee9a2c4d5ae816b4160e2f0f3572c6169cb1fc5b1d5",
+    "extraction/migrations/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "extraction/models.py": "2e1bc0ff9275ead5846db95762ad009375ab6d24402b0cb95a7e540ce3afa999",
+    "extraction/normalization.py": "518e70e441ed1623eb9443912f3e010fc8149819d54317c5258f4b17bf27a66c",
+    "extraction/providers/__init__.py": "cd1e0b78ed347a81288eae26c6d53e5674ee845538a838d5d7a3bd5677eda3eb",
+    "extraction/providers/baseline.py": "8d62ec36fe71094b6fdf2abe3584c91dbb0a7cfd3b2c12e0fe6ffb3ae05447a1",
+    "extraction/providers/openai.py": "e54596381fb31df2c5275c34e98ea78b35fae9cd74b4cdd0054721b4724e60fe",
+    "extraction/replay.py": "de5ade8c7c335e78862eb9b91995bae029c14041eddf7a8f2729905f908c29fa",
+    "extraction/schemas.py": "dc6de6f0cd8fa6372927ea0b29223a1353691a69f985b4a1ff865cd809e0ebdd",
+    "extraction/services.py": "1af32031d1cadec7d457f064e8bac962fd5585c94aac748584406e6702721a46",
+    "documents/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "documents/api.py": "25bc2ee1e3462d80699f008c9dea76015888e5a995b6a8f81d612a48ec0369cb",
+    "documents/management/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "documents/management/commands/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "documents/management/commands/process_jobs.py": "413eeda513ce0aca74411068408915e45f8ead52a3f29a64412ef21b6a09a811",
+    "documents/migrations/0001_initial.py": "8370caad590b53240b719c1096de138dc1ffa20b35d696993463f4bf0e043028",
+    "documents/migrations/0002_immutable_sources.py": "a7a2ded46303536935b38fb83294621af7fc060ee383d6c8f5ae75d802c0dafd",
+    "documents/migrations/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "documents/models.py": "6413e8d29f521b24b2f2e42f4579e0aee0c1614a6427afe7e02463c26e8c7738",
+    "documents/parser.py": "bf681ebe28ef82c5791b958e9f87a3cd886198898bd615f7e2613f8f694345e2",
+    "documents/parser_process.py": "1a8b8d78c11b118c37d92edcac9e25577c8ecb4f601860251297ff6d88e4a80f",
+    "documents/services.py": "68817231e90bea85c299f34bb4306d548df124b60256fc5857baf21703f05280",
+    "documents/storage.py": "96a5ec71fddfc1f8fd11eeb5f261fb4d565c731c10cf115d6560567c198d32c4",
+    "documents/uploads.py": "9d8b5ce29722bd53af564062f1072bd3fdd65c5e384418c26566819ef8d5d827",
+    "uv.lock": "624df5243848cc31e4522086d61178beef724f6c9a4900897c35bd5d32229d78",
+    "pyproject.toml": "9f6488df8b080b285fec7e36901112c47d178b76c41b953c4b538d6dd207b8e7",
+    "scripts/build_dataset.py": "47867e5846a8b38cd2541332b74d4ab9fc943ad8d91760da588c219b6ab2413b",
+    "scripts/generate_fixtures.py": "78eacfb87fe8acc21e195763d1ddc8b8f079c61ad9b0265d380b457e97959943",
+    "datasets/scenarios.json": "023a506ac08b4840aa719de368242269537dbe711e16af5d38426ee7acd09088"
+  },
+  "replay_fixture_hash": "2c9dac0a62287b7b7d020b0eab442ea192fd146cbc68c44b1282e911fad43191",
+  "counts": {
+    "scheduled": 30,
+    "complete": 12,
+    "error": 0,
+    "refused": 0,
+    "unattempted": 18
+  },
+  "metrics": {
+    "present_field_accuracy": {
+      "correct": 45,
+      "total": 113,
+      "rate": 0.39823008849557523
+    },
+    "present_literal_evidence": {
+      "correct": 47,
+      "total": 120,
+      "rate": 0.39166666666666666
+    },
+    "unnormalizable_handling": {
+      "correct": 2,
+      "total": 7,
+      "rate": 0.2857142857142857
+    },
+    "missing_handling": {
+      "correct": 8,
+      "total": 24,
+      "rate": 0.3333333333333333
+    },
+    "ambiguity_detection": {
+      "correct": 2,
+      "total": 6,
+      "rate": 0.3333333333333333
+    },
+    "ambiguous_candidates": {
+      "correct": 2,
+      "total": 6,
+      "rate": 0.3333333333333333
+    },
+    "evidence_validity": {
+      "correct": 51,
+      "total": 132,
+      "rate": 0.38636363636363635
+    },
+    "all_five_correctness": {
+      "correct": 10,
+      "total": 30,
+      "rate": 0.3333333333333333
+    }
+  },
+  "cases": [
+    {
+      "id": "f01_v1",
+      "family": "f01",
+      "state": "complete",
+      "error": "",
+      "field_correct": {
+        "supplier_name": true,
+        "registration_id": false,
+        "contact_email": false,
+        "country": true,
+        "payment_terms_days": true
+      }
+    },
+    {
+      "id": "f02_v1",
+      "family": "f02",
+      "state": "complete",
+      "error": "",
+      "field_correct": {
+        "supplier_name": true,
+        "registration_id": true,
+        "contact_email": true,
+        "country": true,
+        "payment_terms_days": true
+      }
+    },
+    {
+      "id": "f03_v1",
+      "family": "f03",
+      "state": "complete",
+      "error": "",
+      "field_correct": {
+        "supplier_name": true,
+        "registration_id": true,
+        "contact_email": true,
+        "country": true,
+        "payment_terms_days": true
+      }
+    },
+    {
+      "id": "f04_v1",
+      "family": "f04",
+      "state": "complete",
+      "error": "",
+      "field_correct": {
+        "supplier_name": true,
+        "registration_id": true,
+        "contact_email": true,
+        "country": true,
+        "payment_terms_days": true
+      }
+    },
+    {
+      "id": "f05_v1",
+      "family": "f05",
+      "state": "complete",
+      "error": "",
+      "field_correct": {
+        "supplier_name": true,
+        "registration_id": true,
+        "contact_email": true,
+        "country": true,
+        "payment_terms_days": true
+      }
+    },
+    {
+      "id": "f06_v1",
+      "family": "f06",
+      "state": "complete",
+      "error": "",
+      "field_correct": {
+        "supplier_name": true,
+        "registration_id": true,
+        "contact_email": true,
+        "country": true,
+        "payment_terms_days": true
+      }
+    },
+    {
+      "id": "f01_v2",
+      "family": "f01",
+      "state": "complete",
+      "error": "",
+      "field_correct": {
+        "supplier_name": true,
+        "registration_id": true,
+        "contact_email": true,
+        "country": true,
+        "payment_terms_days": true
+      }
+    },
+    {
+      "id": "f07_v1",
+      "family": "f07",
+      "state": "complete",
+      "error": "",
+      "field_correct": {
+        "supplier_name": true,
+        "registration_id": true,
+        "contact_email": true,
+        "country": false,
+        "payment_terms_days": true
+      }
+    },
+    {
+      "id": "f08_v1",
+      "family": "f08",
+      "state": "complete",
+      "error": "",
+      "field_correct": {
+        "supplier_name": true,
+        "registration_id": true,
+        "contact_email": true,
+        "country": true,
+        "payment_terms_days": true
+      }
+    },
+    {
+      "id": "f09_v1",
+      "family": "f09",
+      "state": "complete",
+      "error": "",
+      "field_correct": {
+        "supplier_name": true,
+        "registration_id": true,
+        "contact_email": true,
+        "country": true,
+        "payment_terms_days": true
+      }
+    },
+    {
+      "id": "f10_v1",
+      "family": "f10",
+      "state": "complete",
+      "error": "",
+      "field_correct": {
+        "supplier_name": true,
+        "registration_id": true,
+        "contact_email": true,
+        "country": true,
+        "payment_terms_days": true
+      }
+    },
+    {
+      "id": "f01_v3",
+      "family": "f01",
+      "state": "complete",
+      "error": "",
+      "field_correct": {
+        "supplier_name": true,
+        "registration_id": true,
+        "contact_email": true,
+        "country": true,
+        "payment_terms_days": true
+      }
+    },
+    {
+      "id": "f02_v2",
+      "family": "f02",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f02_v3",
+      "family": "f02",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f03_v2",
+      "family": "f03",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f03_v3",
+      "family": "f03",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f04_v2",
+      "family": "f04",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f04_v3",
+      "family": "f04",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f05_v2",
+      "family": "f05",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f05_v3",
+      "family": "f05",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f06_v2",
+      "family": "f06",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f06_v3",
+      "family": "f06",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f07_v2",
+      "family": "f07",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f07_v3",
+      "family": "f07",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f08_v2",
+      "family": "f08",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f08_v3",
+      "family": "f08",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f09_v2",
+      "family": "f09",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f09_v3",
+      "family": "f09",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f10_v2",
+      "family": "f10",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    },
+    {
+      "id": "f10_v3",
+      "family": "f10",
+      "state": "unattempted",
+      "error": "no_scripted_fixture",
+      "field_correct": {
+        "supplier_name": false,
+        "registration_id": false,
+        "contact_email": false,
+        "country": false,
+        "payment_terms_days": false
+      }
+    }
+  ]
+}

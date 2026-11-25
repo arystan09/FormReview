@@ -1,0 +1,6 @@
+Synthetic development family 10, variant 2
+Supplier: Iris Supply
+Email: iris@example.test
+Country: France
+Country: Belgium
+Payment terms: Net30

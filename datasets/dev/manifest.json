@@ -1,0 +1,308 @@
+{
+  "schema_version": "formreview-dataset-v1",
+  "split": "dev",
+  "gold_path": "gold.json",
+  "gold_sha256": "82cbc7ab644efd1dbbae009f10121a3903433d80b580e26115a19e6bed43e63e",
+  "documents": [
+    {
+      "id": "f01_v1",
+      "family": "f01",
+      "variant": 1,
+      "template_id": "f01",
+      "identity_group": "f01",
+      "path": "01_complete.txt",
+      "raw_sha256": "3ee7e92ec1458760c05be7a9d521e6a43c0545db96503b8e7ce601bb7902f321",
+      "canonical_sha256": "8edc73c0f18e3fbae7dba16925faa7a910f22f294e8dbd3497ce83910efcc869"
+    },
+    {
+      "id": "f02_v1",
+      "family": "f02",
+      "variant": 1,
+      "template_id": "f02",
+      "identity_group": "f02",
+      "path": "02_bom_unicode.txt",
+      "raw_sha256": "457ee1f519bb988405ed2c06da8f2d85d12990586177bc39a5202fc66a9884c5",
+      "canonical_sha256": "120775fc4bb5c8d0378d7cb576fbc7f4f64401471d4dccbeaf33ba63e51bb071"
+    },
+    {
+      "id": "f03_v1",
+      "family": "f03",
+      "variant": 1,
+      "template_id": "f03",
+      "identity_group": "f03",
+      "path": "03_missing_optional.txt",
+      "raw_sha256": "8af0feffc9a1af1545fe1685f42cd40d52bbcf71ae38784f1a31faece15c34cd",
+      "canonical_sha256": "ced676b8bcbdec48f073650ce21d50ac3762fc1f876c572d9c9a63e37a639661"
+    },
+    {
+      "id": "f04_v1",
+      "family": "f04",
+      "variant": 1,
+      "template_id": "f04",
+      "identity_group": "f04",
+      "path": "04_ambiguous_email.txt",
+      "raw_sha256": "b19b82276fe435fad5a6805534d69a1ecf7f1118d6ac418d7b1a422e1f23741f",
+      "canonical_sha256": "0577904cb3c4aa564b2b21136078702a98928861d895f26b281676c919ec64e5"
+    },
+    {
+      "id": "f05_v1",
+      "family": "f05",
+      "variant": 1,
+      "template_id": "f05",
+      "identity_group": "f05",
+      "path": "05_unresolved_terms.txt",
+      "raw_sha256": "1a7f24c10e4fd9750617c5b17e909b1b9a1d0669c07455a0093a92138fb56ed1",
+      "canonical_sha256": "d2966d373a976f0f1400e52104e0866e4b7856535dfb6e7ac6993e2b7aeb9b8c"
+    },
+    {
+      "id": "f06_v1",
+      "family": "f06",
+      "variant": 1,
+      "template_id": "f06",
+      "identity_group": "f06",
+      "path": "06_source_instructions.txt",
+      "raw_sha256": "9932b9d8f98e10df782634b04307b30aff0d63174ebcd7fc107fda79a40223d9",
+      "canonical_sha256": "9e0a1894e7f546708dd9ebdf72cf5ef496113f2d0f315d722f4b72c3447725c4"
+    },
+    {
+      "id": "f01_v2",
+      "family": "f01",
+      "variant": 2,
+      "template_id": "f01",
+      "identity_group": "f01",
+      "path": "07_complete.pdf",
+      "raw_sha256": "905b4d643700da798495881a5799da1b3aa7d80bb56d959dc0b23a17dae42d6d",
+      "canonical_sha256": "d051e66cb89f94a349bc49b2bfef7d01a398fc9ff1caa6cd9fc9e0bb2aced548"
+    },
+    {
+      "id": "f07_v1",
+      "family": "f07",
+      "variant": 1,
+      "template_id": "f07",
+      "identity_group": "f07",
+      "path": "08_two_pages.pdf",
+      "raw_sha256": "96c1ced06535c3b7ae1acf5f370c45473d5851397b82ab55954ff3978d40756a",
+      "canonical_sha256": "b86caf5d9154ab90ec12690cc1fc8ad931ebbfc08072f9853277676d7cd255e7"
+    },
+    {
+      "id": "f08_v1",
+      "family": "f08",
+      "variant": 1,
+      "template_id": "f08",
+      "identity_group": "f08",
+      "path": "09_missing_name.pdf",
+      "raw_sha256": "4832700a36696288a6a2832199e93fb299e60ea46894b8ec1d7af3f1b8f380c2",
+      "canonical_sha256": "28afc87c15b2d56a3478667f357844cb120f9140460f5472c34db7289d70f66e"
+    },
+    {
+      "id": "f09_v1",
+      "family": "f09",
+      "variant": 1,
+      "template_id": "f09",
+      "identity_group": "f09",
+      "path": "10_out_of_range.pdf",
+      "raw_sha256": "66db3539360665e0fd663ca0e3f0af3e52505226e7bc1a9988c186670220ba27",
+      "canonical_sha256": "379e5f07b9b821f670c06745571073113a3f5e16650c35f5faa4114dbbd57c65"
+    },
+    {
+      "id": "f10_v1",
+      "family": "f10",
+      "variant": 1,
+      "template_id": "f10",
+      "identity_group": "f10",
+      "path": "11_ambiguous_country.pdf",
+      "raw_sha256": "f05898a8c640448dd6ef7401e5ddadcff91b1bdde8e165c7cbcafbafae467088",
+      "canonical_sha256": "7f35046c74b8b6f60f99868b1c3412ebb665870b4a6445fb2d0bb7c33cc8af6b"
+    },
+    {
+      "id": "f01_v3",
+      "family": "f01",
+      "variant": 3,
+      "template_id": "f01",
+      "identity_group": "f01",
+      "path": "12_upper_boundary.pdf",
+      "raw_sha256": "180f639356db916d362230f767a8b0f41fea022b033cacc78c36b9e0b1371065",
+      "canonical_sha256": "e05b0b26828246a84532cf7537df3573b12066b2225139e6de1d0f4968db8576"
+    },
+    {
+      "id": "f02_v2",
+      "family": "f02",
+      "variant": 2,
+      "template_id": "f02",
+      "identity_group": "f02",
+      "path": "f02_v2.txt",
+      "raw_sha256": "0521197936ffe3587477444a569fffc288bae28e7cad17c7924405708c110198",
+      "canonical_sha256": "cc68c92d0ebd63486096cc0493d1b3c675b923bc10b428210b376cdce0234885"
+    },
+    {
+      "id": "f02_v3",
+      "family": "f02",
+      "variant": 3,
+      "template_id": "f02",
+      "identity_group": "f02",
+      "path": "f02_v3.txt",
+      "raw_sha256": "a03018532691a91d6b7ae61ae3e2535d470471a9d7a582efcf138a25226b7fca",
+      "canonical_sha256": "b96851925c9e92bee1fee77817c5769a24359cd82368e9b6c337bfb69988df61"
+    },
+    {
+      "id": "f03_v2",
+      "family": "f03",
+      "variant": 2,
+      "template_id": "f03",
+      "identity_group": "f03",
+      "path": "f03_v2.txt",
+      "raw_sha256": "eaf3fd38300d388d2aa3ed1fdea5091f5b71a7d0211dec8a777792bb78fc77fe",
+      "canonical_sha256": "f32587a74a391680f9468edb63944eec919918bd3fc00cfd04ceb7231ddc98be"
+    },
+    {
+      "id": "f03_v3",
+      "family": "f03",
+      "variant": 3,
+      "template_id": "f03",
+      "identity_group": "f03",
+      "path": "f03_v3.pdf",
+      "raw_sha256": "e1b9fcd91c57736dda0556406340c82ffa39361f7158b2d9efce0095106fa77f",
+      "canonical_sha256": "2a3e67b25dfecf888a4e710ad1952480517f2b09acff87a9b6b54a0222a0821c"
+    },
+    {
+      "id": "f04_v2",
+      "family": "f04",
+      "variant": 2,
+      "template_id": "f04",
+      "identity_group": "f04",
+      "path": "f04_v2.txt",
+      "raw_sha256": "b41a58bdf3e3dc52beb93ac626ce1332a568f1b4527244ace4d52a944d189a1b",
+      "canonical_sha256": "80ce792d5e35ac71957dfee0d1a3f0e81357438867c00274a49f118c77179e6f"
+    },
+    {
+      "id": "f04_v3",
+      "family": "f04",
+      "variant": 3,
+      "template_id": "f04",
+      "identity_group": "f04",
+      "path": "f04_v3.pdf",
+      "raw_sha256": "6cdb13b9bc1f6746f4c3cb956bc291cb37a49b346203a721da7fd7ca2edfd700",
+      "canonical_sha256": "6418fef5ff52b15df8d8af80d91524fb6be6747bd6686a4370095a9ce6343b9d"
+    },
+    {
+      "id": "f05_v2",
+      "family": "f05",
+      "variant": 2,
+      "template_id": "f05",
+      "identity_group": "f05",
+      "path": "f05_v2.txt",
+      "raw_sha256": "e4c10f28eb47b01492ddf004940865a27cac89499a882b7907116f938536948c",
+      "canonical_sha256": "2d8d63dc05a64bbc66339eb06e19aecceb346822b9f5108f060db9c842cef390"
+    },
+    {
+      "id": "f05_v3",
+      "family": "f05",
+      "variant": 3,
+      "template_id": "f05",
+      "identity_group": "f05",
+      "path": "f05_v3.pdf",
+      "raw_sha256": "e974b8e1e8619304193870bc8359b51552398106dbf091cca54e8252779d539c",
+      "canonical_sha256": "a38b64d2ff17d4cbae49c1043189f7267e248330e180272c6d93c92a119f6e97"
+    },
+    {
+      "id": "f06_v2",
+      "family": "f06",
+      "variant": 2,
+      "template_id": "f06",
+      "identity_group": "f06",
+      "path": "f06_v2.txt",
+      "raw_sha256": "09e8a3c70a816a355e6919e554a6eaf88a6ac078e9704d3ad89a5b85a9e0173a",
+      "canonical_sha256": "009da98f2b2d63b48ee79633d35a82e202e4ca5c7e98bbbffbfe6b6b7aefacc5"
+    },
+    {
+      "id": "f06_v3",
+      "family": "f06",
+      "variant": 3,
+      "template_id": "f06",
+      "identity_group": "f06",
+      "path": "f06_v3.pdf",
+      "raw_sha256": "bbf250c826f6bed4a11936c0a8873af9b65a999c87cbc9b04c93a884077e059b",
+      "canonical_sha256": "5956c799ca39694ddc0efa6685974ab2cd50e01a0ce4a335f5a8a95a5a2b5536"
+    },
+    {
+      "id": "f07_v2",
+      "family": "f07",
+      "variant": 2,
+      "template_id": "f07",
+      "identity_group": "f07",
+      "path": "f07_v2.txt",
+      "raw_sha256": "6ca8470e807dbdb04ea56e143766e4ca1a22d2d25b5a398e80172a1b1220e732",
+      "canonical_sha256": "182341e25ee6c664e7d374f8f43cd4324be48e4f05f24a2fe946ef16b79b78fa"
+    },
+    {
+      "id": "f07_v3",
+      "family": "f07",
+      "variant": 3,
+      "template_id": "f07",
+      "identity_group": "f07",
+      "path": "f07_v3.pdf",
+      "raw_sha256": "bfb1f014c08a59b41e145d6178efbeb2d151cf70c17410253ff4b234267b6f7f",
+      "canonical_sha256": "d77fe308dab13c422e085e64d76afd3e3b9d2fd42d5393538a8eff2287c86a63"
+    },
+    {
+      "id": "f08_v2",
+      "family": "f08",
+      "variant": 2,
+      "template_id": "f08",
+      "identity_group": "f08",
+      "path": "f08_v2.txt",
+      "raw_sha256": "aa2e3e04ae0dc9336f04f45a45ae298c012c16ce7eef0dbcdb6b54df75ab0fe5",
+      "canonical_sha256": "c94664ce47e26b8132d52db31bc37d0383543648217a75184daa672e6b247aba"
+    },
+    {
+      "id": "f08_v3",
+      "family": "f08",
+      "variant": 3,
+      "template_id": "f08",
+      "identity_group": "f08",
+      "path": "f08_v3.pdf",
+      "raw_sha256": "6a5029d953d3b9937899c0fd3d850a3c59daefb42b6de07abb492f951e25ecd6",
+      "canonical_sha256": "f5fb6adb2c16890938d58d9ecdbf670ad1c6ecfcd0a6e61d9d14970ee702ad1e"
+    },
+    {
+      "id": "f09_v2",
+      "family": "f09",
+      "variant": 2,
+      "template_id": "f09",
+      "identity_group": "f09",
+      "path": "f09_v2.txt",
+      "raw_sha256": "041dbc72433faaa25dfc3c0d9438f8b4f95e80eddb5e5855f1420d24f4d9c90c",
+      "canonical_sha256": "9f1e3230d8078aeed376f1f7d06923f3fa2204623e149d2f1eb27170d63a3829"
+    },
+    {
+      "id": "f09_v3",
+      "family": "f09",
+      "variant": 3,
+      "template_id": "f09",
+      "identity_group": "f09",
+      "path": "f09_v3.pdf",
+      "raw_sha256": "2580f2ae66a04fe22ca92559543cbea4e5b0493fc25501f1c686c419a6582a34",
+      "canonical_sha256": "dcbce9c5d5efd3ebc0e1383ec5709500236c01fca8959eb468701a10098d05cf"
+    },
+    {
+      "id": "f10_v2",
+      "family": "f10",
+      "variant": 2,
+      "template_id": "f10",
+      "identity_group": "f10",
+      "path": "f10_v2.txt",
+      "raw_sha256": "9e8e7f5de1d59e5660717579106d4f6588bc929edf062fd2fccd88b2bbc340a2",
+      "canonical_sha256": "e4688ec639b2c2e50a4ccf0a3ad0f1d04507c7362aea69e7d127bb95f750207e"
+    },
+    {
+      "id": "f10_v3",
+      "family": "f10",
+      "variant": 3,
+      "template_id": "f10",
+      "identity_group": "f10",
+      "path": "f10_v3.pdf",
+      "raw_sha256": "69a5d9d94dd8e0131d5b8b3d1567cabfcda1daf5917bca3931b2a1e1cd5ac6e0",
+      "canonical_sha256": "8e4867e89e62d79b00edf6664c387c612addc0bfe984619e12e66be40bf965b7"
+    }
+  ]
+}

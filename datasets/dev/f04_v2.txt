@@ -1,0 +1,6 @@
+Synthetic development family 4, variant 2
+Supplier: Cedar Supply
+Email: sales@cedar.example.test
+Email: billing@cedar.example.test
+Country: Canada
+Payment terms: Net45

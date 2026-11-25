@@ -27,7 +27,7 @@ jobs:
       - run: uv run python manage.py help
       - run: uv run ruff check .
       - run: uv run ruff format --check .
-      - run: uv run mypy formreview accounts documents extraction reviews
+      - run: uv run mypy formreview accounts documents extraction reviews evaluation
       - run: uv run pytest --collect-only
       - run: uv run pytest -m "not integration and not e2e"
       - run: uv run python manage.py migrate
@@ -38,6 +38,10 @@ jobs:
       - run: uv run pytest -m e2e
       - run: uv run python scripts/demo_smoke.py
       - run: uv run python manage.py configure_live --help
+      - run: uv run python manage.py evaluate --help
+      - run: uv run python manage.py evaluate --dataset datasets/test/manifest.json --validate-only
+      - run: uv run python manage.py evaluate --dataset datasets/dev/manifest.json --provider baseline --output work/ci-baseline.json
+      - run: uv run python manage.py evaluate --dataset datasets/dev/manifest.json --provider replay --output work/ci-replay.json
       - run: docker compose config --quiet
       - run: docker build -t formreview:local .
       - run: uv run python scripts/check_container.py

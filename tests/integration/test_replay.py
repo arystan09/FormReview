@@ -155,8 +155,12 @@ def test_immutable_config_outputs_and_reference_integrity(context) -> None:
 
 @pytest.mark.parametrize(
     "filename",
-    sorted(path.name for path in (ROOT / "datasets/dev").glob("*.txt"))
-    + sorted(path.name for path in (ROOT / "datasets/dev").glob("*.pdf")),
+    sorted(
+        item["id"].split("/")[-1]
+        for item in json.loads((ROOT / "extraction/fixtures/synthetic_v1.json").read_text())[
+            "by_canonical_hash"
+        ].values()
+    ),
 )
 def test_all_development_replays(context, filename) -> None:
     client, membership = context

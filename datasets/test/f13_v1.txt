@@ -1,0 +1,7 @@
+Synthetic holdout scenario 13; variant 1
+Declared Supplier | Holdout 13 Manufacturing
+Declared Registration ID | 0013/Z
+Declared Email | contact13@holdout.example.test
+Declared Email | accounts13@holdout.example.test
+Declared Country | New Zealand
+Declared Payment terms | Net21

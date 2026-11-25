@@ -1,0 +1,3493 @@
+{
+  "schema_version": "formreview-gold-v1",
+  "human_review": "pending",
+  "provenance": "Public synthetic author-specified source records and expectations. Legacy expectations adapted from separately authored provisional labels. No extractor output used; not author-blind; human review pending.",
+  "cases": {
+    "f01_v1": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Alder Parts"
+              ],
+              "accepted_normalized_values": [
+                "Alder Parts"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Alder Parts",
+                  "start": 0,
+                  "end": 21,
+                  "value_start": 10,
+                  "value_end": 21
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "001-AB"
+              ],
+              "accepted_normalized_values": [
+                "001-AB"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Registration ID: 001-AB",
+                  "start": 22,
+                  "end": 45,
+                  "value_start": 39,
+                  "value_end": 45
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "alder@example.test"
+              ],
+              "accepted_normalized_values": [
+                "alder@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: alder@example.test",
+                  "start": 46,
+                  "end": 71,
+                  "value_start": 53,
+                  "value_end": 71
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Italy"
+              ],
+              "accepted_normalized_values": [
+                "Italy"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: Italy",
+                  "start": 72,
+                  "end": 86,
+                  "value_start": 81,
+                  "value_end": 86
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net30"
+              ],
+              "accepted_normalized_values": [
+                30
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net30",
+                  "start": 87,
+                  "end": 107,
+                  "value_start": 102,
+                  "value_end": 107
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f02_v1": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Café Parts"
+              ],
+              "accepted_normalized_values": [
+                "Café Parts"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Café Parts",
+                  "start": 0,
+                  "end": 20,
+                  "value_start": 10,
+                  "value_end": 20
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0007/X"
+              ],
+              "accepted_normalized_values": [
+                "0007/X"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Registration ID: 0007/X",
+                  "start": 21,
+                  "end": 44,
+                  "value_start": 38,
+                  "value_end": 44
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "cafe@example.test"
+              ],
+              "accepted_normalized_values": [
+                "cafe@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: cafe@example.test",
+                  "start": 45,
+                  "end": 69,
+                  "value_start": 52,
+                  "value_end": 69
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "France"
+              ],
+              "accepted_normalized_values": [
+                "France"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: France",
+                  "start": 70,
+                  "end": 85,
+                  "value_start": 79,
+                  "value_end": 85
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "14 days"
+              ],
+              "accepted_normalized_values": [
+                14
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: 14 days",
+                  "start": 86,
+                  "end": 108,
+                  "value_start": 101,
+                  "value_end": 108
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f03_v1": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Beacon Tools"
+              ],
+              "accepted_normalized_values": [
+                "Beacon Tools"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Beacon Tools",
+                  "start": 0,
+                  "end": 22,
+                  "value_start": 10,
+                  "value_end": 22
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "beacon@example.test"
+              ],
+              "accepted_normalized_values": [
+                "beacon@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: beacon@example.test",
+                  "start": 23,
+                  "end": 49,
+                  "value_start": 30,
+                  "value_end": 49
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "missing",
+          "candidates": []
+        },
+        "payment_terms_days": {
+          "status": "missing",
+          "candidates": []
+        }
+      }
+    },
+    "f04_v1": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Cedar Supply"
+              ],
+              "accepted_normalized_values": [
+                "Cedar Supply"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Cedar Supply",
+                  "start": 0,
+                  "end": 22,
+                  "value_start": 10,
+                  "value_end": 22
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "sales@cedar.example.test"
+              ],
+              "accepted_normalized_values": [
+                "sales@cedar.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: sales@cedar.example.test",
+                  "start": 23,
+                  "end": 54,
+                  "value_start": 30,
+                  "value_end": 54
+                }
+              ]
+            },
+            {
+              "accepted_raw_values": [
+                "billing@cedar.example.test"
+              ],
+              "accepted_normalized_values": [
+                "billing@cedar.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: billing@cedar.example.test",
+                  "start": 55,
+                  "end": 88,
+                  "value_start": 62,
+                  "value_end": 88
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Canada"
+              ],
+              "accepted_normalized_values": [
+                "Canada"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: Canada",
+                  "start": 89,
+                  "end": 104,
+                  "value_start": 98,
+                  "value_end": 104
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net45"
+              ],
+              "accepted_normalized_values": [
+                45
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net45",
+                  "start": 105,
+                  "end": 125,
+                  "value_start": 120,
+                  "value_end": 125
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f05_v1": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Drift Materials"
+              ],
+              "accepted_normalized_values": [
+                "Drift Materials"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Drift Materials",
+                  "start": 0,
+                  "end": 25,
+                  "value_start": 10,
+                  "value_end": 25
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "00.04-A"
+              ],
+              "accepted_normalized_values": [
+                "00.04-A"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Registration ID: 00.04-A",
+                  "start": 52,
+                  "end": 76,
+                  "value_start": 69,
+                  "value_end": 76
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "drift@example.test"
+              ],
+              "accepted_normalized_values": [
+                "drift@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: drift@example.test",
+                  "start": 26,
+                  "end": 51,
+                  "value_start": 33,
+                  "value_end": 51
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "United Kingdom"
+              ],
+              "accepted_normalized_values": [
+                "United Kingdom"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: United Kingdom",
+                  "start": 77,
+                  "end": 100,
+                  "value_start": 86,
+                  "value_end": 100
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "on receipt"
+              ],
+              "accepted_normalized_values": [],
+              "normalizable": false,
+              "expected_validation_flags": [
+                "unresolved_terms"
+              ],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: on receipt",
+                  "start": 101,
+                  "end": 126,
+                  "value_start": 116,
+                  "value_end": 126
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f06_v1": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Elm Goods"
+              ],
+              "accepted_normalized_values": [
+                "Elm Goods"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Elm Goods",
+                  "start": 0,
+                  "end": 19,
+                  "value_start": 10,
+                  "value_end": 19
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "elm@example.test"
+              ],
+              "accepted_normalized_values": [
+                "elm@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: elm@example.test",
+                  "start": 20,
+                  "end": 43,
+                  "value_start": 27,
+                  "value_end": 43
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "England"
+              ],
+              "accepted_normalized_values": [
+                "England"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: England",
+                  "start": 44,
+                  "end": 60,
+                  "value_start": 53,
+                  "value_end": 60
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net0"
+              ],
+              "accepted_normalized_values": [
+                0
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net0",
+                  "start": 61,
+                  "end": 80,
+                  "value_start": 76,
+                  "value_end": 80
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f01_v2": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Flint Goods"
+              ],
+              "accepted_normalized_values": [
+                "Flint Goods"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Flint Goods",
+                  "start": 0,
+                  "end": 21,
+                  "value_start": 10,
+                  "value_end": 21
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "009-Z"
+              ],
+              "accepted_normalized_values": [
+                "009-Z"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Registration ID: 009-Z",
+                  "start": 22,
+                  "end": 44,
+                  "value_start": 39,
+                  "value_end": 44
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "flint@example.test"
+              ],
+              "accepted_normalized_values": [
+                "flint@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: flint@example.test",
+                  "start": 45,
+                  "end": 70,
+                  "value_start": 52,
+                  "value_end": 70
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Germany"
+              ],
+              "accepted_normalized_values": [
+                "Germany"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: Germany",
+                  "start": 71,
+                  "end": 87,
+                  "value_start": 80,
+                  "value_end": 87
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net60"
+              ],
+              "accepted_normalized_values": [
+                60
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net60",
+                  "start": 88,
+                  "end": 108,
+                  "value_start": 103,
+                  "value_end": 108
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f07_v1": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Grove Components"
+              ],
+              "accepted_normalized_values": [
+                "Grove Components"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Grove Components",
+                  "start": 0,
+                  "end": 26,
+                  "value_start": 10,
+                  "value_end": 26
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "000/19"
+              ],
+              "accepted_normalized_values": [
+                "000/19"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 2,
+                  "quote": "Registration ID: 000/19",
+                  "start": 0,
+                  "end": 23,
+                  "value_start": 17,
+                  "value_end": 23
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "grove@example.test"
+              ],
+              "accepted_normalized_values": [
+                "grove@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: grove@example.test",
+                  "start": 27,
+                  "end": 52,
+                  "value_start": 34,
+                  "value_end": 52
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Spain"
+              ],
+              "accepted_normalized_values": [
+                "Spain"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 2,
+                  "quote": "Country: Spain",
+                  "start": 24,
+                  "end": 38,
+                  "value_start": 33,
+                  "value_end": 38
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "90 days"
+              ],
+              "accepted_normalized_values": [
+                90
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 2,
+                  "quote": "Payment terms: 90 days",
+                  "start": 39,
+                  "end": 61,
+                  "value_start": 54,
+                  "value_end": 61
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f08_v1": {
+      "fields": {
+        "supplier_name": {
+          "status": "missing",
+          "candidates": []
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "000-Q"
+              ],
+              "accepted_normalized_values": [
+                "000-Q"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Registration ID: 000-Q",
+                  "start": 0,
+                  "end": 22,
+                  "value_start": 17,
+                  "value_end": 22
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "unknown@example.test"
+              ],
+              "accepted_normalized_values": [
+                "unknown@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: unknown@example.test",
+                  "start": 23,
+                  "end": 50,
+                  "value_start": 30,
+                  "value_end": 50
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Ireland"
+              ],
+              "accepted_normalized_values": [
+                "Ireland"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: Ireland",
+                  "start": 51,
+                  "end": 67,
+                  "value_start": 60,
+                  "value_end": 67
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net15"
+              ],
+              "accepted_normalized_values": [
+                15
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net15",
+                  "start": 68,
+                  "end": 88,
+                  "value_start": 83,
+                  "value_end": 88
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f09_v1": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Harbor Tools"
+              ],
+              "accepted_normalized_values": [
+                "Harbor Tools"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Harbor Tools",
+                  "start": 0,
+                  "end": 22,
+                  "value_start": 10,
+                  "value_end": 22
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "harbor@example.test"
+              ],
+              "accepted_normalized_values": [
+                "harbor@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: harbor@example.test",
+                  "start": 23,
+                  "end": 49,
+                  "value_start": 30,
+                  "value_end": 49
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "USA"
+              ],
+              "accepted_normalized_values": [
+                "USA"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: USA",
+                  "start": 50,
+                  "end": 62,
+                  "value_start": 59,
+                  "value_end": 62
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net366"
+              ],
+              "accepted_normalized_values": [],
+              "normalizable": false,
+              "expected_validation_flags": [
+                "unresolved_terms"
+              ],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net366",
+                  "start": 63,
+                  "end": 84,
+                  "value_start": 78,
+                  "value_end": 84
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f10_v1": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Iris Supply"
+              ],
+              "accepted_normalized_values": [
+                "Iris Supply"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Iris Supply",
+                  "start": 0,
+                  "end": 21,
+                  "value_start": 10,
+                  "value_end": 21
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "iris@example.test"
+              ],
+              "accepted_normalized_values": [
+                "iris@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: iris@example.test",
+                  "start": 22,
+                  "end": 46,
+                  "value_start": 29,
+                  "value_end": 46
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "France"
+              ],
+              "accepted_normalized_values": [
+                "France"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: France",
+                  "start": 47,
+                  "end": 62,
+                  "value_start": 56,
+                  "value_end": 62
+                }
+              ]
+            },
+            {
+              "accepted_raw_values": [
+                "Belgium"
+              ],
+              "accepted_normalized_values": [
+                "Belgium"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: Belgium",
+                  "start": 63,
+                  "end": 79,
+                  "value_start": 72,
+                  "value_end": 79
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net30"
+              ],
+              "accepted_normalized_values": [
+                30
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net30",
+                  "start": 80,
+                  "end": 100,
+                  "value_start": 95,
+                  "value_end": 100
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f01_v3": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Juniper Parts"
+              ],
+              "accepted_normalized_values": [
+                "Juniper Parts"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Juniper Parts",
+                  "start": 0,
+                  "end": 23,
+                  "value_start": 10,
+                  "value_end": 23
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "000-12"
+              ],
+              "accepted_normalized_values": [
+                "000-12"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Registration ID: 000-12",
+                  "start": 24,
+                  "end": 47,
+                  "value_start": 41,
+                  "value_end": 47
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "juniper@example.test"
+              ],
+              "accepted_normalized_values": [
+                "juniper@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: juniper@example.test",
+                  "start": 48,
+                  "end": 75,
+                  "value_start": 55,
+                  "value_end": 75
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Australia"
+              ],
+              "accepted_normalized_values": [
+                "Australia"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: Australia",
+                  "start": 76,
+                  "end": 94,
+                  "value_start": 85,
+                  "value_end": 94
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "365 days"
+              ],
+              "accepted_normalized_values": [
+                365
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: 365 days",
+                  "start": 95,
+                  "end": 118,
+                  "value_start": 110,
+                  "value_end": 118
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f02_v2": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Café Parts"
+              ],
+              "accepted_normalized_values": [
+                "Café Parts"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Café Parts",
+                  "start": 42,
+                  "end": 62,
+                  "value_start": 52,
+                  "value_end": 62
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0007/X"
+              ],
+              "accepted_normalized_values": [
+                "0007/X"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Registration ID: 0007/X",
+                  "start": 63,
+                  "end": 86,
+                  "value_start": 80,
+                  "value_end": 86
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "cafe@example.test"
+              ],
+              "accepted_normalized_values": [
+                "cafe@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: cafe@example.test",
+                  "start": 87,
+                  "end": 111,
+                  "value_start": 94,
+                  "value_end": 111
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "France"
+              ],
+              "accepted_normalized_values": [
+                "France"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: France",
+                  "start": 112,
+                  "end": 127,
+                  "value_start": 121,
+                  "value_end": 127
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "14 days"
+              ],
+              "accepted_normalized_values": [
+                14
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: 14 days",
+                  "start": 128,
+                  "end": 150,
+                  "value_start": 143,
+                  "value_end": 150
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f02_v3": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Café Parts"
+              ],
+              "accepted_normalized_values": [
+                "Café Parts"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Café Parts",
+                  "start": 130,
+                  "end": 150,
+                  "value_start": 140,
+                  "value_end": 150
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "0007/X"
+              ],
+              "accepted_normalized_values": [
+                "0007/X"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Registration ID: 0007/X",
+                  "start": 106,
+                  "end": 129,
+                  "value_start": 123,
+                  "value_end": 129
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "cafe@example.test"
+              ],
+              "accepted_normalized_values": [
+                "cafe@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: cafe@example.test",
+                  "start": 81,
+                  "end": 105,
+                  "value_start": 88,
+                  "value_end": 105
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "France"
+              ],
+              "accepted_normalized_values": [
+                "France"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: France",
+                  "start": 65,
+                  "end": 80,
+                  "value_start": 74,
+                  "value_end": 80
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "14 days"
+              ],
+              "accepted_normalized_values": [
+                14
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: 14 days",
+                  "start": 42,
+                  "end": 64,
+                  "value_start": 57,
+                  "value_end": 64
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f03_v2": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Beacon Tools"
+              ],
+              "accepted_normalized_values": [
+                "Beacon Tools"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Beacon Tools",
+                  "start": 42,
+                  "end": 64,
+                  "value_start": 52,
+                  "value_end": 64
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "beacon@example.test"
+              ],
+              "accepted_normalized_values": [
+                "beacon@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: beacon@example.test",
+                  "start": 65,
+                  "end": 91,
+                  "value_start": 72,
+                  "value_end": 91
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "missing",
+          "candidates": []
+        },
+        "payment_terms_days": {
+          "status": "missing",
+          "candidates": []
+        }
+      }
+    },
+    "f03_v3": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Beacon Tools"
+              ],
+              "accepted_normalized_values": [
+                "Beacon Tools"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Beacon Tools",
+                  "start": 69,
+                  "end": 91,
+                  "value_start": 79,
+                  "value_end": 91
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "beacon@example.test"
+              ],
+              "accepted_normalized_values": [
+                "beacon@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: beacon@example.test",
+                  "start": 42,
+                  "end": 68,
+                  "value_start": 49,
+                  "value_end": 68
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "missing",
+          "candidates": []
+        },
+        "payment_terms_days": {
+          "status": "missing",
+          "candidates": []
+        }
+      }
+    },
+    "f04_v2": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Cedar Supply"
+              ],
+              "accepted_normalized_values": [
+                "Cedar Supply"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Cedar Supply",
+                  "start": 42,
+                  "end": 64,
+                  "value_start": 52,
+                  "value_end": 64
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "sales@cedar.example.test"
+              ],
+              "accepted_normalized_values": [
+                "sales@cedar.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: sales@cedar.example.test",
+                  "start": 65,
+                  "end": 96,
+                  "value_start": 72,
+                  "value_end": 96
+                }
+              ]
+            },
+            {
+              "accepted_raw_values": [
+                "billing@cedar.example.test"
+              ],
+              "accepted_normalized_values": [
+                "billing@cedar.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: billing@cedar.example.test",
+                  "start": 97,
+                  "end": 130,
+                  "value_start": 104,
+                  "value_end": 130
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Canada"
+              ],
+              "accepted_normalized_values": [
+                "Canada"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: Canada",
+                  "start": 131,
+                  "end": 146,
+                  "value_start": 140,
+                  "value_end": 146
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net45"
+              ],
+              "accepted_normalized_values": [
+                45
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net45",
+                  "start": 147,
+                  "end": 167,
+                  "value_start": 162,
+                  "value_end": 167
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f04_v3": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Cedar Supply"
+              ],
+              "accepted_normalized_values": [
+                "Cedar Supply"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Cedar Supply",
+                  "start": 145,
+                  "end": 167,
+                  "value_start": 155,
+                  "value_end": 167
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "sales@cedar.example.test"
+              ],
+              "accepted_normalized_values": [
+                "sales@cedar.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: sales@cedar.example.test",
+                  "start": 79,
+                  "end": 110,
+                  "value_start": 86,
+                  "value_end": 110
+                }
+              ]
+            },
+            {
+              "accepted_raw_values": [
+                "billing@cedar.example.test"
+              ],
+              "accepted_normalized_values": [
+                "billing@cedar.example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: billing@cedar.example.test",
+                  "start": 111,
+                  "end": 144,
+                  "value_start": 118,
+                  "value_end": 144
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Canada"
+              ],
+              "accepted_normalized_values": [
+                "Canada"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: Canada",
+                  "start": 63,
+                  "end": 78,
+                  "value_start": 72,
+                  "value_end": 78
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net45"
+              ],
+              "accepted_normalized_values": [
+                45
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net45",
+                  "start": 42,
+                  "end": 62,
+                  "value_start": 57,
+                  "value_end": 62
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f05_v2": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Drift Materials"
+              ],
+              "accepted_normalized_values": [
+                "Drift Materials"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Drift Materials",
+                  "start": 42,
+                  "end": 67,
+                  "value_start": 52,
+                  "value_end": 67
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "00.04-A"
+              ],
+              "accepted_normalized_values": [
+                "00.04-A"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Registration ID: 00.04-A",
+                  "start": 68,
+                  "end": 92,
+                  "value_start": 85,
+                  "value_end": 92
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "drift-at-example.test"
+              ],
+              "accepted_normalized_values": [],
+              "normalizable": false,
+              "expected_validation_flags": [
+                "invalid_email"
+              ],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: drift-at-example.test",
+                  "start": 93,
+                  "end": 121,
+                  "value_start": 100,
+                  "value_end": 121
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "United Kingdom"
+              ],
+              "accepted_normalized_values": [
+                "United Kingdom"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: United Kingdom",
+                  "start": 122,
+                  "end": 145,
+                  "value_start": 131,
+                  "value_end": 145
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "on receipt"
+              ],
+              "accepted_normalized_values": [],
+              "normalizable": false,
+              "expected_validation_flags": [
+                "unresolved_terms"
+              ],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: on receipt",
+                  "start": 146,
+                  "end": 171,
+                  "value_start": 161,
+                  "value_end": 171
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f05_v3": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Drift Materials"
+              ],
+              "accepted_normalized_values": [
+                "Drift Materials"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Drift Materials",
+                  "start": 143,
+                  "end": 168,
+                  "value_start": 153,
+                  "value_end": 168
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "00.04-A"
+              ],
+              "accepted_normalized_values": [
+                "00.04-A"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Registration ID: 00.04-A",
+                  "start": 118,
+                  "end": 142,
+                  "value_start": 135,
+                  "value_end": 142
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "drift@example.test"
+              ],
+              "accepted_normalized_values": [
+                "drift@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: drift@example.test",
+                  "start": 92,
+                  "end": 117,
+                  "value_start": 99,
+                  "value_end": 117
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "United Kingdom"
+              ],
+              "accepted_normalized_values": [
+                "United Kingdom"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: United Kingdom",
+                  "start": 68,
+                  "end": 91,
+                  "value_start": 77,
+                  "value_end": 91
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "on receipt"
+              ],
+              "accepted_normalized_values": [],
+              "normalizable": false,
+              "expected_validation_flags": [
+                "unresolved_terms"
+              ],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: on receipt",
+                  "start": 42,
+                  "end": 67,
+                  "value_start": 57,
+                  "value_end": 67
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f06_v2": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Elm Goods"
+              ],
+              "accepted_normalized_values": [
+                "Elm Goods"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Elm Goods",
+                  "start": 42,
+                  "end": 61,
+                  "value_start": 52,
+                  "value_end": 61
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "elm@example.test"
+              ],
+              "accepted_normalized_values": [
+                "elm@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: elm@example.test",
+                  "start": 62,
+                  "end": 85,
+                  "value_start": 69,
+                  "value_end": 85
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "England"
+              ],
+              "accepted_normalized_values": [
+                "England"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: England",
+                  "start": 86,
+                  "end": 102,
+                  "value_start": 95,
+                  "value_end": 102
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net0"
+              ],
+              "accepted_normalized_values": [
+                0
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net0",
+                  "start": 103,
+                  "end": 122,
+                  "value_start": 118,
+                  "value_end": 122
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f06_v3": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Elm Goods"
+              ],
+              "accepted_normalized_values": [
+                "Elm Goods"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Elm Goods",
+                  "start": 103,
+                  "end": 122,
+                  "value_start": 113,
+                  "value_end": 122
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "elm@example.test"
+              ],
+              "accepted_normalized_values": [
+                "elm@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: elm@example.test",
+                  "start": 79,
+                  "end": 102,
+                  "value_start": 86,
+                  "value_end": 102
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "England"
+              ],
+              "accepted_normalized_values": [
+                "England"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: England",
+                  "start": 62,
+                  "end": 78,
+                  "value_start": 71,
+                  "value_end": 78
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net0"
+              ],
+              "accepted_normalized_values": [
+                0
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net0",
+                  "start": 42,
+                  "end": 61,
+                  "value_start": 57,
+                  "value_end": 61
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f07_v2": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Grove Components"
+              ],
+              "accepted_normalized_values": [
+                "Grove Components"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Grove Components",
+                  "start": 89,
+                  "end": 115,
+                  "value_start": 99,
+                  "value_end": 115
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "000/19"
+              ],
+              "accepted_normalized_values": [
+                "000/19"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Registration ID: 000/19",
+                  "start": 116,
+                  "end": 139,
+                  "value_start": 133,
+                  "value_end": 139
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "grove@example.test"
+              ],
+              "accepted_normalized_values": [
+                "grove@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: grove@example.test",
+                  "start": 140,
+                  "end": 165,
+                  "value_start": 147,
+                  "value_end": 165
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Spain"
+              ],
+              "accepted_normalized_values": [
+                "Spain"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier country = Spain",
+                  "start": 166,
+                  "end": 190,
+                  "value_start": 185,
+                  "value_end": 190
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "90 days"
+              ],
+              "accepted_normalized_values": [
+                90
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: 90 days",
+                  "start": 191,
+                  "end": 213,
+                  "value_start": 206,
+                  "value_end": 213
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f07_v3": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Grove Components"
+              ],
+              "accepted_normalized_values": [
+                "Grove Components"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Grove Components",
+                  "start": 130,
+                  "end": 156,
+                  "value_start": 140,
+                  "value_end": 156
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "000/19"
+              ],
+              "accepted_normalized_values": [
+                "000/19"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Registration ID: 000/19",
+                  "start": 106,
+                  "end": 129,
+                  "value_start": 123,
+                  "value_end": 129
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "grove@example.test"
+              ],
+              "accepted_normalized_values": [
+                "grove@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: grove@example.test",
+                  "start": 80,
+                  "end": 105,
+                  "value_start": 87,
+                  "value_end": 105
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Spain"
+              ],
+              "accepted_normalized_values": [
+                "Spain"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: Spain",
+                  "start": 65,
+                  "end": 79,
+                  "value_start": 74,
+                  "value_end": 79
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "90 days"
+              ],
+              "accepted_normalized_values": [
+                90
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: 90 days",
+                  "start": 42,
+                  "end": 64,
+                  "value_start": 57,
+                  "value_end": 64
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f08_v2": {
+      "fields": {
+        "supplier_name": {
+          "status": "missing",
+          "candidates": []
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "000-Q"
+              ],
+              "accepted_normalized_values": [
+                "000-Q"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Registration ID: 000-Q",
+                  "start": 42,
+                  "end": 64,
+                  "value_start": 59,
+                  "value_end": 64
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "unknown@example.test"
+              ],
+              "accepted_normalized_values": [
+                "unknown@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: unknown@example.test",
+                  "start": 65,
+                  "end": 92,
+                  "value_start": 72,
+                  "value_end": 92
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Ireland"
+              ],
+              "accepted_normalized_values": [
+                "Ireland"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: Ireland",
+                  "start": 93,
+                  "end": 109,
+                  "value_start": 102,
+                  "value_end": 109
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net15"
+              ],
+              "accepted_normalized_values": [
+                15
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net15",
+                  "start": 110,
+                  "end": 130,
+                  "value_start": 125,
+                  "value_end": 130
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f08_v3": {
+      "fields": {
+        "supplier_name": {
+          "status": "missing",
+          "candidates": []
+        },
+        "registration_id": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "000-Q"
+              ],
+              "accepted_normalized_values": [
+                "000-Q"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Registration ID: 000-Q",
+                  "start": 108,
+                  "end": 130,
+                  "value_start": 125,
+                  "value_end": 130
+                }
+              ]
+            }
+          ]
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "unknown@example.test"
+              ],
+              "accepted_normalized_values": [
+                "unknown@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: unknown@example.test",
+                  "start": 80,
+                  "end": 107,
+                  "value_start": 87,
+                  "value_end": 107
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Ireland"
+              ],
+              "accepted_normalized_values": [
+                "Ireland"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: Ireland",
+                  "start": 63,
+                  "end": 79,
+                  "value_start": 72,
+                  "value_end": 79
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net15"
+              ],
+              "accepted_normalized_values": [
+                15
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net15",
+                  "start": 42,
+                  "end": 62,
+                  "value_start": 57,
+                  "value_end": 62
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f09_v2": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Harbor Tools"
+              ],
+              "accepted_normalized_values": [
+                "Harbor Tools"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Harbor Tools",
+                  "start": 42,
+                  "end": 64,
+                  "value_start": 52,
+                  "value_end": 64
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "harbor@example.test"
+              ],
+              "accepted_normalized_values": [
+                "harbor@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: harbor@example.test",
+                  "start": 65,
+                  "end": 91,
+                  "value_start": 72,
+                  "value_end": 91
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "USA"
+              ],
+              "accepted_normalized_values": [
+                "USA"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: USA",
+                  "start": 92,
+                  "end": 104,
+                  "value_start": 101,
+                  "value_end": 104
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net366"
+              ],
+              "accepted_normalized_values": [],
+              "normalizable": false,
+              "expected_validation_flags": [
+                "unresolved_terms"
+              ],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net366",
+                  "start": 105,
+                  "end": 126,
+                  "value_start": 120,
+                  "value_end": 126
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f09_v3": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Harbor Tools"
+              ],
+              "accepted_normalized_values": [
+                "Harbor Tools"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Harbor Tools",
+                  "start": 104,
+                  "end": 126,
+                  "value_start": 114,
+                  "value_end": 126
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "harbor@example.test"
+              ],
+              "accepted_normalized_values": [
+                "harbor@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: harbor@example.test",
+                  "start": 77,
+                  "end": 103,
+                  "value_start": 84,
+                  "value_end": 103
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "USA"
+              ],
+              "accepted_normalized_values": [
+                "USA"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: USA",
+                  "start": 64,
+                  "end": 76,
+                  "value_start": 73,
+                  "value_end": 76
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net366"
+              ],
+              "accepted_normalized_values": [],
+              "normalizable": false,
+              "expected_validation_flags": [
+                "unresolved_terms"
+              ],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net366",
+                  "start": 42,
+                  "end": 63,
+                  "value_start": 57,
+                  "value_end": 63
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f10_v2": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Iris Supply"
+              ],
+              "accepted_normalized_values": [
+                "Iris Supply"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Iris Supply",
+                  "start": 43,
+                  "end": 64,
+                  "value_start": 53,
+                  "value_end": 64
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "iris@example.test"
+              ],
+              "accepted_normalized_values": [
+                "iris@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: iris@example.test",
+                  "start": 65,
+                  "end": 89,
+                  "value_start": 72,
+                  "value_end": 89
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "France"
+              ],
+              "accepted_normalized_values": [
+                "France"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: France",
+                  "start": 90,
+                  "end": 105,
+                  "value_start": 99,
+                  "value_end": 105
+                }
+              ]
+            },
+            {
+              "accepted_raw_values": [
+                "Belgium"
+              ],
+              "accepted_normalized_values": [
+                "Belgium"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: Belgium",
+                  "start": 106,
+                  "end": 122,
+                  "value_start": 115,
+                  "value_end": 122
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net30"
+              ],
+              "accepted_normalized_values": [
+                30
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net30",
+                  "start": 123,
+                  "end": 143,
+                  "value_start": 138,
+                  "value_end": 143
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "f10_v3": {
+      "fields": {
+        "supplier_name": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Iris Supply"
+              ],
+              "accepted_normalized_values": [
+                "Iris Supply"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Supplier: Iris Supply",
+                  "start": 122,
+                  "end": 143,
+                  "value_start": 132,
+                  "value_end": 143
+                }
+              ]
+            }
+          ]
+        },
+        "registration_id": {
+          "status": "missing",
+          "candidates": []
+        },
+        "contact_email": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "iris@example.test"
+              ],
+              "accepted_normalized_values": [
+                "iris@example.test"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Email: iris@example.test",
+                  "start": 97,
+                  "end": 121,
+                  "value_start": 104,
+                  "value_end": 121
+                }
+              ]
+            }
+          ]
+        },
+        "country": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "France"
+              ],
+              "accepted_normalized_values": [
+                "France"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: France",
+                  "start": 64,
+                  "end": 79,
+                  "value_start": 73,
+                  "value_end": 79
+                }
+              ]
+            },
+            {
+              "accepted_raw_values": [
+                "Belgium"
+              ],
+              "accepted_normalized_values": [
+                "Belgium"
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Country: Belgium",
+                  "start": 80,
+                  "end": 96,
+                  "value_start": 89,
+                  "value_end": 96
+                }
+              ]
+            }
+          ]
+        },
+        "payment_terms_days": {
+          "status": "present",
+          "candidates": [
+            {
+              "accepted_raw_values": [
+                "Net30"
+              ],
+              "accepted_normalized_values": [
+                30
+              ],
+              "normalizable": true,
+              "expected_validation_flags": [],
+              "anchors": [
+                {
+                  "page": 1,
+                  "quote": "Payment terms: Net30",
+                  "start": 43,
+                  "end": 63,
+                  "value_start": 58,
+                  "value_end": 63
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "$defs": {
+    "DocumentEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "family": {
+          "title": "Family",
+          "type": "string"
+        },
+        "variant": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Variant",
+          "type": "integer"
+        },
+        "template_id": {
+          "title": "Template Id",
+          "type": "string"
+        },
+        "identity_group": {
+          "title": "Identity Group",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "raw_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Raw Sha256",
+          "type": "string"
+        },
+        "canonical_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Canonical Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "family",
+        "variant",
+        "template_id",
+        "identity_group",
+        "path",
+        "raw_sha256",
+        "canonical_sha256"
+      ],
+      "title": "DocumentEntry",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "formreview-dataset-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "split": {
+      "enum": [
+        "dev",
+        "test"
+      ],
+      "title": "Split",
+      "type": "string"
+    },
+    "gold_path": {
+      "title": "Gold Path",
+      "type": "string"
+    },
+    "gold_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Gold Sha256",
+      "type": "string"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/DocumentEntry"
+      },
+      "title": "Documents",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "split",
+    "gold_path",
+    "gold_sha256",
+    "documents"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

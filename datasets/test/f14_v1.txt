@@ -1,0 +1,6 @@
+Synthetic holdout scenario 14; variant 1
+Onboarding Supplier: [Holdout 14 Manufacturing]
+Onboarding Registration ID: [0014/Z]
+Onboarding Email: [contact14@holdout.example.test]
+Onboarding Country: [New Zealand]
+Onboarding Payment terms: [2% ten days, otherwise thirty]

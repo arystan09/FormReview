@@ -1,0 +1,6 @@
+Synthetic holdout scenario 15; variant 2
+Supplier form / Supplier / Holdout 15 Manufacturing
+Supplier form / Registration ID / 0015/Z
+Supplier form / Email / not-an-email-address
+Supplier form / Country / New Zealand
+Supplier form / Payment terms / Net21
