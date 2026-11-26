@@ -8,8 +8,11 @@ from extraction import api as extraction_api
 from extraction import live_api
 from formreview.views import liveness
 from reviews import api as reviews_api
+from reviews import assets
 
 urlpatterns = [
+    path("static/reviews/review.js", assets.javascript),
+    path("static/reviews/review.css", assets.stylesheet),
     path("api/v1/drafts/<uuid:draft_id>", reviews_api.patch_draft),
     path("drafts/<uuid:draft_id>/confirm", reviews_api.confirm),
     path("drafts/<uuid:draft_id>/approve", reviews_api.approve_endpoint),

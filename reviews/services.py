@@ -20,32 +20,51 @@ class ReviewConflict(ValueError):
     pass
 
 
+class SourceSpan(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True)
+    page: int = Field(ge=1, le=5)
+    quote: str = Field(min_length=1, max_length=500)
+    value_text: str = Field(min_length=1, max_length=256)
+
+
 class Decision(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
-    action: Literal["accept", "edit", "missing"]
+    action: Literal["accept", "edit", "missing", "unresolved"]
     candidate_id: StrictInt | None
     value: StrictStr | StrictInt | None
     reason: str = Field(max_length=1000)
     provenance: str = Field(max_length=500)
+    source_span: SourceSpan | None = None
 
 
 def resolve_decisions(
-    draft: ReviewDraft, decisions: object
+    draft: ReviewDraft, decisions: object, *, partial: bool = False
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    if not isinstance(decisions, dict) or set(decisions) != set(FIELD_NAMES):
+    if not isinstance(decisions, dict) or (
+        not set(decisions).issubset(FIELD_NAMES) if partial else set(decisions) != set(FIELD_NAMES)
+    ):
         raise ReviewConflict("exactly_five_decisions_required")
     values: dict[str, Any] = {}
     provenance: dict[str, Any] = {}
-    for name in FIELD_NAMES:
+    for name in decisions:
         try:
             decision = Decision.model_validate(decisions[name])
         except ValidationError:
             raise ReviewConflict(f"{name}:invalid_decision") from None
-        for item in (decision.value, decision.reason, decision.provenance):
+        text_items = [decision.value, decision.reason, decision.provenance]
+        if decision.source_span is not None:
+            text_items.extend([decision.source_span.quote, decision.source_span.value_text])
+        for item in text_items:
             if isinstance(item, str) and (
                 "\x00" in item or any(0xD800 <= ord(c) <= 0xDFFF for c in item)
             ):
                 raise ReviewConflict(f"{name}:invalid_text")
+        if partial and decision.action != "accept":
+            continue
+        if decision.action == "unresolved":
+            raise ReviewConflict(f"{name}:explicit_decision_required")
+        if decision.action != "edit" and decision.source_span is not None:
+            raise ReviewConflict(f"{name}:span_requires_manual_correction")
         if decision.action == "accept":
             if draft.run_id is None or decision.candidate_id is None or decision.value is not None:
                 raise ReviewConflict(f"{name}:candidate_required")
@@ -82,6 +101,29 @@ def resolve_decisions(
                 "reason": decision.reason,
                 "provenance": decision.provenance,
             }
+            if decision.source_span is not None:
+                span = decision.source_span
+                evidence = anchor(draft.text_version.pages, span.page, span.quote, span.value_text)
+                normalized, flags = normalize(name, span.value_text)
+                if (
+                    evidence.flags
+                    or flags
+                    or type(normalized) is not type(value)
+                    or normalized != value
+                ):
+                    raise ReviewConflict(f"{name}:manual_span_does_not_support_value")
+                provenance[name].update(
+                    {
+                        "kind": "manual_source_correction",
+                        "page": span.page,
+                        "quote": span.quote,
+                        "value_text": span.value_text,
+                        "quote_start": evidence.quote_start,
+                        "quote_end": evidence.quote_end,
+                        "value_start": evidence.value_start,
+                        "value_end": evidence.value_end,
+                    }
+                )
         else:
             if (
                 decision.value is not None
@@ -124,13 +166,19 @@ def lock_draft(membership: Membership, draft_id: uuid.UUID | str) -> ReviewDraft
 
 @transaction.atomic
 def save_decisions(
-    membership: Membership, draft_id: uuid.UUID | str, expected_revision: int, decisions: object
+    membership: Membership,
+    draft_id: uuid.UUID | str,
+    expected_revision: int,
+    decisions: object,
+    *,
+    partial: bool = False,
 ) -> ReviewDraft:
     draft = lock_draft(membership, draft_id)
     if draft.status != "active" or draft.revision != expected_revision:
         raise ReviewConflict("stale_or_closed_draft")
-    resolve_decisions(draft, decisions)
-    draft.decisions = decisions
+    resolve_decisions(draft, decisions, partial=partial)
+    assert isinstance(decisions, dict)
+    draft.decisions = {**draft.decisions, **decisions} if partial else decisions
     draft.revision += 1
     draft.save(update_fields=["decisions", "revision"])
     ReviewEvent.objects.create(

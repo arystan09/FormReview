@@ -10,7 +10,7 @@ class ReviewDraft(models.Model):
     """Explicit source/run binding and revisioned human decisions."""
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    document = models.OneToOneField(Document, on_delete=models.PROTECT, related_name="review_draft")
+    document = models.ForeignKey(Document, on_delete=models.PROTECT, related_name="review_drafts")
     run = models.ForeignKey(ExtractionRun, null=True, on_delete=models.PROTECT)
     text_version = models.ForeignKey(TextVersion, on_delete=models.PROTECT)
     revision = models.PositiveIntegerField(default=1)
@@ -21,9 +21,14 @@ class ReviewDraft(models.Model):
 
     class Meta:
         constraints = [
+            models.UniqueConstraint(
+                fields=["document"],
+                condition=models.Q(status="active"),
+                name="one_active_review_draft",
+            ),
             models.CheckConstraint(
                 condition=models.Q(revision__gte=1), name="positive_draft_revision"
-            )
+            ),
         ]
 
 

@@ -15,7 +15,7 @@ from extraction.normalization import normalize
 from extraction.providers import build_request, request_hash
 from extraction.replay import ReplayProvider
 from extraction.schemas import ExtractionOutput
-from reviews.models import ReviewDraft
+from reviews.models import ApprovedRecord, ReviewDraft, ReviewEvent
 
 
 class ReplayConflict(ValueError):
@@ -153,25 +153,51 @@ def create_draft(
     document_id: uuid.UUID | str,
     run_id: uuid.UUID | str,
     expected_revision: int,
+    expected_draft_id: str | None = None,
 ) -> ReviewDraft:
     document = Document.objects.select_for_update().get(
         pk=document_id, workspace_id=membership.workspace_id
     )
     reviewer_for_document(membership, document)
-    existing = ReviewDraft.objects.select_for_update().filter(document=document).first()
+    if ApprovedRecord.objects.filter(document=document).exists():
+        raise ReplayConflict("document_already_approved")
+    existing = (
+        ReviewDraft.objects.select_for_update().filter(document=document, status="active").first()
+    )
     if existing is not None:
         if existing.revision != expected_revision:
             raise ReplayConflict("revision_conflict")
-        if str(existing.run_id) != str(run_id):
-            raise ReplayConflict("draft_already_bound_to_another_run")
-        return existing
-    if expected_revision != 0:
+        if str(existing.run_id) == str(run_id):
+            return existing
+        if expected_draft_id != str(existing.id):
+            raise ReplayConflict("explicit_current_draft_selection_required")
+    elif expected_revision != 0 or expected_draft_id is not None:
         raise ReplayConflict("revision_conflict")
     run = ExtractionRun.objects.filter(
         pk=run_id, text_version__document=document, status="validated"
     ).first()
     if run is None:
         raise ReplayConflict("valid_owned_run_required")
-    return ReviewDraft.objects.create(
+    if existing is not None:
+        existing.status = "superseded"
+        existing.revision += 1
+        existing.save(update_fields=["status", "revision"])
+        ReviewEvent.objects.create(
+            draft=existing,
+            actor_id=membership.user_id,
+            action="superseded",
+            revision=existing.revision,
+            decisions=existing.decisions,
+        )
+    draft = ReviewDraft.objects.create(
         document=document, run=run, text_version=run.text_version, mode=run.mode
     )
+    if existing is not None:
+        ReviewEvent.objects.create(
+            draft=draft,
+            actor_id=membership.user_id,
+            action="selected",
+            revision=draft.revision,
+            decisions={},
+        )
+    return draft

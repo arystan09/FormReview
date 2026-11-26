@@ -132,7 +132,9 @@ def preview_context(run: ExtractionRun) -> dict[str, Any]:
         "run": run,
         "fields": fields,
         "document": run.text_version.document,
-        "existing_draft": ReviewDraft.objects.filter(document=run.text_version.document).first(),
+        "existing_draft": ReviewDraft.objects.filter(
+            document=run.text_version.document, status="active"
+        ).first(),
     }
 
 
@@ -166,7 +168,13 @@ def draft_create(request: HttpRequest, document_id: uuid.UUID) -> HttpResponse:
     except ValueError:
         return JsonResponse({"error": "run_id_and_expected_revision_required"}, status=400)
     try:
-        draft = create_draft(membership, document_id, run_id, expected_revision)
+        draft = create_draft(
+            membership,
+            document_id,
+            run_id,
+            expected_revision,
+            request.POST.get("expected_draft_id") or None,
+        )
     except ReplayConflict as error:
         return JsonResponse({"error": str(error)}, status=409)
     if request.POST.get("preview") == "yes":

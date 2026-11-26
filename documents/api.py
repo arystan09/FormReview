@@ -85,7 +85,7 @@ def source(request: HttpRequest, document_id: object) -> HttpResponse:
             "text": text,
             "job": document.parse_job,
             "can_extract": active_membership(request).role == "reviewer",
-            "review_draft": ReviewDraft.objects.filter(document=document).first(),
+            "review_draft": ReviewDraft.objects.filter(document=document, status="active").first(),
             "approved_record": ApprovedRecord.objects.filter(document=document).first(),
             "live_attempts": LiveAttempt.objects.filter(text_version__document=document).order_by(
                 "-created_at"

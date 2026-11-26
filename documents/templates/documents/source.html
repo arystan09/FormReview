@@ -21,6 +21,6 @@
 </section>
 {% if can_extract %}<section><h2>Other workflows</h2>
 <p><a href="/documents/{{ document.id }}/live-confirm">Check paid extraction availability and estimate</a></p>
-{% if not review_draft %}<form method="post" action="/documents/{{ document.id }}/drafts">{% csrf_token %}<input type="hidden" name="mode" value="manual"><input type="hidden" name="expected_revision" value="0"><button>Create manual-only draft</button></form>{% endif %}
+{% if not review_draft and not approved_record %}<form method="post" action="/documents/{{ document.id }}/drafts">{% csrf_token %}<input type="hidden" name="mode" value="manual"><input type="hidden" name="expected_revision" value="0"><button>Create manual-only draft</button></form>{% endif %}
 <p>Manual-only fallback is separate from model success and cannot replace an existing draft.</p>
 </section>{% endif %}{% endif %}{% endblock %}

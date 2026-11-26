@@ -1,12 +1,23 @@
 # FormReview
 
-Stage 5 of exactly **10 mandatory stages** adds a grouped offline synthetic benchmark.
+Stage 6 of exactly **10 mandatory stages** adds evidence-focused human review,
+partial saves and explicit revision-conflict handling alongside the grouped offline benchmark.
 The existing stage-4 product provides human decisions, atomic approval,
 immutable records/exports and an explicitly enabled live adapter. The keyless
 replay workflow is available locally. Full stage-4 acceptance still requires an
 actual authorized live extraction; replay and mocked transport are not live evidence.
-Paid mode defaults disabled. Stages 6–10 are not implemented. The offline labelled-line baseline is separate
+Paid mode defaults disabled. Stages 7–10 are not implemented. The offline labelled-line baseline is separate
 from replay and live inference.
+
+## Evidence review
+
+See [review workflow and conflict handling](docs/review-ux.md). Review canonical
+pages beside field candidates, highlight exact evidence and distinguish manual
+corrections from accepted suggestions. Save unfinished decisions with **Save partial
+draft**; approval still requires five complete decisions and explicit confirmation.
+Stale tabs keep local text and offer comparison/manual reconciliation. Selecting a
+new extraction run explicitly creates a new active draft and preserves the old one.
+Migrate before starting web/worker; existing records/receipts remain attributable.
 
 ## Offline evaluation
 
@@ -44,7 +55,7 @@ registration_id missing, and correct contact_email to `alder@example.test` using
 the source Email line with a correction reason and provenance. Save decisions,
 inspect the confirmation, explicitly confirm human approval, then export the record.
 The record preserves replay provenance and manual corrections; it is not model success. A later extraction does not replace this
-draft. `04_ambiguous_email.txt` demonstrates two source candidates, while
+draft; selecting a different run explicitly preserves it as a superseded draft. `04_ambiguous_email.txt` demonstrates two source candidates, while
 `08_two_pages.pdf` deliberately claims the wrong page. No key is needed. Only the
 12 bundled development sources have replay outputs; arbitrary source hashes return
 `no_synthetic_replay_fixture` without inventing results.
@@ -62,14 +73,17 @@ POST `/documents/{id}/extractions` requires a reviewer session, CSRF and form fi
 GET `/extractions/{id}` shows the source/field preview. POST
 `/documents/{id}/drafts` requires `run_id` and `expected_revision=0` for initial
 creation. Existing drafts require their exact revision and same run for an
-idempotent response; stale revisions and replacement runs receive 409. GET
+idempotent response. Selecting another run additionally requires the active draft ID;
+stale or implicit replacements receive 409. GET
 `/drafts/{id}` shows the owned editor. PATCH `/api/v1/drafts/{id}` requires JSON
-`expected_revision` and all five `decisions`. A decision contains `action`
+`expected_revision` and `decisions`. Optional `partial=true` saves a subset or
+unfinished manual decisions without approving; complete saves require all five. A decision contains `action`
 (accept/edit/missing), `candidate_id`, `value`, `reason` and `provenance`, with
 explicit nulls where unused. Saves increment revision; stale or closed drafts get
 409. GET `/drafts/{id}/confirm` binds the revision and decision hash to an approval
 form. POST `/drafts/{id}/approve` requires its idempotency key and explicit human
-confirmation. Same request returns the same receipt; mismatches get 409. Document
+confirmation. Same request returns the same receipt; mismatches get 409. See the review workflow
+for explicit run selection with current draft ID/revision. Document
 then Draft locks, role rechecking and final validation protect concurrent saves and
 approval. GET `/records/{id}` and `/records/{id}/export` remain workspace-owned.
 

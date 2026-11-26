@@ -6,7 +6,8 @@ Stage 1 establishes the foundation. A keyless replay walkthrough is due after
 stage 3; the full MVP is due after stage 4. Stage 2 adds owned uploads and immutable canonical parsing. Stage 3 adds synthetic replay, immutable extraction config/evidence and an initial
 review preview. Stage 4 adds guarded live admission and human review/approval.
 Stage 5 adds the grouped public synthetic dataset and offline baseline/replay scoring.
-Stages 6–10 are not implemented here. Actual paid verification remains a required
+Stage 6 adds side-by-side evidence review, partial saves and explicit draft selection.
+Stages 7–10 are not implemented here. Actual paid verification remains a required
 gate until owner credentials and explicit spending authorization are supplied.
 No approved design/roadmap files were supplied at initialization. Do not invent
 implementation history or fill in a replacement roadmap. Obtain the approved
@@ -59,7 +60,7 @@ Use focused typed modules. Verification: `make install`, `make check`,
 `uv run pytest --collect-only`, `uv run python manage.py help`,
 `make container-check`. Missing Docker or remote CI is a pending gate, never a pass.
 Stop after reporting acceptance evidence and suggesting the intended commit:
-`add grouped extraction dataset and baseline evaluation`.
+`improve evidence review and preserve draft conflicts`.
 
 Stage 2 checks additionally require PostgreSQL 18 with UTF-8 encoding:
 `make integration`. Tests create/drop a dedicated test database; never point them
@@ -102,3 +103,17 @@ Stage 5 checks: `uv run python manage.py evaluate --help`, dev evaluate for base
 and replay, test `--validate-only`, deterministic dataset rebuild, all existing checks.
 Default report paths are outputs/evaluation-v1-dev-baseline.json and
 outputs/evaluation-v1-dev-replay.json; use a fresh --output path for reruns.
+
+
+Stage 6 permits partial unresolved draft decisions but no approval bypass. All five
+complete decisions remain mandatory at confirmation/approval. Manual spans require
+unique server anchoring and a value match; manual overrides require provenance and
+reason. Invalid-evidence candidates cannot be accepted as supported source.
+Re-extraction never mutates review. Explicit run selection locks Document→Draft,
+checks current draft ID/revision, preserves the superseded draft and creates an
+empty active draft. At most one active draft and one approved record per document.
+Existing draft/record IDs and provenance remain attributable. Browser conflicts
+retain local text; comparison/reconciliation is explicit, without auto-merge or
+last-write-wins. No localStorage of private review data.
+Read docs/review-ux.md. Verify full checks, `uv run pytest -m e2e` and
+`uv run pytest tests/integration/test_review_conflicts.py`. No later-stage work.

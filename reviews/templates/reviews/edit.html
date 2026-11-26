@@ -1,13 +1,37 @@
 {% extends "documents/base.html" %}{% block content %}
-<h1>Review all five fields</h1><p>Mode: <strong>{{ draft.mode }}</strong>. {% if draft.mode == 'replay' %}Synthetic replay, not a live model result.{% elif draft.mode == 'manual' %}Manual-only fallback; no model result.{% else %}Live model suggestions require your confirmation.{% endif %}</p>
-<p>Revision {{ draft.revision }} · status {{ draft.status }}. <a href="/documents/{{ draft.document_id }}">Inspect immutable source</a>{% if draft.run_id %} · <a href="/extractions/{{ draft.run_id }}">Inspect candidate evidence</a>{% endif %}</p>
-<p>Confirm each field yourself. A quote match is not semantic truth. Registration IDs are not government-verified; country is source text. Manual edits need a reason and provenance. Optional missing values need a reason.</p>
-{% if can_write %}<form id="review-form" data-endpoint="/api/v1/drafts/{{ draft.id }}">{% csrf_token %}<input type="hidden" name="expected_revision" value="{{ draft.revision }}">
-{% for row in rows %}<fieldset data-field="{{ row.name }}"><legend>{{ row.name }}</legend>
-<label for="{{ row.name }}_action">Decision for {{ row.name }}</label> <select id="{{ row.name }}_action" name="{{ row.name }}_action" required><option value="">Choose explicitly</option><option value="accept" {% if row.decision.action == 'accept' %}selected{% endif %}>Accept source candidate</option><option value="edit" {% if row.decision.action == 'edit' %}selected{% endif %}>Enter manual correction</option><option value="missing" {% if row.decision.action == 'missing' %}selected{% endif %}>Mark missing with reason</option></select>
-<label for="{{ row.name }}_candidate">Candidate for {{ row.name }}</label> <select id="{{ row.name }}_candidate" name="{{ row.name }}_candidate"><option value="">Choose candidate</option>{% for candidate in row.candidates %}<option value="{{ candidate.pk }}" {% if row.decision.candidate_id == candidate.pk %}selected{% endif %}>{{ candidate.value_text }} · page {{ candidate.page }}{% if candidate.flags %} · flagged: {{ candidate.flags|join:", " }}{% endif %}</option>{% endfor %}</select>
+<link rel="stylesheet" href="/static/reviews/review.css">
+<h1>Review all five fields</h1>
+<p>Mode: <strong>{{ draft.mode }}</strong>. {% if draft.mode == 'replay' %}Synthetic replay, not a live model result.{% elif draft.mode == 'manual' %}Manual-only fallback; no model result.{% else %}Live model suggestions require your confirmation.{% endif %}</p>
+<p>Revision <span id="revision">{{ draft.revision }}</span> · status {{ draft.status }}. <a href="/documents/{{ draft.document_id }}">Inspect immutable source</a>{% if draft.run_id %} · <a href="/extractions/{{ draft.run_id }}">Inspect candidate evidence</a> · config <code>{{ draft.run.config_hash }}</code>{% endif %}</p>
+<p>Quote membership is not semantic truth. IDs are not government-verified; country is source text. Every field needs your explicit decision. Manual corrections remain separate from model suggestions.</p>
+{% if draft.status != 'active' %}<p role="status">This draft is read-only. Its decisions and source binding remain preserved.</p>{% if active_draft %}<a href="/drafts/{{ active_draft.id }}">Open active draft</a>{% endif %}{% endif %}
+<a href="#field-supplier_name">Skip to field decisions</a>
+<div class="review-layout">
+<aside class="canonical-source" aria-label="Canonical source">
+<h2>Canonical source</h2><p id="highlight-status" role="status">Choose “Show evidence” to highlight a source quote.</p>
+{% for page in source_pages %}<h3>Page {{ forloop.counter }}</h3><pre id="source-page-{{ forloop.counter }}" tabindex="0">{{ page }}</pre>{% endfor %}
+<p class="muted">For a manual correction, select source text and use the field’s “Use selected source” button, or enter the page and exact quote with the keyboard.</p>
+</aside>
+<form id="review-form" data-endpoint="/api/v1/drafts/{{ draft.id }}" data-editable="{{ can_write|yesno:'yes,no' }}">{% csrf_token %}<input type="hidden" name="expected_revision" value="{{ draft.revision }}">
+<div id="review-error" role="alert" tabindex="-1"></div><p id="save-status" role="status"></p>
+<section id="conflict-panel" hidden aria-label="Draft conflict"><h2>Your edits are still here</h2><p>Another tab changed or closed this draft. No automatic overwrite occurred. Compare saved decisions, then reconcile each field yourself.</p><button type="button" id="compare-current">Compare current saved decisions</button><div id="saved-comparison"></div><label><input type="checkbox" id="reconciled"> I compared every saved decision and reconciled my edits.</label><button type="button" id="use-revision" disabled>Use current revision; keep my edits</button><button type="button" id="reload-draft">Reload and discard my unsaved edits</button></section>
+{% for row in rows %}<fieldset id="field-{{ row.name }}" data-field="{{ row.name }}" {% if not can_write %}disabled{% endif %}><legend>{{ row.name }}</legend>
+<p>Extraction status: <strong>{{ row.status }}</strong>{% if row.name == 'supplier_name' or row.name == 'contact_email' %} · Required for approval{% else %} · Missing allowed with a reason{% endif %}</p>
+{% for flag in row.flags %}<p class="flag"><strong>{{ flag.code }}</strong>: {{ flag.help }}</p>{% endfor %}
+{% for item in row.candidates %}<article class="candidate"><strong>Suggestion {{ forloop.counter }}: {{ item.candidate.value_text }}</strong><blockquote>{{ item.candidate.quote }}</blockquote><p>Claimed page {{ item.candidate.page }} · {% if item.supported %}Unique source evidence; still needs your judgment.{% else %}Unsupported candidate — cannot accept. Enter a valid human correction instead.{% endif %}</p>{% if item.start is not None %}<button type="button" class="show-evidence" data-page="{{ item.candidate.page }}" data-start="{{ item.start }}" data-end="{{ item.end }}">Show evidence for {{ row.name }} candidate {{ forloop.counter }}</button>{% endif %}</article>{% empty %}<p>No source candidate. Inspect the canonical pages before deciding.</p>{% endfor %}
+<label for="{{ row.name }}_action">Decision for {{ row.name }}</label><select id="{{ row.name }}_action" name="{{ row.name }}_action"><option value="unresolved">Not decided yet</option><option value="accept" {% if row.decision.action == 'accept' %}selected{% endif %}>Accept source candidate</option><option value="edit" {% if row.decision.action == 'edit' %}selected{% endif %}>Enter manual correction</option><option value="missing" {% if row.decision.action == 'missing' %}selected{% endif %}>Mark missing with reason</option></select>
+<label for="{{ row.name }}_candidate">Candidate for {{ row.name }}</label><select id="{{ row.name }}_candidate" name="{{ row.name }}_candidate"><option value="">Choose candidate</option>{% for item in row.candidates %}<option value="{{ item.candidate.pk }}" {% if row.decision.candidate_id == item.candidate.pk %}selected{% endif %} {% if not item.supported %}disabled{% endif %}>{{ item.candidate.value_text }} · page {{ item.candidate.page }}{% if not item.supported %} · unsupported{% endif %}</option>{% endfor %}</select>
 <label>Manual value for {{ row.name }} <input name="{{ row.name }}_value" value="{{ row.decision.value|default_if_none:'' }}" maxlength="256"></label>
 <label>Reason for {{ row.name }} <input name="{{ row.name }}_reason" value="{{ row.decision.reason }}" maxlength="1000"></label>
-<label>Provenance for {{ row.name }} <input name="{{ row.name }}_provenance" value="{{ row.decision.provenance }}" maxlength="500" placeholder="e.g. page 1, Email line; or reviewer-supplied information"></label>
-</fieldset>{% endfor %}<button>Save decisions and review confirmation</button><p id="review-error" role="alert"></p></form>
-<script>{% include "reviews/editor.js" %}</script>{% else %}<p>This draft is read-only.</p>{% endif %}{% endblock %}
+<label>Provenance for {{ row.name }} <input name="{{ row.name }}_provenance" value="{{ row.decision.provenance }}" maxlength="500" placeholder="Source location or reviewer-supplied information"></label>
+<details {% if row.decision.source_span %}open{% endif %}><summary>Optional exact source span for a manual correction</summary><p>Without a valid span this remains a reviewer-supplied override, not verified source evidence. A span must support the final value; reasons are still required.</p>
+<button type="button" class="capture-source" data-name="{{ row.name }}">Use selected source for {{ row.name }}</button>
+<label>Source page for {{ row.name }} <input type="number" min="1" max="5" name="{{ row.name }}_page" value="{{ row.decision.source_span.page }}"></label>
+<label>Exact quote for {{ row.name }} <textarea name="{{ row.name }}_quote" maxlength="500">{{ row.decision.source_span.quote }}</textarea></label>
+<label>Source literal for {{ row.name }} <input name="{{ row.name }}_literal" value="{{ row.decision.source_span.value_text }}" maxlength="256"></label>
+</details></fieldset>{% endfor %}
+{% if can_write %}<div class="review-actions"><button type="submit" value="partial">Save partial draft</button><button type="submit" value="confirm">Save decisions and review confirmation</button></div>{% endif %}
+</form></div>
+{{ source_pages|json_script:"source-pages" }}
+<script src="/static/reviews/review.js" defer></script>
+{% endblock %}

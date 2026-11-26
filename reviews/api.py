@@ -8,10 +8,10 @@ from django.views.decorators.http import require_GET, require_http_methods, requ
 
 from accounts.access import active_membership
 from extraction.config import digest
-from extraction.schemas import FIELD_NAMES
 from extraction.services import ReplayConflict
 from reviews.approval import approve
 from reviews.models import ApprovedRecord, ReviewDraft
+from reviews.presentation import review_rows, validation_errors
 from reviews.services import ReviewConflict, resolve_decisions, save_decisions
 
 
@@ -24,21 +24,53 @@ def owned_draft(request: HttpRequest, draft_id: uuid.UUID) -> ReviewDraft:
     )
 
 
-@require_http_methods(["PATCH"])
+@require_http_methods(["GET", "PATCH"])
 def patch_draft(request: HttpRequest, draft_id: uuid.UUID) -> HttpResponse:
+    if request.method == "GET":
+        draft = owned_draft(request, draft_id)
+        return JsonResponse(
+            {
+                "id": str(draft.id),
+                "revision": draft.revision,
+                "status": draft.status,
+                "decisions": draft.decisions,
+                "candidate_values": {
+                    name: candidate.value_text
+                    for name, decision in draft.decisions.items()
+                    if decision.get("action") == "accept"
+                    for candidate in (
+                        draft.run.candidates.filter(pk=decision.get("candidate_id"), field=name)
+                        if draft.run
+                        else []
+                    )
+                },
+            }
+        )
     membership = active_membership(request, reviewer=True)
     owned_draft(request, draft_id)
     try:
         data = json.loads(request.body)
         if (
-            set(data) != {"expected_revision", "decisions"}
+            not isinstance(data, dict)
+            or set(data)
+            not in (
+                {"expected_revision", "decisions"},
+                {"expected_revision", "decisions", "partial"},
+            )
+            or type(data.get("partial", False)) is not bool
             or type(data["expected_revision"]) is not int
         ):
             raise ValueError
     except (ValueError, TypeError, RecursionError):
         return JsonResponse({"error": "expected_revision_and_five_decisions_required"}, status=400)
     try:
-        draft = save_decisions(membership, draft_id, data["expected_revision"], data["decisions"])
+        draft = save_decisions(
+            membership,
+            draft_id,
+            data["expected_revision"],
+            data["decisions"],
+            partial=data.get("partial", False),
+        )
     except (ReviewConflict, ReplayConflict) as error:
         return JsonResponse({"error": str(error)}, status=409)
     return JsonResponse(
@@ -47,6 +79,7 @@ def patch_draft(request: HttpRequest, draft_id: uuid.UUID) -> HttpResponse:
             "revision": draft.revision,
             "decisions_hash": digest(draft.decisions),
             "confirmation_url": f"/drafts/{draft.id}/confirm",
+            "validation_errors": validation_errors(draft),
         }
     )
 
@@ -54,22 +87,16 @@ def patch_draft(request: HttpRequest, draft_id: uuid.UUID) -> HttpResponse:
 @require_GET
 def edit(request: HttpRequest, draft_id: uuid.UUID) -> HttpResponse:
     draft = owned_draft(request, draft_id)
-    rows = []
-    for name in FIELD_NAMES:
-        candidates = (
-            draft.run.candidates.filter(field=name).order_by("position")
-            if draft.run is not None
-            else []
-        )
-        rows.append(
-            {"name": name, "decision": draft.decisions.get(name, {}), "candidates": candidates}
-        )
     return render(
         request,
         "reviews/edit.html",
         {
             "draft": draft,
-            "rows": rows,
+            "rows": review_rows(draft),
+            "source_pages": draft.text_version.pages,
+            "active_draft": ReviewDraft.objects.filter(
+                document=draft.document, status="active"
+            ).first(),
             "can_write": active_membership(request).role == "reviewer" and draft.status == "active",
         },
     )
@@ -117,6 +144,13 @@ def approve_endpoint(request: HttpRequest, draft_id: uuid.UUID) -> HttpResponse:
             request.POST.get("confirmed") == "yes",
         )
     except (ReviewConflict, ReplayConflict) as error:
+        if request.POST.get("preview") == "yes":
+            return render(
+                request,
+                "reviews/conflict.html",
+                {"draft_id": draft_id, "error": str(error)},
+                status=409,
+            )
         return JsonResponse({"error": str(error)}, status=409)
     except IntegrityError:
         return JsonResponse({"error": "approval_or_idempotency_conflict"}, status=409)
@@ -142,7 +176,16 @@ def owned_record(request: HttpRequest, record_id: uuid.UUID) -> ApprovedRecord:
 
 @require_GET
 def record(request: HttpRequest, record_id: uuid.UUID) -> HttpResponse:
-    return render(request, "reviews/record.html", {"record": owned_record(request, record_id)})
+    approved = owned_record(request, record_id)
+    rows = [
+        {
+            "name": name,
+            "value": value,
+            "provenance": approved.snapshot.get("provenance", {}).get(name, {}),
+        }
+        for name, value in approved.fields.items()
+    ]
+    return render(request, "reviews/record.html", {"record": approved, "rows": rows})
 
 
 @require_GET

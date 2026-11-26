@@ -1,54 +1,13 @@
 import json
-import os
 import subprocess
 import sys
 
 import pytest
-from django.contrib.auth import get_user_model
-from django.db import connection
-from playwright.sync_api import expect, sync_playwright
+from playwright.sync_api import expect
 
-from accounts.models import Membership, Workspace
 from tests.support import ROOT
 
 pytestmark = [pytest.mark.e2e, pytest.mark.django_db(transaction=True)]
-
-
-@pytest.fixture
-def browser_seed(settings, tmp_path, transactional_db):
-    settings.PRIVATE_ROOT = tmp_path / "private"
-    settings.PUBLIC_DEMO = False
-    user = get_user_model().objects.create_user(
-        username="browser-reviewer", password="synthetic-test-password"
-    )
-    Membership.objects.create(
-        user=user,
-        workspace=Workspace.objects.create(name="Browser synthetic workspace"),
-        role="reviewer",
-    )
-    database = connection.settings_dict
-    env = {
-        **os.environ,
-        "POSTGRES_DB": database["NAME"],
-        "POSTGRES_HOST": database["HOST"],
-        "POSTGRES_PORT": str(database["PORT"]),
-        "POSTGRES_USER": database["USER"],
-        "POSTGRES_PASSWORD": database["PASSWORD"],
-        "FORMREVIEW_PRIVATE_ROOT": str(settings.PRIVATE_ROOT),
-    }
-    env.pop("FORMREVIEW_OPENAI_API_KEY", None)
-    return env
-
-
-@pytest.fixture
-def review_page(browser_seed, live_server):
-    # Keep Playwright's event loop inside this fixture, after DB setup and before teardown.
-    with sync_playwright() as playwright:
-        browser = playwright.chromium.launch()
-        context = browser.new_context()
-        yield context.new_page()
-        context.close()
-        browser.close()
 
 
 def fill_replay_decisions(page):
@@ -67,14 +26,14 @@ def fill_replay_decisions(page):
     page.get_by_label("Provenance for contact_email", exact=True).fill("Page 1 Email line")
 
 
-def upload_source(page, live_server, browser_seed):
+def upload_source(page, live_server, browser_seed, source_path=None):
     page.goto(live_server.url + "/accounts/login")
     page.get_by_label("Username:", exact=True).fill("browser-reviewer")
     page.get_by_label("Password:", exact=True).fill("synthetic-test-password")
     page.get_by_role("button", name="Sign in", exact=True).click()
     page.get_by_role("button", name="Open workspace").click()
     page.get_by_label("Document", exact=True).set_input_files(
-        str(ROOT / "datasets/dev/01_complete.txt")
+        str(source_path or ROOT / "datasets/dev/01_complete.txt")
     )
     page.get_by_role("button", name="Upload for parsing").click()
     expect(page.get_by_text("Parse status:", exact=False)).to_contain_text("queued")

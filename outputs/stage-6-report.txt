@@ -1,0 +1,174 @@
+FormReview — stage 6 of exactly 10
+2026-11-26, Europe/Rome
+
+Outcome
+Implemented evidence-focused human review with side-by-side canonical source,
+server-anchored highlights, explained flags, candidate selection, manual source
+spans/override provenance, partial saves, explicit confirmation and approval receipt.
+Stale tabs retain input and require manual comparison/reconciliation. Explicitly
+selecting a newer extraction run creates a new active draft and preserves the old
+one. Re-extraction alone never changes review. No automatic approval was added.
+
+All verification used synthetic sources and replay/mocked provider output. Real
+PostgreSQL and real Chromium exercised actual local HTTP/worker/UI behavior. No
+paid live request occurred and no independent human review is claimed. Prior live
+verification, Docker/Linux container proof and remote CI remain pending. Exactly
+10 stages remain; no stage 7 work, commit, push, deployment or paid resources.
+
+Initial inspection and scope
+Read AGENTS.md, current review/extraction/source code, migrations, Git status and
+verification commands. The working tree was clean at 35f6cd2 (stage 5). No separate
+approved design/roadmap files were supplied or invented. ScopeCheck and ImportLedger
+were not edited. Existing PostgreSQL and browser regressions passed before the
+new scenario tests; the full unit/integration/browser suite also passed afterward.
+
+Important changes
+- reviews/presentation.py and templates/reviews/edit.html: canonical pages beside
+  each field, present/missing/ambiguous labels, plain-language flag explanations,
+  eligible/unsupported candidate distinction and source highlighting. Relevant
+  controls appear for the chosen action; labels, keyboard focus and responsive
+  layout are included. No confidence percentage.
+- reviews/static/reviews/review.js and review.css: escaped text-node highlighting,
+  selected-source capture, manual keyboard span entry, partial saves, dirty-input
+  navigation warning, explicit comparison/reconciliation, preserved text on 409 or
+  uncertain save outcome. No localStorage of private review content or auto-merge.
+  Two fixed public asset routes serve these local files without another dependency.
+- reviews/services.py: structurally validated partial work can retain unresolved
+  decisions/unfinished manual values. Complete saves and approval still require
+  all five valid decisions. Invalid evidence cannot be accepted, even in partial
+  save. A manual source span must uniquely anchor and normalize to the final value
+  before approval; otherwise use a reasoned reviewer-supplied override. Both remain
+  separate from model provenance.
+- reviews/api.py: owned GET /api/v1/drafts/{id} supports saved-decision comparison;
+  PATCH supports optional partial=true and expected_revision. Existing CSRF/role/
+  workspace checks remain. Conflict pages guide stale approval back to review.
+  Confirmation and approved records display mode/config and decision provenance.
+- reviews/models.py and migrations 0005/0006: change the document/draft relation
+  from one-to-one to a foreign key, with a unique active draft per document and
+  explicit transition guards. Existing IDs, decisions, revisions, sources, records
+  and receipts are not rewritten. A separate real-PG upgrade test proves preservation
+  of populated stage-5 drafts and approval receipt/snapshot hashes.
+- extraction/services.py and preview: explicit selection requires the active draft
+  ID/revision, serializes Document→Draft locks, preserves old decisions under
+  superseded status and creates an empty draft bound to the selected owned run.
+  Selection/supersession events are atomic. Approved documents cannot reopen review;
+  unique document approval and idempotent receipt contracts remain unchanged.
+- Paid confirmation explicitly says mode live and retains actual config/model and
+  estimate. No live admission policy, request allowance or provider limits changed.
+- tests/integration/test_review_conflicts.py, test_review_upgrade.py and
+  tests/e2e/test_review.py add focused conflict, upgrade, provenance and browser
+  coverage. Existing browser fixtures are shared through tests/e2e/conftest.py.
+- docs/review-ux.md, README.md and AGENTS.md document the workflow, migration and
+  limitations. No new runtime dependency or provider framework.
+
+Exact prerequisites and run commands
+Run from:
+/Users/arystan/Documents/Codex/2026-11-21/you-are-implementing-formreview-an-applied
+
+Prerequisites: Python 3.12, uv 0.13.9, PostgreSQL 18 with UTF-8. For tests use a
+local disposable server/user with CREATEDB, never production. Chromium is required
+for browser tests. The documented Docker route needs Docker Engine/Compose v2,
+which is absent on this host. Local uv commands use exported environment variables;
+Compose loads .env, but local Python does not implicitly load it.
+
+  uv sync --frozen --all-groups
+  cp .env.example .env
+  docker compose up -d db
+  uv run python manage.py migrate
+  uv run python manage.py bootstrap_workspace --username reviewer --workspace "Local demo"
+  uv run python manage.py runserver 127.0.0.1:8000
+
+Run in another terminal:
+  uv run python manage.py process_jobs
+
+If using a separately installed local PostgreSQL instance, export POSTGRES_HOST,
+POSTGRES_PORT, POSTGRES_DB, POSTGRES_USER and POSTGRES_PASSWORD instead of the Docker
+DB command. Bootstrap prompts privately for a new password. Existing users can
+skip bootstrap. Back up before migration; the audit guard migrations remain
+irreversible and require a deliberate rollback plan if reverting application code.
+
+Open http://127.0.0.1:8000/accounts/login, select the workspace and upload
+ datasets/dev/01_complete.txt. Parse it, run synthetic replay and create its draft.
+Use Show evidence, correct the unsupported email, and save a partial draft. Open a
+second tab, save in the first, then save in the second: local text remains visible
+with a conflict. Compare current saved values, reconcile manually, acknowledge the
+comparison, and explicitly save against that revision. Complete all five decisions
+and confirm approval. The receipt/export records source/config/manual provenance.
+For existing bundled ambiguity use datasets/dev/04_ambiguous_email.txt.
+
+The targeted contradictory-terms demonstration is an automated browser fixture,
+not a new production replay script: Net30 and Net60, missing registration ID and
+hostile source text. It saves a missing-ID reason, triggers a second-tab conflict
+without losing text, explicitly chooses Net60 and approves the correct revision.
+
+  uv run pytest tests/integration/test_review_conflicts.py
+  uv run pytest tests/integration/test_review_upgrade.py
+  uv run playwright install chromium
+  uv run pytest tests/e2e/test_review.py
+  uv run pytest -m e2e
+
+Checks actually run and results
+PASS: uv sync --frozen --all-groups; frozen environment unchanged, no new dependency.
+PASS: Django manage.py check, Ruff check/format and mypy (67 application source files).
+PASS: full make check, including 148 unit tests.
+PASS: collection with strict category markers, 228 tests after the upgrade test.
+PASS: make integration: migrations applied, final migrate has none pending,
+      makemigrations --check --dry-run has no changes, 75 real PostgreSQL tests.
+PASS: requested test_review_conflicts.py, 10 tests; independent connections exercise
+      selection/approval races under Document locks and audit event preservation.
+PASS: test_review_upgrade.py, 1 test; separate uniquely named disposable database
+      populated at stage-5 schema, migrated forward and checked for attributable
+      drafts/records/receipts and explicit selection. Scratch database dropped.
+PASS: pytest -m e2e, 5 actual Chromium tests over local HTTP and real parser workers.
+      Stage-6 targeted tests were rerun after final assertions, all 3 passed.
+PASS: scripts/demo_smoke.py, both existing replay/manual browser workflows passed.
+PASS: manage.py help and configure_live --help.
+PASS: git diff --check; visual inspection of the synthetic review screenshot.
+      A CSS visibility conflict found during inspection was fixed and covered by
+      a browser assertion; no test was bypassed.
+Chromium was already installed from previous stages and was executed successfully;
+no extra browser download was needed this turn.
+UNAVAILABLE/FAILED: make container-check stops at docker compose config --quiet
+      because docker is not installed. Compose/build/non-root container HTTP health
+      and Linux resource ceilings were not verified here.
+NOT RUN: remote CI. Existing CI commands collect the new tests; no push authorized.
+NOT RUN: actual live smoke/paid benchmark. No key or spending authorization supplied.
+      These remain explicit earlier-stage gates, not inferred from replay or mocks.
+
+Acceptance evidence
+1. Understand flags and complete/correct/approve: PASS in real browser tests. Clear
+   evidence, ambiguous/missing guidance, mandatory decisions and separate explicit
+   final confirmation; no model/worker approval path. Invalid evidence requires
+   a valid correction instead of being promoted to verified source.
+2. Stale changes never overwrite: PASS. PostgreSQL expected_revision checks, actual
+   two-tab stale saves and stale approval rejection, preserved local input, manual
+   comparison/reconciliation, and selection/approval race tests. Another save after
+   comparison still conflicts if the revision changed again.
+3. Manual/model separation: PASS. Candidate, exact-span human correction and
+   reviewer-supplied override provenance remain distinct in confirmation, record
+   and immutable export snapshot. No correction counted as model success.
+4. Actual browser behavior: PASS. Five workflows cover replay, supported/ambiguous
+   candidates, manual-only fallback, source focus/highlights, selected-source capture
+   and keyboard span entry, run selection and hostile HTML escaping. The deliberate
+   hostile text renders literally and does not execute. Automated reviewer actions
+   are not a claim of independent human review.
+5. Existing attribution: PASS. Populated database upgrade preserves IDs, decisions,
+   receipt references and snapshot hashes. Superseded drafts retain their own run/
+   text bindings and remain read-only; one approved record per document remains.
+
+Known limitations
+Unsaved edits are kept in the open tab, not durably cached. Browser crash, deliberate
+reload/discard or closing the tab can lose unsaved content; navigation warnings are
+provided. Manual reconciliation requires the reviewer to compare all fields; there
+is no automatic merge. Source anchoring verifies exact membership, not supplier
+truth or government registration. Approved documents cannot start another review.
+Public demo remains read-only/keyless; no publication occurred. Stage-5 gold review
+is still pending, test extraction remains untouched, and no live/generalization
+claims are made. Stages 7–10 remain unimplemented.
+
+Artifacts
+outputs/stage-6-review.png — synthetic browser screenshot, not live model evidence.
+docs/review-ux.md — workflow/contract details and demo instructions.
+
+Suggested commit (user reviews and commits):
+improve evidence review and preserve draft conflicts
